@@ -1,0 +1,1696 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-11-05T13:22:49.750Z",
+  "expectedAppSHA": "5ff0d98f6bddeae85972c3194c5264a297981d38",
+  "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+  "verification": "pass",
+  "artifactChecks": [
+    {
+      "path": "docs/MEDIA.md",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/docs/MEDIA.md?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 12595,
+      "contentType": "text/markdown; charset=utf-8",
+      "localSHA256": "ce98b2052e99a094f06b7484cb0ebb49d994bad2d99ed75eb41fb3b08cc19e0a",
+      "publicSHA256": "ce98b2052e99a094f06b7484cb0ebb49d994bad2d99ed75eb41fb3b08cc19e0a",
+      "match": true
+    },
+    {
+      "path": "favicon.svg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/favicon.svg?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 309,
+      "contentType": "image/svg+xml",
+      "localSHA256": "a52658227a78d60b161b5f1a313fa7c8fd0d7864b8c8975e488d8d08e6d2036a",
+      "publicSHA256": "a52658227a78d60b161b5f1a313fa7c8fd0d7864b8c8975e488d8d08e6d2036a",
+      "match": true
+    },
+    {
+      "path": "fonts/font-1.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-1.ttf?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 48280,
+      "contentType": "font/ttf",
+      "localSHA256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "publicSHA256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "match": true
+    },
+    {
+      "path": "fonts/font-2.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-2.ttf?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 48308,
+      "contentType": "font/ttf",
+      "localSHA256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae",
+      "publicSHA256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae",
+      "match": true
+    },
+    {
+      "path": "fonts/font-3.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-3.ttf?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 48280,
+      "contentType": "font/ttf",
+      "localSHA256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a",
+      "publicSHA256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a",
+      "match": true
+    },
+    {
+      "path": "fonts/font-4.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-4.ttf?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 48200,
+      "contentType": "font/ttf",
+      "localSHA256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "publicSHA256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "match": true
+    },
+    {
+      "path": "fonts/font-5.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-5.ttf?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 111168,
+      "contentType": "font/ttf",
+      "localSHA256": "ef1515fa19156794b36e5f362c677f78837c38ccdd6fa1fa76d1dd918ea7abbe",
+      "publicSHA256": "ef1515fa19156794b36e5f362c677f78837c38ccdd6fa1fa76d1dd918ea7abbe",
+      "match": true
+    },
+    {
+      "path": "fonts/font-6.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-6.ttf?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 123608,
+      "contentType": "font/ttf",
+      "localSHA256": "b60ffb0ee2b4e09d71d67ff3ea16d6a23cf2e0cf637c5f4e36fff2e3b1465252",
+      "publicSHA256": "b60ffb0ee2b4e09d71d67ff3ea16d6a23cf2e0cf637c5f4e36fff2e3b1465252",
+      "match": true
+    },
+    {
+      "path": "icons/icon-192.png",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/icons/icon-192.png?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 4713,
+      "contentType": "image/png",
+      "localSHA256": "6baf68da2dc8e90ccd10bfb8eeb37e320de9d0a7eeb00a9592ded03eb3dce71d",
+      "publicSHA256": "6baf68da2dc8e90ccd10bfb8eeb37e320de9d0a7eeb00a9592ded03eb3dce71d",
+      "match": true
+    },
+    {
+      "path": "icons/icon-512.png",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/icons/icon-512.png?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 15546,
+      "contentType": "image/png",
+      "localSHA256": "591c57d187628b2ebf2801639b88e7dbef3baae92f55ce8190d2a23b18106a1d",
+      "publicSHA256": "591c57d187628b2ebf2801639b88e7dbef3baae92f55ce8190d2a23b18106a1d",
+      "match": true
+    },
+    {
+      "path": "icons/icon.svg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/icons/icon.svg?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 363,
+      "contentType": "image/svg+xml",
+      "localSHA256": "44197bc2403c36084e2360db57fd10b00837b2afea7fb2d7a2555050716c8f21",
+      "publicSHA256": "44197bc2403c36084e2360db57fd10b00837b2afea7fb2d7a2555050716c8f21",
+      "match": true
+    },
+    {
+      "path": "index.html",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/index.html?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 1320,
+      "contentType": "text/html; charset=utf-8",
+      "localSHA256": "efb6a67d7d1b3bb779744f4c1fe2b0aad41076de6aad56e59552a56167f654ba",
+      "publicSHA256": "efb6a67d7d1b3bb779744f4c1fe2b0aad41076de6aad56e59552a56167f654ba",
+      "match": true
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSE?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 1079,
+      "contentType": "application/octet-stream",
+      "localSHA256": "055ccdc8eb22f95ff180290ed620963e90ed34438956afc3a2a5b8d25c2358d9",
+      "publicSHA256": "055ccdc8eb22f95ff180290ed620963e90ed34438956afc3a2a5b8d25c2358d9",
+      "match": true
+    },
+    {
+      "path": "LICENSES/fonts/dmsans-OFL.txt",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/dmsans-OFL.txt?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 4389,
+      "contentType": "text/plain; charset=utf-8",
+      "localSHA256": "2af94f4fb533be8fa23282eb33e08ca311ddf47c2f32777e2040b282deeec65c",
+      "publicSHA256": "2af94f4fb533be8fa23282eb33e08ca311ddf47c2f32777e2040b282deeec65c",
+      "match": true
+    },
+    {
+      "path": "LICENSES/fonts/manifest.json",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/manifest.json?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 2360,
+      "contentType": "application/json; charset=utf-8",
+      "localSHA256": "bf41b3d13a8e241510773d49c1a69ae381c67d49183f2c0cbc8c197e26ee3773",
+      "publicSHA256": "bf41b3d13a8e241510773d49c1a69ae381c67d49183f2c0cbc8c197e26ee3773",
+      "match": true
+    },
+    {
+      "path": "LICENSES/fonts/playfairdisplay-OFL.txt",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/playfairdisplay-OFL.txt?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 4449,
+      "contentType": "text/plain; charset=utf-8",
+      "localSHA256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "publicSHA256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "match": true
+    },
+    {
+      "path": "LICENSES/photos/manifest.json",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/photos/manifest.json?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 7581,
+      "contentType": "application/json; charset=utf-8",
+      "localSHA256": "305824c25aaa7f2c25d816fefc79112fd6ef08d711b26590fc7c0489aec3489d",
+      "publicSHA256": "305824c25aaa7f2c25d816fefc79112fd6ef08d711b26590fc7c0489aec3489d",
+      "match": true
+    },
+    {
+      "path": "manifest.webmanifest",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/manifest.webmanifest?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 722,
+      "contentType": "application/manifest+json; charset=utf-8",
+      "localSHA256": "7bd818f56e12acfeb2fded7955a0d05bbb40587319d38989e7a5c314d09e8750",
+      "publicSHA256": "7bd818f56e12acfeb2fded7955a0d05bbb40587319d38989e7a5c314d09e8750",
+      "match": true
+    },
+    {
+      "path": "media/dalat-flower-park.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-flower-park.jpg?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 376949,
+      "contentType": "image/jpeg",
+      "localSHA256": "9be9b6a1257da28606bac999a2e7fa66ea9dce3ace6eb0efe0521c77414c91a8",
+      "publicSHA256": "9be9b6a1257da28606bac999a2e7fa66ea9dce3ace6eb0efe0521c77414c91a8",
+      "match": true
+    },
+    {
+      "path": "media/dalat-station.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-station.jpg?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 239405,
+      "contentType": "image/jpeg",
+      "localSHA256": "535c1443baedc50dbe6cd36f308fb1e66f1cf8e32b7d58488359309c9386f5ae",
+      "publicSHA256": "535c1443baedc50dbe6cd36f308fb1e66f1cf8e32b7d58488359309c9386f5ae",
+      "match": true
+    },
+    {
+      "path": "media/dalat-xuan-huong.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 392568,
+      "contentType": "image/jpeg",
+      "localSHA256": "e4ed6e4f0c2b718dc4a5caae81e47f84699dca5066c886a578ddd688f6180d74",
+      "publicSHA256": "e4ed6e4f0c2b718dc4a5caae81e47f84699dca5066c886a578ddd688f6180d74",
+      "match": true
+    },
+    {
+      "path": "media/hoian-japanese-bridge.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-japanese-bridge.jpg?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 394467,
+      "contentType": "image/jpeg",
+      "localSHA256": "ec5c3165a72307522411272b867863317164aade8af60e759a781da64e9cead8",
+      "publicSHA256": "ec5c3165a72307522411272b867863317164aade8af60e759a781da64e9cead8",
+      "match": true
+    },
+    {
+      "path": "media/hoian-river.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-river.jpg?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 367193,
+      "contentType": "image/jpeg",
+      "localSHA256": "d23b50e84ebe5a9f701969722ad98d5a5d7f328e6b242d6b426944e1b772a782",
+      "publicSHA256": "d23b50e84ebe5a9f701969722ad98d5a5d7f328e6b242d6b426944e1b772a782",
+      "match": true
+    },
+    {
+      "path": "media/hoian-street.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 355759,
+      "contentType": "image/jpeg",
+      "localSHA256": "6e34d3d412531c277f230e4943d52a31fd57175bc0b8d6fbc17aef04ff58295c",
+      "publicSHA256": "6e34d3d412531c277f230e4943d52a31fd57175bc0b8d6fbc17aef04ff58295c",
+      "match": true
+    },
+    {
+      "path": "service-worker.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/service-worker.js?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 6883,
+      "contentType": "application/javascript; charset=utf-8",
+      "localSHA256": "51f702615dff95d0df5ce385e029f366dd221d68c9748216fe221a089eb69178",
+      "publicSHA256": "51f702615dff95d0df5ce385e029f366dd221d68c9748216fe221a089eb69178",
+      "match": true
+    },
+    {
+      "path": "src/app.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/app.js?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 66056,
+      "contentType": "application/javascript; charset=utf-8",
+      "localSHA256": "7ec30ab8336e3d585cfb03231032aaa50c064fe9627cf2cc191a201fdd155ccf",
+      "publicSHA256": "7ec30ab8336e3d585cfb03231032aaa50c064fe9627cf2cc191a201fdd155ccf",
+      "match": true
+    },
+    {
+      "path": "src/catalog.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/catalog.js?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 15509,
+      "contentType": "application/javascript; charset=utf-8",
+      "localSHA256": "e76b930879631ca35c2ccaab295c977740dbc9e0801ee374f76189c4651c49fa",
+      "publicSHA256": "e76b930879631ca35c2ccaab295c977740dbc9e0801ee374f76189c4651c49fa",
+      "match": true
+    },
+    {
+      "path": "src/domain.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/domain.js?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 20910,
+      "contentType": "application/javascript; charset=utf-8",
+      "localSHA256": "85a5070d5200c6ff160e8fb32db8770f35bf402a13ed66513a1586c5b1d61de2",
+      "publicSHA256": "85a5070d5200c6ff160e8fb32db8770f35bf402a13ed66513a1586c5b1d61de2",
+      "match": true
+    },
+    {
+      "path": "src/fonts.css",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/fonts.css?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 1028,
+      "contentType": "text/css; charset=utf-8",
+      "localSHA256": "bd26994cb6aaf5933c93b80a52c8ec6a54a7cdfc041e066ac9884ca34592a471",
+      "publicSHA256": "bd26994cb6aaf5933c93b80a52c8ec6a54a7cdfc041e066ac9884ca34592a471",
+      "match": true
+    },
+    {
+      "path": "src/offline.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/offline.js?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 6255,
+      "contentType": "application/javascript; charset=utf-8",
+      "localSHA256": "c07ad123890f9c4b3abed7d68cf7a04c21e7c3ae34ccf5a55c7ec365a2ef1b40",
+      "publicSHA256": "c07ad123890f9c4b3abed7d68cf7a04c21e7c3ae34ccf5a55c7ec365a2ef1b40",
+      "match": true
+    },
+    {
+      "path": "src/styles.css",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/styles.css?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 45912,
+      "contentType": "text/css; charset=utf-8",
+      "localSHA256": "2f70fffc92c73671058a66a24394f31049a5940cb6a5ce6376b3dfeeb9ebd58d",
+      "publicSHA256": "2f70fffc92c73671058a66a24394f31049a5940cb6a5ce6376b3dfeeb9ebd58d",
+      "match": true
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/THIRD_PARTY_NOTICES.md?verify=5ff0d98f6bddeae85972c3194c5264a297981d38",
+      "status": 200,
+      "bytes": 1558,
+      "contentType": "text/markdown; charset=utf-8",
+      "localSHA256": "118951803f3094c3f4d65feea3a9fde80c59b38d0ae4debd995a87b861ecc732",
+      "publicSHA256": "118951803f3094c3f4d65feea3a9fde80c59b38d0ae4debd995a87b861ecc732",
+      "match": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "canonical committed inputs and deterministic 32-file artifact",
+      "status": "pass",
+      "milliseconds": 2341,
+      "detail": [
+        "work/atlas-reuse-canonical-5ff0d98/dist/LICENSE",
+        "work/atlas-reuse-canonical-5ff0d98/dist/LICENSES/fonts/dmsans-OFL.txt",
+        "work/atlas-reuse-canonical-5ff0d98/dist/LICENSES/fonts/manifest.json",
+        "work/atlas-reuse-canonical-5ff0d98/dist/LICENSES/fonts/playfairdisplay-OFL.txt",
+        "work/atlas-reuse-canonical-5ff0d98/dist/LICENSES/photos/manifest.json",
+        "work/atlas-reuse-canonical-5ff0d98/dist/THIRD_PARTY_NOTICES.md",
+        "work/atlas-reuse-canonical-5ff0d98/dist/docs/MEDIA.md",
+        "work/atlas-reuse-canonical-5ff0d98/dist/favicon.svg",
+        "work/atlas-reuse-canonical-5ff0d98/dist/fonts/font-1.ttf",
+        "work/atlas-reuse-canonical-5ff0d98/dist/fonts/font-2.ttf",
+        "work/atlas-reuse-canonical-5ff0d98/dist/fonts/font-3.ttf",
+        "work/atlas-reuse-canonical-5ff0d98/dist/fonts/font-4.ttf",
+        "work/atlas-reuse-canonical-5ff0d98/dist/fonts/font-5.ttf",
+        "work/atlas-reuse-canonical-5ff0d98/dist/fonts/font-6.ttf",
+        "work/atlas-reuse-canonical-5ff0d98/dist/icons/icon-192.png",
+        "work/atlas-reuse-canonical-5ff0d98/dist/icons/icon-512.png",
+        "work/atlas-reuse-canonical-5ff0d98/dist/icons/icon.svg",
+        "work/atlas-reuse-canonical-5ff0d98/dist/index.html",
+        "work/atlas-reuse-canonical-5ff0d98/dist/manifest.webmanifest",
+        "work/atlas-reuse-canonical-5ff0d98/dist/media/dalat-flower-park.jpg",
+        "work/atlas-reuse-canonical-5ff0d98/dist/media/dalat-station.jpg",
+        "work/atlas-reuse-canonical-5ff0d98/dist/media/dalat-xuan-huong.jpg",
+        "work/atlas-reuse-canonical-5ff0d98/dist/media/hoian-japanese-bridge.jpg",
+        "work/atlas-reuse-canonical-5ff0d98/dist/media/hoian-river.jpg",
+        "work/atlas-reuse-canonical-5ff0d98/dist/media/hoian-street.jpg",
+        "work/atlas-reuse-canonical-5ff0d98/dist/service-worker.js",
+        "work/atlas-reuse-canonical-5ff0d98/dist/src/app.js",
+        "work/atlas-reuse-canonical-5ff0d98/dist/src/catalog.js",
+        "work/atlas-reuse-canonical-5ff0d98/dist/src/domain.js",
+        "work/atlas-reuse-canonical-5ff0d98/dist/src/fonts.css",
+        "work/atlas-reuse-canonical-5ff0d98/dist/src/offline.js",
+        "work/atlas-reuse-canonical-5ff0d98/dist/src/styles.css"
+      ]
+    },
+    {
+      "name": "all public artifact bytes including generated worker match the expected app SHA",
+      "status": "pass",
+      "milliseconds": 8332,
+      "detail": {
+        "files": 32,
+        "allHTTP200": true,
+        "allSHA256Match": true,
+        "includesGeneratedWorker": true
+      }
+    },
+    {
+      "name": "desktop1440 original plan is created only through real public controls",
+      "status": "pass",
+      "milliseconds": 4983,
+      "detail": {
+        "id": "8f2065b1-e120-418d-810c-08d206a22190",
+        "title": "Một kế hoạch cũ, dành lại cho ngày mới",
+        "destination": "Huế",
+        "startDate": "2032-01-01",
+        "days": 90,
+        "travelers": 2,
+        "budget": 2000000,
+        "cover": "hoian",
+        "activities": [
+          {
+            "id": "79008b53-1c83-42c5-a856-e4e46ff03b5b",
+            "placeId": "",
+            "day": 0,
+            "title": "Buổi sáng bên sông · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "09:00",
+            "duration": 60,
+            "cost": 80000,
+            "costMode": "person",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": true
+          },
+          {
+            "id": "79410ecc-064b-4aac-817d-58819d080ebd",
+            "placeId": "",
+            "day": 89,
+            "title": "Một điểm dừng ngày cuối · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "14:00",
+            "duration": 90,
+            "cost": 100000,
+            "costMode": "group",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": true
+          }
+        ],
+        "expenses": [
+          {
+            "id": "fc3ff9b4-cd51-4b04-adec-d944b83692de",
+            "title": "Khoản đã chi của chuyến nguồn · dữ liệu kiểm chứng",
+            "amount": 450000,
+            "date": "2032-01-02",
+            "category": "move",
+            "payer": "Người kiểm chứng",
+            "notes": "Dữ liệu thử riêng trong trình duyệt; không phải thanh toán thật."
+          }
+        ],
+        "checklist": [
+          {
+            "id": "cf4fde6e-f05f-469f-838b-438675c48d72",
+            "title": "Giấy tờ và vé tàu · kiểm chứng",
+            "done": true
+          },
+          {
+            "id": "3e82c5ad-66d3-48c6-a5ac-ea827bf260f4",
+            "title": "Sạc dự phòng · kiểm chứng",
+            "done": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop1440 reuse preserves source, resets completion and excludes paid expenses",
+      "status": "pass",
+      "milliseconds": 14108,
+      "detail": {
+        "copied": {
+          "id": "76076be9-1d29-45c1-9667-e10ca9131c94",
+          "title": "Chuyến mới từ kế hoạch cũ",
+          "destination": "Huế",
+          "startDate": "2033-02-01",
+          "days": 90,
+          "travelers": 2,
+          "budget": 2000000,
+          "cover": "hoian",
+          "activities": [
+            {
+              "id": "c5c8029c-6c33-4b00-8225-5b8cfefe066b",
+              "placeId": "",
+              "day": 0,
+              "title": "Buổi sáng bên sông · kế hoạch kiểm chứng",
+              "category": "other",
+              "start": "09:00",
+              "duration": 60,
+              "cost": 80000,
+              "costMode": "person",
+              "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+              "address": "23 Lê Lợi\nTầng 2, Huế",
+              "done": false
+            },
+            {
+              "id": "ca62fc7d-b5cf-481c-bfe5-cd6328dbf521",
+              "placeId": "",
+              "day": 89,
+              "title": "Một điểm dừng ngày cuối · kế hoạch kiểm chứng",
+              "category": "other",
+              "start": "14:00",
+              "duration": 90,
+              "cost": 100000,
+              "costMode": "group",
+              "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+              "address": "23 Lê Lợi\nTầng 2, Huế",
+              "done": false
+            }
+          ],
+          "expenses": [],
+          "checklist": [
+            {
+              "id": "25c8b4c6-6806-4aac-8b69-bf3e5c5f142e",
+              "title": "Giấy tờ và vé tàu · kiểm chứng",
+              "done": false
+            },
+            {
+              "id": "3ad5124e-da84-4d5e-8c64-deb9b9ad70ac",
+              "title": "Sạc dự phòng · kiểm chứng",
+              "done": false
+            }
+          ]
+        },
+        "copyEvidence": {
+          "originalTripId": "8f2065b1-e120-418d-810c-08d206a22190",
+          "copiedTripId": "76076be9-1d29-45c1-9667-e10ca9131c94",
+          "newEntityIds": [
+            "76076be9-1d29-45c1-9667-e10ca9131c94",
+            "c5c8029c-6c33-4b00-8225-5b8cfefe066b",
+            "ca62fc7d-b5cf-481c-bfe5-cd6328dbf521",
+            "25c8b4c6-6806-4aac-8b69-bf3e5c5f142e",
+            "3ad5124e-da84-4d5e-8c64-deb9b9ad70ac"
+          ],
+          "copiedActivities": 2,
+          "copiedChecklist": 2,
+          "actualExpenses": 0,
+          "resetCompletion": true,
+          "estimateVND": 260000
+        }
+      }
+    },
+    {
+      "name": "desktop1440 day90 remains visible and checklist retains keyboard focus",
+      "status": "pass",
+      "milliseconds": 308,
+      "detail": {
+        "day90": {
+          "scrollLeft": 8014,
+          "activeLeft": 992,
+          "activeRight": 1082,
+          "stripLeft": 284,
+          "stripRight": 1082
+        },
+        "keyboardToggleFocusPreserved": true,
+        "toggledTwiceAndRestored": true
+      }
+    },
+    {
+      "name": "desktop1440 actual JSON/ICS downloads and reload retain both independent plans",
+      "status": "pass",
+      "milliseconds": 1956,
+      "detail": {
+        "actualJSON": true,
+        "actualICS": true,
+        "events": 2,
+        "firstDate": "2033-02-01",
+        "lastDate": "2033-05-01",
+        "multilineLocation": true,
+        "sourceTripUnchanged": true,
+        "copiedActualExpenses": 0,
+        "copiedEstimateVND": 260000,
+        "persistedAfterReload": true
+      }
+    },
+    {
+      "name": "mobile390 original plan is created only through real public controls",
+      "status": "pass",
+      "milliseconds": 9629,
+      "detail": {
+        "id": "0801ee4c-f271-4de2-a689-229c8bb96974",
+        "title": "Một kế hoạch để dùng lại trên điện thoại",
+        "destination": "Huế",
+        "startDate": "2032-01-01",
+        "days": 90,
+        "travelers": 2,
+        "budget": 2000000,
+        "cover": "hoian",
+        "activities": [
+          {
+            "id": "64d559d3-e9dc-4dab-907f-375902370405",
+            "placeId": "",
+            "day": 0,
+            "title": "Buổi sáng bên sông · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "09:00",
+            "duration": 60,
+            "cost": 80000,
+            "costMode": "person",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": true
+          },
+          {
+            "id": "967f7499-fb49-432d-bbc4-ff7d3f521629",
+            "placeId": "",
+            "day": 89,
+            "title": "Một điểm dừng ngày cuối · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "14:00",
+            "duration": 90,
+            "cost": 100000,
+            "costMode": "group",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": true
+          }
+        ],
+        "expenses": [
+          {
+            "id": "1f36315a-dad5-4a3e-8c88-5f54bdfa2506",
+            "title": "Khoản đã chi của chuyến nguồn · dữ liệu kiểm chứng",
+            "amount": 450000,
+            "date": "2032-01-02",
+            "category": "move",
+            "payer": "Người kiểm chứng",
+            "notes": "Dữ liệu thử riêng trong trình duyệt; không phải thanh toán thật."
+          }
+        ],
+        "checklist": [
+          {
+            "id": "c390d70c-a986-4a1c-9b45-707f9ef83d8d",
+            "title": "Giấy tờ và vé tàu · kiểm chứng",
+            "done": true
+          },
+          {
+            "id": "30347012-37ad-463f-bcf7-0f5c14b61307",
+            "title": "Sạc dự phòng · kiểm chứng",
+            "done": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "mobile390 reuse preserves source, resets completion and excludes paid expenses",
+      "status": "pass",
+      "milliseconds": 13934,
+      "detail": {
+        "copied": {
+          "id": "e43406c7-9bf2-416d-9410-6e922ed909dd",
+          "title": "Chuyến mới từ điện thoại",
+          "destination": "Huế",
+          "startDate": "2033-02-01",
+          "days": 90,
+          "travelers": 2,
+          "budget": 2000000,
+          "cover": "hoian",
+          "activities": [
+            {
+              "id": "521ee209-1430-4f16-929b-1faa561d788f",
+              "placeId": "",
+              "day": 0,
+              "title": "Buổi sáng bên sông · kế hoạch kiểm chứng",
+              "category": "other",
+              "start": "09:00",
+              "duration": 60,
+              "cost": 80000,
+              "costMode": "person",
+              "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+              "address": "23 Lê Lợi\nTầng 2, Huế",
+              "done": false
+            },
+            {
+              "id": "bde4bf06-8ac4-4a7b-8768-0ae0cbbbc1df",
+              "placeId": "",
+              "day": 89,
+              "title": "Một điểm dừng ngày cuối · kế hoạch kiểm chứng",
+              "category": "other",
+              "start": "14:00",
+              "duration": 90,
+              "cost": 100000,
+              "costMode": "group",
+              "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+              "address": "23 Lê Lợi\nTầng 2, Huế",
+              "done": false
+            }
+          ],
+          "expenses": [],
+          "checklist": [
+            {
+              "id": "9122f415-4255-4ef3-bdb9-70133176d8f5",
+              "title": "Giấy tờ và vé tàu · kiểm chứng",
+              "done": false
+            },
+            {
+              "id": "6286ad78-e0d9-4677-bb66-7fb19589f3a4",
+              "title": "Sạc dự phòng · kiểm chứng",
+              "done": false
+            }
+          ]
+        },
+        "copyEvidence": {
+          "originalTripId": "0801ee4c-f271-4de2-a689-229c8bb96974",
+          "copiedTripId": "e43406c7-9bf2-416d-9410-6e922ed909dd",
+          "newEntityIds": [
+            "e43406c7-9bf2-416d-9410-6e922ed909dd",
+            "521ee209-1430-4f16-929b-1faa561d788f",
+            "bde4bf06-8ac4-4a7b-8768-0ae0cbbbc1df",
+            "9122f415-4255-4ef3-bdb9-70133176d8f5",
+            "6286ad78-e0d9-4677-bb66-7fb19589f3a4"
+          ],
+          "copiedActivities": 2,
+          "copiedChecklist": 2,
+          "actualExpenses": 0,
+          "resetCompletion": true,
+          "estimateVND": 260000
+        }
+      }
+    },
+    {
+      "name": "mobile390 day90 remains visible and checklist retains keyboard focus",
+      "status": "pass",
+      "milliseconds": 608,
+      "detail": {
+        "day90": {
+          "scrollLeft": 7828,
+          "activeLeft": 289,
+          "activeRight": 372,
+          "stripLeft": 18,
+          "stripRight": 372
+        },
+        "keyboardToggleFocusPreserved": true,
+        "toggledTwiceAndRestored": true
+      }
+    },
+    {
+      "name": "mobile390 actual JSON/ICS downloads and reload retain both independent plans",
+      "status": "pass",
+      "milliseconds": 904,
+      "detail": {
+        "actualJSON": true,
+        "actualICS": true,
+        "events": 2,
+        "firstDate": "2033-02-01",
+        "lastDate": "2033-05-01",
+        "multilineLocation": true,
+        "sourceTripUnchanged": true,
+        "copiedActualExpenses": 0,
+        "copiedEstimateVND": 260000,
+        "persistedAfterReload": true
+      }
+    },
+    {
+      "name": "public installed app supports an offline new-page copy, edit and persistent reload",
+      "status": "pass",
+      "milliseconds": 1511,
+      "detail": {
+        "scope": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+        "script": "https://nguyenhonggiang2407.github.io/YangAtlas/service-worker.js",
+        "cacheName": "yangatlas-offline:%2FYangAtlas%2F:1dee834ddc11340e558cee72",
+        "cachedResources": 31,
+        "newPageWhileOffline": true,
+        "copiedWhileOffline": true,
+        "editedWhileOffline": true,
+        "persistedAfterOfflineReload": true,
+        "olderTripsUnchanged": true
+      }
+    },
+    {
+      "name": "isolated public browser diagnostics have no errors, missing assets, third-party requests or writes",
+      "status": "pass",
+      "milliseconds": 1,
+      "detail": {
+        "contexts": 2,
+        "noBackendWrites": true,
+        "noThirdPartyRequests": true
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "outputs/yangatlas-reuse-live/reuse-dialog-desktop.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T13:23:20.149Z",
+      "visual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      },
+      "sha256": "0bb49d82e1c47861e783147f8766e8c85461426a89430beb294ffdc02f67f241"
+    },
+    {
+      "file": "outputs/yangatlas-reuse-live/reused-plan-desktop.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T13:23:27.209Z",
+      "visual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      },
+      "sha256": "71609734502e667a4772431fdfff90953577abc0d7bae03242d5771473917065"
+    },
+    {
+      "file": "outputs/yangatlas-reuse-live/reuse-dialog-mobile.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T13:23:50.246Z",
+      "visual": {
+        "viewport": 390,
+        "scrollWidth": 390,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      },
+      "sha256": "68ae34d427b07893dcfb652287d4399ba7c1d1096980861974fa49ff8d7f2d94"
+    },
+    {
+      "file": "outputs/yangatlas-reuse-live/reused-plan-mobile.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T13:23:57.471Z",
+      "visual": {
+        "viewport": 390,
+        "scrollWidth": 390,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      },
+      "sha256": "9dd0fbbd9904f718f5b1bc0fd01a5eb516708ba52ec36a3da6b5ce4a29a57b4a"
+    },
+    {
+      "file": "outputs/yangatlas-reuse-live/reused-day90-mobile.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T13:23:57.853Z",
+      "visual": {
+        "viewport": 390,
+        "scrollWidth": 390,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      },
+      "sha256": "7c3657149218eb0d6e05cff17fea73a064917a1406f1decc3781db75f7cd5db4"
+    },
+    {
+      "file": "outputs/yangatlas-reuse-live/reused-checklist-mobile.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T13:23:58.081Z",
+      "visual": {
+        "viewport": 390,
+        "scrollWidth": 390,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      },
+      "sha256": "5139d93e6984a5635c6ecc513d10fe0a106f46635cfa3e30695e3218f0a40e32"
+    },
+    {
+      "file": "outputs/yangatlas-reuse-live/reused-plan-offline-desktop.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T13:24:00.470Z",
+      "visual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      },
+      "sha256": "d5938990b98a9f348b590acec3e4ad91a612a6d311c7902c0fe62fe58c19c154"
+    }
+  ],
+  "downloads": [
+    {
+      "label": "desktop reused plan JSON",
+      "suggestedFilename": "yangatlas-backup.json",
+      "bytes": 3998,
+      "sha256": "10b6a2be686ed97324fd8350d4e2bfcb264b0f9ed07dd6cea98be194d85670f9",
+      "actualBrowserDownload": true
+    },
+    {
+      "label": "desktop reused plan ICS",
+      "suggestedFilename": "yangatlas-itinerary.ics",
+      "bytes": 1363,
+      "sha256": "989c95e40e1e2b34b5daab9f9e569b17e3fc98957d2579f8cf2b6b8c37001c86",
+      "actualBrowserDownload": true
+    },
+    {
+      "label": "mobile reused plan JSON",
+      "suggestedFilename": "yangatlas-backup.json",
+      "bytes": 4004,
+      "sha256": "6ef6affe31257e15b27863f7e6332af8b35ca14f38500cafc1084bf4b4af18eb",
+      "actualBrowserDownload": true
+    },
+    {
+      "label": "mobile reused plan ICS",
+      "suggestedFilename": "yangatlas-itinerary.ics",
+      "bytes": 1362,
+      "sha256": "726912d7af1138dc1602a37c8f49fe68c2b2ed07ba2208a5d36facb86e3c4d33",
+      "actualBrowserDownload": true
+    }
+  ],
+  "limitations": [
+    "Test trip, activities, expenses and checklist entries are deliberately entered demonstration data in isolated browser storage, not a real customer's trip or payments.",
+    "Screenshots are direct captures of the public app. No source/response fixtures, screenshot substitutions or persistent user browser profile are used.",
+    "Native install acceptance, OS print dialog and cross-device synchronization are not claimed by this check."
+  ],
+  "localHEAD": "5ff0d98f6bddeae85972c3194c5264a297981d38",
+  "expectedSourceTree": "614c022cf341f69667aa99a52bb4b2c6425ebd30",
+  "offlineRelease": "1dee834ddc11340e558cee72",
+  "localDistribution": {
+    "source": "canonical git archive (no Windows checkout newline conversion)",
+    "directory": "work/atlas-reuse-canonical-5ff0d98/dist",
+    "files": 32,
+    "committedCopyFiles": [
+      {
+        "path": "LICENSE",
+        "source": "LICENSE",
+        "sha256": "055ccdc8eb22f95ff180290ed620963e90ed34438956afc3a2a5b8d25c2358d9"
+      },
+      {
+        "path": "LICENSES/fonts/dmsans-OFL.txt",
+        "source": "LICENSES/fonts/dmsans-OFL.txt",
+        "sha256": "2af94f4fb533be8fa23282eb33e08ca311ddf47c2f32777e2040b282deeec65c"
+      },
+      {
+        "path": "LICENSES/fonts/manifest.json",
+        "source": "LICENSES/fonts/manifest.json",
+        "sha256": "bf41b3d13a8e241510773d49c1a69ae381c67d49183f2c0cbc8c197e26ee3773"
+      },
+      {
+        "path": "LICENSES/fonts/playfairdisplay-OFL.txt",
+        "source": "LICENSES/fonts/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      {
+        "path": "LICENSES/photos/manifest.json",
+        "source": "LICENSES/photos/manifest.json",
+        "sha256": "305824c25aaa7f2c25d816fefc79112fd6ef08d711b26590fc7c0489aec3489d"
+      },
+      {
+        "path": "THIRD_PARTY_NOTICES.md",
+        "source": "THIRD_PARTY_NOTICES.md",
+        "sha256": "118951803f3094c3f4d65feea3a9fde80c59b38d0ae4debd995a87b861ecc732"
+      },
+      {
+        "path": "docs/MEDIA.md",
+        "source": "docs/MEDIA.md",
+        "sha256": "ce98b2052e99a094f06b7484cb0ebb49d994bad2d99ed75eb41fb3b08cc19e0a"
+      },
+      {
+        "path": "favicon.svg",
+        "source": "public/favicon.svg",
+        "sha256": "a52658227a78d60b161b5f1a313fa7c8fd0d7864b8c8975e488d8d08e6d2036a"
+      },
+      {
+        "path": "fonts/font-1.ttf",
+        "source": "public/fonts/font-1.ttf",
+        "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+      },
+      {
+        "path": "fonts/font-2.ttf",
+        "source": "public/fonts/font-2.ttf",
+        "sha256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae"
+      },
+      {
+        "path": "fonts/font-3.ttf",
+        "source": "public/fonts/font-3.ttf",
+        "sha256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a"
+      },
+      {
+        "path": "fonts/font-4.ttf",
+        "source": "public/fonts/font-4.ttf",
+        "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+      },
+      {
+        "path": "fonts/font-5.ttf",
+        "source": "public/fonts/font-5.ttf",
+        "sha256": "ef1515fa19156794b36e5f362c677f78837c38ccdd6fa1fa76d1dd918ea7abbe"
+      },
+      {
+        "path": "fonts/font-6.ttf",
+        "source": "public/fonts/font-6.ttf",
+        "sha256": "b60ffb0ee2b4e09d71d67ff3ea16d6a23cf2e0cf637c5f4e36fff2e3b1465252"
+      },
+      {
+        "path": "icons/icon-192.png",
+        "source": "public/icons/icon-192.png",
+        "sha256": "6baf68da2dc8e90ccd10bfb8eeb37e320de9d0a7eeb00a9592ded03eb3dce71d"
+      },
+      {
+        "path": "icons/icon-512.png",
+        "source": "public/icons/icon-512.png",
+        "sha256": "591c57d187628b2ebf2801639b88e7dbef3baae92f55ce8190d2a23b18106a1d"
+      },
+      {
+        "path": "icons/icon.svg",
+        "source": "public/icons/icon.svg",
+        "sha256": "44197bc2403c36084e2360db57fd10b00837b2afea7fb2d7a2555050716c8f21"
+      },
+      {
+        "path": "index.html",
+        "source": "index.html",
+        "sha256": "efb6a67d7d1b3bb779744f4c1fe2b0aad41076de6aad56e59552a56167f654ba"
+      },
+      {
+        "path": "manifest.webmanifest",
+        "source": "public/manifest.webmanifest",
+        "sha256": "7bd818f56e12acfeb2fded7955a0d05bbb40587319d38989e7a5c314d09e8750"
+      },
+      {
+        "path": "media/dalat-flower-park.jpg",
+        "source": "public/media/dalat-flower-park.jpg",
+        "sha256": "9be9b6a1257da28606bac999a2e7fa66ea9dce3ace6eb0efe0521c77414c91a8"
+      },
+      {
+        "path": "media/dalat-station.jpg",
+        "source": "public/media/dalat-station.jpg",
+        "sha256": "535c1443baedc50dbe6cd36f308fb1e66f1cf8e32b7d58488359309c9386f5ae"
+      },
+      {
+        "path": "media/dalat-xuan-huong.jpg",
+        "source": "public/media/dalat-xuan-huong.jpg",
+        "sha256": "e4ed6e4f0c2b718dc4a5caae81e47f84699dca5066c886a578ddd688f6180d74"
+      },
+      {
+        "path": "media/hoian-japanese-bridge.jpg",
+        "source": "public/media/hoian-japanese-bridge.jpg",
+        "sha256": "ec5c3165a72307522411272b867863317164aade8af60e759a781da64e9cead8"
+      },
+      {
+        "path": "media/hoian-river.jpg",
+        "source": "public/media/hoian-river.jpg",
+        "sha256": "d23b50e84ebe5a9f701969722ad98d5a5d7f328e6b242d6b426944e1b772a782"
+      },
+      {
+        "path": "media/hoian-street.jpg",
+        "source": "public/media/hoian-street.jpg",
+        "sha256": "6e34d3d412531c277f230e4943d52a31fd57175bc0b8d6fbc17aef04ff58295c"
+      },
+      {
+        "path": "src/app.js",
+        "source": "src/app.js",
+        "sha256": "7ec30ab8336e3d585cfb03231032aaa50c064fe9627cf2cc191a201fdd155ccf"
+      },
+      {
+        "path": "src/catalog.js",
+        "source": "src/catalog.js",
+        "sha256": "e76b930879631ca35c2ccaab295c977740dbc9e0801ee374f76189c4651c49fa"
+      },
+      {
+        "path": "src/domain.js",
+        "source": "src/domain.js",
+        "sha256": "85a5070d5200c6ff160e8fb32db8770f35bf402a13ed66513a1586c5b1d61de2"
+      },
+      {
+        "path": "src/fonts.css",
+        "source": "src/fonts.css",
+        "sha256": "bd26994cb6aaf5933c93b80a52c8ec6a54a7cdfc041e066ac9884ca34592a471"
+      },
+      {
+        "path": "src/offline.js",
+        "source": "src/offline.js",
+        "sha256": "c07ad123890f9c4b3abed7d68cf7a04c21e7c3ae34ccf5a55c7ec365a2ef1b40"
+      },
+      {
+        "path": "src/styles.css",
+        "source": "src/styles.css",
+        "sha256": "2f70fffc92c73671058a66a24394f31049a5940cb6a5ce6376b3dfeeb9ebd58d"
+      }
+    ],
+    "generatedWorkerVerified": true
+  },
+  "rootDocument": {
+    "status": 200,
+    "sha256": "efb6a67d7d1b3bb779744f4c1fe2b0aad41076de6aad56e59552a56167f654ba",
+    "exactIndexMatch": true
+  },
+  "browserEngine": {
+    "engine": "chromium",
+    "channel": "bundled",
+    "version": "156.0.8078.4",
+    "isolated": true
+  },
+  "contextResults": [
+    {
+      "viewport": "1440x1000",
+      "original": {
+        "id": "8f2065b1-e120-418d-810c-08d206a22190",
+        "title": "Một kế hoạch cũ, dành lại cho ngày mới",
+        "destination": "Huế",
+        "startDate": "2032-01-01",
+        "days": 90,
+        "travelers": 2,
+        "budget": 2000000,
+        "cover": "hoian",
+        "activities": [
+          {
+            "id": "79008b53-1c83-42c5-a856-e4e46ff03b5b",
+            "placeId": "",
+            "day": 0,
+            "title": "Buổi sáng bên sông · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "09:00",
+            "duration": 60,
+            "cost": 80000,
+            "costMode": "person",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": true
+          },
+          {
+            "id": "79410ecc-064b-4aac-817d-58819d080ebd",
+            "placeId": "",
+            "day": 89,
+            "title": "Một điểm dừng ngày cuối · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "14:00",
+            "duration": 90,
+            "cost": 100000,
+            "costMode": "group",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": true
+          }
+        ],
+        "expenses": [
+          {
+            "id": "fc3ff9b4-cd51-4b04-adec-d944b83692de",
+            "title": "Khoản đã chi của chuyến nguồn · dữ liệu kiểm chứng",
+            "amount": 450000,
+            "date": "2032-01-02",
+            "category": "move",
+            "payer": "Người kiểm chứng",
+            "notes": "Dữ liệu thử riêng trong trình duyệt; không phải thanh toán thật."
+          }
+        ],
+        "checklist": [
+          {
+            "id": "cf4fde6e-f05f-469f-838b-438675c48d72",
+            "title": "Giấy tờ và vé tàu · kiểm chứng",
+            "done": true
+          },
+          {
+            "id": "3e82c5ad-66d3-48c6-a5ac-ea827bf260f4",
+            "title": "Sạc dự phòng · kiểm chứng",
+            "done": false
+          }
+        ]
+      },
+      "copied": {
+        "id": "76076be9-1d29-45c1-9667-e10ca9131c94",
+        "title": "Chuyến mới từ kế hoạch cũ",
+        "destination": "Huế",
+        "startDate": "2033-02-01",
+        "days": 90,
+        "travelers": 2,
+        "budget": 2000000,
+        "cover": "hoian",
+        "activities": [
+          {
+            "id": "c5c8029c-6c33-4b00-8225-5b8cfefe066b",
+            "placeId": "",
+            "day": 0,
+            "title": "Buổi sáng bên sông · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "09:00",
+            "duration": 60,
+            "cost": 80000,
+            "costMode": "person",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": false
+          },
+          {
+            "id": "ca62fc7d-b5cf-481c-bfe5-cd6328dbf521",
+            "placeId": "",
+            "day": 89,
+            "title": "Một điểm dừng ngày cuối · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "14:00",
+            "duration": 90,
+            "cost": 100000,
+            "costMode": "group",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": false
+          }
+        ],
+        "expenses": [],
+        "checklist": [
+          {
+            "id": "25c8b4c6-6806-4aac-8b69-bf3e5c5f142e",
+            "title": "Giấy tờ và vé tàu · kiểm chứng",
+            "done": false
+          },
+          {
+            "id": "3ad5124e-da84-4d5e-8c64-deb9b9ad70ac",
+            "title": "Sạc dự phòng · kiểm chứng",
+            "done": false
+          }
+        ]
+      },
+      "copyEvidence": {
+        "originalTripId": "8f2065b1-e120-418d-810c-08d206a22190",
+        "copiedTripId": "76076be9-1d29-45c1-9667-e10ca9131c94",
+        "newEntityIds": [
+          "76076be9-1d29-45c1-9667-e10ca9131c94",
+          "c5c8029c-6c33-4b00-8225-5b8cfefe066b",
+          "ca62fc7d-b5cf-481c-bfe5-cd6328dbf521",
+          "25c8b4c6-6806-4aac-8b69-bf3e5c5f142e",
+          "3ad5124e-da84-4d5e-8c64-deb9b9ad70ac"
+        ],
+        "copiedActivities": 2,
+        "copiedChecklist": 2,
+        "actualExpenses": 0,
+        "resetCompletion": true,
+        "estimateVND": 260000
+      },
+      "interaction": {
+        "day90": {
+          "scrollLeft": 8014,
+          "activeLeft": 992,
+          "activeRight": 1082,
+          "stripLeft": 284,
+          "stripRight": 1082
+        },
+        "keyboardToggleFocusPreserved": true,
+        "toggledTwiceAndRestored": true
+      },
+      "exports": {
+        "actualJSON": true,
+        "actualICS": true,
+        "events": 2,
+        "firstDate": "2033-02-01",
+        "lastDate": "2033-05-01",
+        "multilineLocation": true,
+        "sourceTripUnchanged": true,
+        "copiedActualExpenses": 0,
+        "copiedEstimateVND": 260000,
+        "persistedAfterReload": true
+      }
+    },
+    {
+      "viewport": "390x844",
+      "original": {
+        "id": "0801ee4c-f271-4de2-a689-229c8bb96974",
+        "title": "Một kế hoạch để dùng lại trên điện thoại",
+        "destination": "Huế",
+        "startDate": "2032-01-01",
+        "days": 90,
+        "travelers": 2,
+        "budget": 2000000,
+        "cover": "hoian",
+        "activities": [
+          {
+            "id": "64d559d3-e9dc-4dab-907f-375902370405",
+            "placeId": "",
+            "day": 0,
+            "title": "Buổi sáng bên sông · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "09:00",
+            "duration": 60,
+            "cost": 80000,
+            "costMode": "person",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": true
+          },
+          {
+            "id": "967f7499-fb49-432d-bbc4-ff7d3f521629",
+            "placeId": "",
+            "day": 89,
+            "title": "Một điểm dừng ngày cuối · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "14:00",
+            "duration": 90,
+            "cost": 100000,
+            "costMode": "group",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": true
+          }
+        ],
+        "expenses": [
+          {
+            "id": "1f36315a-dad5-4a3e-8c88-5f54bdfa2506",
+            "title": "Khoản đã chi của chuyến nguồn · dữ liệu kiểm chứng",
+            "amount": 450000,
+            "date": "2032-01-02",
+            "category": "move",
+            "payer": "Người kiểm chứng",
+            "notes": "Dữ liệu thử riêng trong trình duyệt; không phải thanh toán thật."
+          }
+        ],
+        "checklist": [
+          {
+            "id": "c390d70c-a986-4a1c-9b45-707f9ef83d8d",
+            "title": "Giấy tờ và vé tàu · kiểm chứng",
+            "done": true
+          },
+          {
+            "id": "30347012-37ad-463f-bcf7-0f5c14b61307",
+            "title": "Sạc dự phòng · kiểm chứng",
+            "done": false
+          }
+        ]
+      },
+      "copied": {
+        "id": "e43406c7-9bf2-416d-9410-6e922ed909dd",
+        "title": "Chuyến mới từ điện thoại",
+        "destination": "Huế",
+        "startDate": "2033-02-01",
+        "days": 90,
+        "travelers": 2,
+        "budget": 2000000,
+        "cover": "hoian",
+        "activities": [
+          {
+            "id": "521ee209-1430-4f16-929b-1faa561d788f",
+            "placeId": "",
+            "day": 0,
+            "title": "Buổi sáng bên sông · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "09:00",
+            "duration": 60,
+            "cost": 80000,
+            "costMode": "person",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": false
+          },
+          {
+            "id": "bde4bf06-8ac4-4a7b-8768-0ae0cbbbc1df",
+            "placeId": "",
+            "day": 89,
+            "title": "Một điểm dừng ngày cuối · kế hoạch kiểm chứng",
+            "category": "other",
+            "start": "14:00",
+            "duration": 90,
+            "cost": 100000,
+            "costMode": "group",
+            "notes": "Giữ nguyên thời gian, địa chỉ và dự tính khi dùng lại kế hoạch.",
+            "address": "23 Lê Lợi\nTầng 2, Huế",
+            "done": false
+          }
+        ],
+        "expenses": [],
+        "checklist": [
+          {
+            "id": "9122f415-4255-4ef3-bdb9-70133176d8f5",
+            "title": "Giấy tờ và vé tàu · kiểm chứng",
+            "done": false
+          },
+          {
+            "id": "6286ad78-e0d9-4677-bb66-7fb19589f3a4",
+            "title": "Sạc dự phòng · kiểm chứng",
+            "done": false
+          }
+        ]
+      },
+      "copyEvidence": {
+        "originalTripId": "0801ee4c-f271-4de2-a689-229c8bb96974",
+        "copiedTripId": "e43406c7-9bf2-416d-9410-6e922ed909dd",
+        "newEntityIds": [
+          "e43406c7-9bf2-416d-9410-6e922ed909dd",
+          "521ee209-1430-4f16-929b-1faa561d788f",
+          "bde4bf06-8ac4-4a7b-8768-0ae0cbbbc1df",
+          "9122f415-4255-4ef3-bdb9-70133176d8f5",
+          "6286ad78-e0d9-4677-bb66-7fb19589f3a4"
+        ],
+        "copiedActivities": 2,
+        "copiedChecklist": 2,
+        "actualExpenses": 0,
+        "resetCompletion": true,
+        "estimateVND": 260000
+      },
+      "interaction": {
+        "day90": {
+          "scrollLeft": 7828,
+          "activeLeft": 289,
+          "activeRight": 372,
+          "stripLeft": 18,
+          "stripRight": 372
+        },
+        "keyboardToggleFocusPreserved": true,
+        "toggledTwiceAndRestored": true
+      },
+      "exports": {
+        "actualJSON": true,
+        "actualICS": true,
+        "events": 2,
+        "firstDate": "2033-02-01",
+        "lastDate": "2033-05-01",
+        "multilineLocation": true,
+        "sourceTripUnchanged": true,
+        "copiedActualExpenses": 0,
+        "copiedEstimateVND": 260000,
+        "persistedAfterReload": true
+      }
+    }
+  ],
+  "installedOffline": {
+    "scope": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+    "script": "https://nguyenhonggiang2407.github.io/YangAtlas/service-worker.js",
+    "cacheName": "yangatlas-offline:%2FYangAtlas%2F:1dee834ddc11340e558cee72",
+    "cachedResources": 31,
+    "newPageWhileOffline": true,
+    "copiedWhileOffline": true,
+    "editedWhileOffline": true,
+    "persistedAfterOfflineReload": true,
+    "olderTripsUnchanged": true
+  },
+  "browserDiagnostics": [
+    {
+      "viewport": "1440x1000",
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "abortedRequests": [],
+      "httpErrors": [],
+      "writes": [],
+      "thirdPartyRequests": [],
+      "offline": false
+    },
+    {
+      "viewport": "390x844",
+      "errors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "abortedRequests": [],
+      "httpErrors": [],
+      "writes": [],
+      "thirdPartyRequests": [],
+      "offline": false
+    }
+  ],
+  "finishedAt": "2026-11-05T13:24:00.637Z",
+  "pathNote": "Local file paths normalized relative to the verification workspace. Observations, timestamps and hashes are unchanged; screenshots copied without editing."
+}

@@ -10,7 +10,7 @@ destination photography. No account required.
 
 ![YangAtlas, captured from the running application](docs/screenshots/personal-desktop.png)
 
-Verified public release **5 November 2026**: [40 native checks + 17 browser workflows](https://github.com/nguyenhonggiang2407/YangAtlas/actions/runs/41951152367), 32 exact public-file hashes and real offline edits/reload. [Detailed evidence](docs/VALIDATION.md).
+Verified public release **v2.1 · 5 November 2026**: [50 native checks + 21 browser workflows](https://github.com/nguyenhonggiang2407/YangAtlas/actions/runs/42034869630), 32 exact public-file hashes and real public trip reuse/offline checks. [Detailed evidence](docs/VALIDATION.md).
 
 <details>
 <summary>Actual expense ledger and preparation checklist</summary>

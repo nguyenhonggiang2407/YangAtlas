@@ -2,6 +2,11 @@
 
 ## Trip reuse and interaction refinements — v2.1, 5 November 2026
 
+**Published and independently verified.** Application `5ff0d98f6bddeae85972c3194c5264a297981d38` passed [CI42034869630](https://github.com/nguyenhonggiang2407/YangAtlas/actions/runs/42034869630): **50/50 native + 21/21 browser**, 12 photo/font hashes, zero dependency advisories at that run and Pages publication. [Decoded CI excerpts](evidence/reuse-ci-verification.json).
+
+All 32 public resource hashes match canonical Git bytes and the generated worker for release `1dee834ddc11340e558cee72`. Fresh public browser checks cover plan reuse, unchanged source payments, new identifiers/reset completion, real JSON/ICS downloads, final-day visibility, keyboard continuity and offline persistence. [Full public observations and actual captures](evidence/reuse-live-verification.json). Existing v2 proofs below are historical and are not reused as evidence for these new behaviors.
+
+
 - **50/50 native checks passed locally:** the previous 40 plus 6 trip-duplication
   checks and 4 regressions for the real UI's asynchronous update/reload policy.
 - **4/4 focused new browser cases passed:** desktop/mobile plan reuse, final-day

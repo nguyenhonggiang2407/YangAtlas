@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-11-05T13:22:13.501Z",
+  "sourceCommit": "5ff0d98f6bddeae85972c3194c5264a297981d38",
+  "runId": 42034869630,
+  "jobId": 127270275389,
+  "url": "https://github.com/nguyenhonggiang2407/YangAtlas/actions/runs/42034869630",
+  "selectedLogLines": [
+    "2026-11-05T13:20:33.1648487Z found 0 vulnerabilities",
+    "2026-11-05T13:20:34.2558210Z ℹ tests 50",
+    "2026-11-05T13:20:34.2558870Z ℹ pass 50",
+    "2026-11-05T13:20:34.2559080Z ℹ fail 0",
+    "2026-11-05T13:20:34.4321419Z {\"photos\":6,\"fonts\":6,\"curatedPlaces\":10,\"sampleTrips\":2,\"checkedFiles\":12,\"sha256Verified\":true,\"selfHostedFonts\":true}",
+    "2026-11-05T13:20:34.6295515Z Built 32 static files (2708.7 KiB). Offline release 1dee834ddc11340e558cee72: 31 integrity-checked resources. No runtime dependencies.",
+    "2026-11-05T13:21:15.9992810Z ℹ tests 21",
+    "2026-11-05T13:21:15.9993518Z ℹ pass 21",
+    "2026-11-05T13:21:15.9993814Z ℹ fail 0"
+  ]
+}
