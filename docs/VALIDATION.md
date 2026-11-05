@@ -29,9 +29,17 @@ account-free, browser-local model.
   multiline address edit/JSON/ICS/map fidelity and the literal `constructor`
   destination, alongside genuine offline navigation/edit/reload.
 
-The public-release evidence below currently describes **v1**. New v2 CI and public
-resource/browser verification will be appended after the exact source is deployed;
-v1 observations are not reused as evidence of new features.
+### Verified public v2 release
+
+Application commit `6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4`. [CI41951152367](https://github.com/nguyenhonggiang2407/YangAtlas/actions/runs/41951152367) completed successfully: **40/40 native tests, 17/17 browser workflows**, 12 photo/font hashes, build and Pages publication. The development dependency installation reported zero advisories at that run. [Decoded CI excerpts](evidence/personal-ci-verification.json).
+
+Independent public checks on **5 November 2026, 01:52:24–01:52:48 UTC** passed **all 32 HTTP200 resources with exact SHA-256**, plus the root document. Expected files were reconstructed from canonical Git bytes at the exact application commit, including the generated integrity-checked worker, matching Linux CI release `72996fdc74c9b8d20a99a93e`. This avoids differences from Windows checkout line endings.
+
+Fresh Chromium 156 desktop 1440×1000 and mobile 390×844 contexts opened an empty workspace, created Huế trips with custom addresses, recorded actual expenses independently from estimates, reloaded checklist data and downloaded real JSON/CSV/ICS files including LOCATION. The installed worker cached 31 resources; with the network disabled a new page reopened, accepted edits and retained them after another offline reload. No browser/runtime/HTTP/request errors, unexpected third-party requests, backend writes or horizontal overflow were observed.
+
+[Public observations, file hashes, downloads and screenshot timestamps](evidence/personal-live-verification.json). Four unedited public screenshots are published as `docs/screenshots/personal-*.png`; nine original captures and three downloaded files were delivered separately. All entered amounts are isolated verification data, not real payments. Native OS installation acceptance and physical printing were not exercised. These checks do not promise every browser, physical phone, storage retention or uptime.
+
+The v1 evidence below is retained as a historical record, not substituted for v2 verification.
 
 ## Historical v1 release
 

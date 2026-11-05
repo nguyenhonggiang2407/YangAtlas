@@ -8,7 +8,18 @@ destination photography. No account required.
 
 **[Open YangAtlas →](https://nguyenhonggiang2407.github.io/YangAtlas/)** · [Build & browser checks](https://github.com/nguyenhonggiang2407/YangAtlas/actions/workflows/pages.yml) · [Photography credits](docs/MEDIA.md)
 
-![YangAtlas, captured from the running application](docs/screenshots/itinerary-desktop.png)
+![YangAtlas, captured from the running application](docs/screenshots/personal-desktop.png)
+
+Verified public release **5 November 2026**: [40 native checks + 17 browser workflows](https://github.com/nguyenhonggiang2407/YangAtlas/actions/runs/41951152367), 32 exact public-file hashes and real offline edits/reload. [Detailed evidence](docs/VALIDATION.md).
+
+<details>
+<summary>Actual expense ledger and preparation checklist</summary>
+
+![Actual expenses, entered through the public app in a private verification browser](docs/screenshots/personal-expenses.png)
+![Trip preparation checklist captured from the public app](docs/screenshots/personal-checklist.png)
+
+These are direct screenshots with isolated verification data, not real purchases or customer records.
+</details>
 
 ## Make it your own
 

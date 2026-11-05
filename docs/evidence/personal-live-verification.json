@@ -1,0 +1,1146 @@
+{
+  "startedAt": "2026-11-05T01:52:24.188Z",
+  "expectedAppSHA": "6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+  "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+  "verification": "pass",
+  "artifactChecks": [
+    {
+      "path": "docs/MEDIA.md",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/docs/MEDIA.md?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 12595,
+      "contentType": "text/markdown; charset=utf-8",
+      "localSHA256": "ce98b2052e99a094f06b7484cb0ebb49d994bad2d99ed75eb41fb3b08cc19e0a",
+      "publicSHA256": "ce98b2052e99a094f06b7484cb0ebb49d994bad2d99ed75eb41fb3b08cc19e0a",
+      "match": true
+    },
+    {
+      "path": "favicon.svg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/favicon.svg?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 309,
+      "contentType": "image/svg+xml",
+      "localSHA256": "a52658227a78d60b161b5f1a313fa7c8fd0d7864b8c8975e488d8d08e6d2036a",
+      "publicSHA256": "a52658227a78d60b161b5f1a313fa7c8fd0d7864b8c8975e488d8d08e6d2036a",
+      "match": true
+    },
+    {
+      "path": "fonts/font-1.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-1.ttf?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 48280,
+      "contentType": "font/ttf",
+      "localSHA256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "publicSHA256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "match": true
+    },
+    {
+      "path": "fonts/font-2.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-2.ttf?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 48308,
+      "contentType": "font/ttf",
+      "localSHA256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae",
+      "publicSHA256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae",
+      "match": true
+    },
+    {
+      "path": "fonts/font-3.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-3.ttf?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 48280,
+      "contentType": "font/ttf",
+      "localSHA256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a",
+      "publicSHA256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a",
+      "match": true
+    },
+    {
+      "path": "fonts/font-4.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-4.ttf?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 48200,
+      "contentType": "font/ttf",
+      "localSHA256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "publicSHA256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "match": true
+    },
+    {
+      "path": "fonts/font-5.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-5.ttf?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 111168,
+      "contentType": "font/ttf",
+      "localSHA256": "ef1515fa19156794b36e5f362c677f78837c38ccdd6fa1fa76d1dd918ea7abbe",
+      "publicSHA256": "ef1515fa19156794b36e5f362c677f78837c38ccdd6fa1fa76d1dd918ea7abbe",
+      "match": true
+    },
+    {
+      "path": "fonts/font-6.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-6.ttf?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 123608,
+      "contentType": "font/ttf",
+      "localSHA256": "b60ffb0ee2b4e09d71d67ff3ea16d6a23cf2e0cf637c5f4e36fff2e3b1465252",
+      "publicSHA256": "b60ffb0ee2b4e09d71d67ff3ea16d6a23cf2e0cf637c5f4e36fff2e3b1465252",
+      "match": true
+    },
+    {
+      "path": "icons/icon-192.png",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/icons/icon-192.png?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 4713,
+      "contentType": "image/png",
+      "localSHA256": "6baf68da2dc8e90ccd10bfb8eeb37e320de9d0a7eeb00a9592ded03eb3dce71d",
+      "publicSHA256": "6baf68da2dc8e90ccd10bfb8eeb37e320de9d0a7eeb00a9592ded03eb3dce71d",
+      "match": true
+    },
+    {
+      "path": "icons/icon-512.png",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/icons/icon-512.png?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 15546,
+      "contentType": "image/png",
+      "localSHA256": "591c57d187628b2ebf2801639b88e7dbef3baae92f55ce8190d2a23b18106a1d",
+      "publicSHA256": "591c57d187628b2ebf2801639b88e7dbef3baae92f55ce8190d2a23b18106a1d",
+      "match": true
+    },
+    {
+      "path": "icons/icon.svg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/icons/icon.svg?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 363,
+      "contentType": "image/svg+xml",
+      "localSHA256": "44197bc2403c36084e2360db57fd10b00837b2afea7fb2d7a2555050716c8f21",
+      "publicSHA256": "44197bc2403c36084e2360db57fd10b00837b2afea7fb2d7a2555050716c8f21",
+      "match": true
+    },
+    {
+      "path": "index.html",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/index.html?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 1320,
+      "contentType": "text/html; charset=utf-8",
+      "localSHA256": "efb6a67d7d1b3bb779744f4c1fe2b0aad41076de6aad56e59552a56167f654ba",
+      "publicSHA256": "efb6a67d7d1b3bb779744f4c1fe2b0aad41076de6aad56e59552a56167f654ba",
+      "match": true
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSE?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 1079,
+      "contentType": "application/octet-stream",
+      "localSHA256": "055ccdc8eb22f95ff180290ed620963e90ed34438956afc3a2a5b8d25c2358d9",
+      "publicSHA256": "055ccdc8eb22f95ff180290ed620963e90ed34438956afc3a2a5b8d25c2358d9",
+      "match": true
+    },
+    {
+      "path": "LICENSES/fonts/dmsans-OFL.txt",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/dmsans-OFL.txt?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 4389,
+      "contentType": "text/plain; charset=utf-8",
+      "localSHA256": "2af94f4fb533be8fa23282eb33e08ca311ddf47c2f32777e2040b282deeec65c",
+      "publicSHA256": "2af94f4fb533be8fa23282eb33e08ca311ddf47c2f32777e2040b282deeec65c",
+      "match": true
+    },
+    {
+      "path": "LICENSES/fonts/manifest.json",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/manifest.json?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 2360,
+      "contentType": "application/json; charset=utf-8",
+      "localSHA256": "bf41b3d13a8e241510773d49c1a69ae381c67d49183f2c0cbc8c197e26ee3773",
+      "publicSHA256": "bf41b3d13a8e241510773d49c1a69ae381c67d49183f2c0cbc8c197e26ee3773",
+      "match": true
+    },
+    {
+      "path": "LICENSES/fonts/playfairdisplay-OFL.txt",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/playfairdisplay-OFL.txt?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 4449,
+      "contentType": "text/plain; charset=utf-8",
+      "localSHA256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "publicSHA256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "match": true
+    },
+    {
+      "path": "LICENSES/photos/manifest.json",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/photos/manifest.json?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 7581,
+      "contentType": "application/json; charset=utf-8",
+      "localSHA256": "305824c25aaa7f2c25d816fefc79112fd6ef08d711b26590fc7c0489aec3489d",
+      "publicSHA256": "305824c25aaa7f2c25d816fefc79112fd6ef08d711b26590fc7c0489aec3489d",
+      "match": true
+    },
+    {
+      "path": "manifest.webmanifest",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/manifest.webmanifest?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 722,
+      "contentType": "application/manifest+json; charset=utf-8",
+      "localSHA256": "7bd818f56e12acfeb2fded7955a0d05bbb40587319d38989e7a5c314d09e8750",
+      "publicSHA256": "7bd818f56e12acfeb2fded7955a0d05bbb40587319d38989e7a5c314d09e8750",
+      "match": true
+    },
+    {
+      "path": "media/dalat-flower-park.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-flower-park.jpg?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 376949,
+      "contentType": "image/jpeg",
+      "localSHA256": "9be9b6a1257da28606bac999a2e7fa66ea9dce3ace6eb0efe0521c77414c91a8",
+      "publicSHA256": "9be9b6a1257da28606bac999a2e7fa66ea9dce3ace6eb0efe0521c77414c91a8",
+      "match": true
+    },
+    {
+      "path": "media/dalat-station.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-station.jpg?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 239405,
+      "contentType": "image/jpeg",
+      "localSHA256": "535c1443baedc50dbe6cd36f308fb1e66f1cf8e32b7d58488359309c9386f5ae",
+      "publicSHA256": "535c1443baedc50dbe6cd36f308fb1e66f1cf8e32b7d58488359309c9386f5ae",
+      "match": true
+    },
+    {
+      "path": "media/dalat-xuan-huong.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 392568,
+      "contentType": "image/jpeg",
+      "localSHA256": "e4ed6e4f0c2b718dc4a5caae81e47f84699dca5066c886a578ddd688f6180d74",
+      "publicSHA256": "e4ed6e4f0c2b718dc4a5caae81e47f84699dca5066c886a578ddd688f6180d74",
+      "match": true
+    },
+    {
+      "path": "media/hoian-japanese-bridge.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-japanese-bridge.jpg?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 394467,
+      "contentType": "image/jpeg",
+      "localSHA256": "ec5c3165a72307522411272b867863317164aade8af60e759a781da64e9cead8",
+      "publicSHA256": "ec5c3165a72307522411272b867863317164aade8af60e759a781da64e9cead8",
+      "match": true
+    },
+    {
+      "path": "media/hoian-river.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-river.jpg?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 367193,
+      "contentType": "image/jpeg",
+      "localSHA256": "d23b50e84ebe5a9f701969722ad98d5a5d7f328e6b242d6b426944e1b772a782",
+      "publicSHA256": "d23b50e84ebe5a9f701969722ad98d5a5d7f328e6b242d6b426944e1b772a782",
+      "match": true
+    },
+    {
+      "path": "media/hoian-street.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 355759,
+      "contentType": "image/jpeg",
+      "localSHA256": "6e34d3d412531c277f230e4943d52a31fd57175bc0b8d6fbc17aef04ff58295c",
+      "publicSHA256": "6e34d3d412531c277f230e4943d52a31fd57175bc0b8d6fbc17aef04ff58295c",
+      "match": true
+    },
+    {
+      "path": "service-worker.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/service-worker.js?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 6883,
+      "contentType": "application/javascript; charset=utf-8",
+      "localSHA256": "1acb257c0100ad5c8645502040ec6b9834ba0d14b6fce7a156d78888ab622dac",
+      "publicSHA256": "1acb257c0100ad5c8645502040ec6b9834ba0d14b6fce7a156d78888ab622dac",
+      "match": true
+    },
+    {
+      "path": "src/app.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/app.js?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 61982,
+      "contentType": "application/javascript; charset=utf-8",
+      "localSHA256": "c5802e73f7021a7f2cc748eac3b4262b0e819cb6a6599e6d87e29852343f5b84",
+      "publicSHA256": "c5802e73f7021a7f2cc748eac3b4262b0e819cb6a6599e6d87e29852343f5b84",
+      "match": true
+    },
+    {
+      "path": "src/catalog.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/catalog.js?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 15509,
+      "contentType": "application/javascript; charset=utf-8",
+      "localSHA256": "e76b930879631ca35c2ccaab295c977740dbc9e0801ee374f76189c4651c49fa",
+      "publicSHA256": "e76b930879631ca35c2ccaab295c977740dbc9e0801ee374f76189c4651c49fa",
+      "match": true
+    },
+    {
+      "path": "src/domain.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/domain.js?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 19271,
+      "contentType": "application/javascript; charset=utf-8",
+      "localSHA256": "7b8dd695b3848511fc1a15d55a8cb9090458c35b49342593cb17968e69ef7aa9",
+      "publicSHA256": "7b8dd695b3848511fc1a15d55a8cb9090458c35b49342593cb17968e69ef7aa9",
+      "match": true
+    },
+    {
+      "path": "src/fonts.css",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/fonts.css?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 1028,
+      "contentType": "text/css; charset=utf-8",
+      "localSHA256": "bd26994cb6aaf5933c93b80a52c8ec6a54a7cdfc041e066ac9884ca34592a471",
+      "publicSHA256": "bd26994cb6aaf5933c93b80a52c8ec6a54a7cdfc041e066ac9884ca34592a471",
+      "match": true
+    },
+    {
+      "path": "src/offline.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/offline.js?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 6255,
+      "contentType": "application/javascript; charset=utf-8",
+      "localSHA256": "c07ad123890f9c4b3abed7d68cf7a04c21e7c3ae34ccf5a55c7ec365a2ef1b40",
+      "publicSHA256": "c07ad123890f9c4b3abed7d68cf7a04c21e7c3ae34ccf5a55c7ec365a2ef1b40",
+      "match": true
+    },
+    {
+      "path": "src/styles.css",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/styles.css?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 45333,
+      "contentType": "text/css; charset=utf-8",
+      "localSHA256": "55cc85fca45651445ca03d438734472e4af5b219d8d8ecdd72b5ac0c3785d815",
+      "publicSHA256": "55cc85fca45651445ca03d438734472e4af5b219d8d8ecdd72b5ac0c3785d815",
+      "match": true
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/THIRD_PARTY_NOTICES.md?verify=6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+      "status": 200,
+      "bytes": 1558,
+      "contentType": "text/markdown; charset=utf-8",
+      "localSHA256": "118951803f3094c3f4d65feea3a9fde80c59b38d0ae4debd995a87b861ecc732",
+      "publicSHA256": "118951803f3094c3f4d65feea3a9fde80c59b38d0ae4debd995a87b861ecc732",
+      "match": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "local committed sources and deterministic 32-file distribution",
+      "status": "pass",
+      "milliseconds": 2288,
+      "detail": [
+        "work/atlas-v2-canonical-6b9f6ce/dist/LICENSE",
+        "work/atlas-v2-canonical-6b9f6ce/dist/LICENSES/fonts/dmsans-OFL.txt",
+        "work/atlas-v2-canonical-6b9f6ce/dist/LICENSES/fonts/manifest.json",
+        "work/atlas-v2-canonical-6b9f6ce/dist/LICENSES/fonts/playfairdisplay-OFL.txt",
+        "work/atlas-v2-canonical-6b9f6ce/dist/LICENSES/photos/manifest.json",
+        "work/atlas-v2-canonical-6b9f6ce/dist/THIRD_PARTY_NOTICES.md",
+        "work/atlas-v2-canonical-6b9f6ce/dist/docs/MEDIA.md",
+        "work/atlas-v2-canonical-6b9f6ce/dist/favicon.svg",
+        "work/atlas-v2-canonical-6b9f6ce/dist/fonts/font-1.ttf",
+        "work/atlas-v2-canonical-6b9f6ce/dist/fonts/font-2.ttf",
+        "work/atlas-v2-canonical-6b9f6ce/dist/fonts/font-3.ttf",
+        "work/atlas-v2-canonical-6b9f6ce/dist/fonts/font-4.ttf",
+        "work/atlas-v2-canonical-6b9f6ce/dist/fonts/font-5.ttf",
+        "work/atlas-v2-canonical-6b9f6ce/dist/fonts/font-6.ttf",
+        "work/atlas-v2-canonical-6b9f6ce/dist/icons/icon-192.png",
+        "work/atlas-v2-canonical-6b9f6ce/dist/icons/icon-512.png",
+        "work/atlas-v2-canonical-6b9f6ce/dist/icons/icon.svg",
+        "work/atlas-v2-canonical-6b9f6ce/dist/index.html",
+        "work/atlas-v2-canonical-6b9f6ce/dist/manifest.webmanifest",
+        "work/atlas-v2-canonical-6b9f6ce/dist/media/dalat-flower-park.jpg",
+        "work/atlas-v2-canonical-6b9f6ce/dist/media/dalat-station.jpg",
+        "work/atlas-v2-canonical-6b9f6ce/dist/media/dalat-xuan-huong.jpg",
+        "work/atlas-v2-canonical-6b9f6ce/dist/media/hoian-japanese-bridge.jpg",
+        "work/atlas-v2-canonical-6b9f6ce/dist/media/hoian-river.jpg",
+        "work/atlas-v2-canonical-6b9f6ce/dist/media/hoian-street.jpg",
+        "work/atlas-v2-canonical-6b9f6ce/dist/service-worker.js",
+        "work/atlas-v2-canonical-6b9f6ce/dist/src/app.js",
+        "work/atlas-v2-canonical-6b9f6ce/dist/src/catalog.js",
+        "work/atlas-v2-canonical-6b9f6ce/dist/src/domain.js",
+        "work/atlas-v2-canonical-6b9f6ce/dist/src/fonts.css",
+        "work/atlas-v2-canonical-6b9f6ce/dist/src/offline.js",
+        "work/atlas-v2-canonical-6b9f6ce/dist/src/styles.css"
+      ]
+    },
+    {
+      "name": "public 32-file HTTP/SHA-256 comparison",
+      "status": "pass",
+      "milliseconds": 4762,
+      "detail": {
+        "files": 32,
+        "allHTTP200": true,
+        "allSHA256Match": true,
+        "includesGeneratedWorker": true
+      }
+    },
+    {
+      "name": "fresh public desktop starts empty, with real photographs/fonts and no horizontal overflow",
+      "status": "pass",
+      "milliseconds": 705
+    },
+    {
+      "name": "custom Huế trip and address are entered through the public UI",
+      "status": "pass",
+      "milliseconds": 1322
+    },
+    {
+      "name": "actual expenses remain independent of itinerary estimates",
+      "status": "pass",
+      "milliseconds": 1495
+    },
+    {
+      "name": "checklist persists after an actual public-page reload",
+      "status": "pass",
+      "milliseconds": 2031,
+      "detail": {
+        "version": 2,
+        "trips": 1,
+        "activities": 1,
+        "expenses": 2,
+        "checklist": [
+          {
+            "title": "Căn cước và vé tàu",
+            "done": true
+          },
+          {
+            "title": "Sạc dự phòng",
+            "done": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "real JSON, CSV and ICS downloads preserve personal data and LOCATION",
+      "status": "pass",
+      "milliseconds": 1237,
+      "detail": {
+        "actualExpenseCSVTotal": 215000,
+        "itineraryEstimate": 160000,
+        "calendarEvents": 1,
+        "customLocationPreserved": true
+      }
+    },
+    {
+      "name": "real installed service worker reopens, edits and reloads persistent personal data with network OFF",
+      "status": "pass",
+      "milliseconds": 1425,
+      "detail": {
+        "cachedResources": 31,
+        "scope": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+        "persistedAfterOfflineReload": true
+      }
+    },
+    {
+      "name": "390px public welcome and personal expense/checklist flows have real assets and no horizontal overflow",
+      "status": "pass",
+      "milliseconds": 2437,
+      "detail": {
+        "viewport": "390x844",
+        "persistedAfterReload": true
+      }
+    },
+    {
+      "name": "public browser diagnostics have no runtime errors, missing HTTP assets, third-party requests or backend writes",
+      "status": "pass",
+      "milliseconds": 0,
+      "detail": {
+        "contexts": 2,
+        "noBackendWrites": true,
+        "noThirdPartyRequests": true
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "outputs/yangatlas-v2-live/welcome-desktop.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T01:52:37.790Z",
+      "visual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "file": "outputs/yangatlas-v2-live/planner-desktop.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T01:52:39.112Z",
+      "visual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "file": "outputs/yangatlas-v2-live/expenses-desktop.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T01:52:40.609Z",
+      "visual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "file": "outputs/yangatlas-v2-live/checklist-desktop.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T01:52:42.356Z",
+      "visual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "unloaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "file": "outputs/yangatlas-v2-live/planner-offline-desktop.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T01:52:45.253Z",
+      "visual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "file": "outputs/yangatlas-v2-live/welcome-mobile.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T01:52:46.354Z",
+      "visual": {
+        "viewport": 390,
+        "scrollWidth": 390,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "file": "outputs/yangatlas-v2-live/planner-mobile.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T01:52:46.988Z",
+      "visual": {
+        "viewport": 390,
+        "scrollWidth": 390,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "file": "outputs/yangatlas-v2-live/expenses-mobile.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T01:52:47.430Z",
+      "visual": {
+        "viewport": 390,
+        "scrollWidth": 390,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      }
+    },
+    {
+      "file": "outputs/yangatlas-v2-live/checklist-mobile.png",
+      "publicURL": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "capturedAt": "2026-11-05T01:52:47.750Z",
+      "visual": {
+        "viewport": 390,
+        "scrollWidth": 390,
+        "images": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "fonts": [
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "DM Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          },
+          {
+            "family": "Playfair Display",
+            "status": "loaded"
+          }
+        ]
+      }
+    }
+  ],
+  "downloads": [
+    {
+      "file": "outputs/yangatlas-v2-live/downloads/yangatlas-backup.json",
+      "bytes": 1932,
+      "sha256": "47f9a9cb1cac8f7c18b3f473bf251733e0bf6d415fdf92c80bc0a8270723f60c",
+      "actualBrowserDownload": true
+    },
+    {
+      "file": "outputs/yangatlas-v2-live/downloads/yangatlas-chi-tieu.csv",
+      "bytes": 458,
+      "sha256": "3a326380e3aa54e526cae92bacb3f95e333eeb019b93366c8cf8e65d2290c72f",
+      "actualBrowserDownload": true
+    },
+    {
+      "file": "outputs/yangatlas-v2-live/downloads/yangatlas-itinerary.ics",
+      "bytes": 732,
+      "sha256": "26c725cc6c422e709ba634f9e5bb33a879b5d00b49b32efb399cbb86889fc0d2",
+      "actualBrowserDownload": true
+    }
+  ],
+  "limitations": [
+    "Test trip, activities, expenses and checklist entries are deliberately entered demonstration data in isolated browser storage, not a real customer's trip or payments.",
+    "Screenshots are direct captures of the public app. No source/response fixtures, screenshot substitutions or persistent user browser profile are used.",
+    "Native install acceptance, OS print dialog and cross-device synchronization are not claimed by this check."
+  ],
+  "localHEAD": "6b9f6cefa81f062b7b09493e496b2e0a8ec9b3e4",
+  "offlineRelease": "72996fdc74c9b8d20a99a93e",
+  "localDistribution": {
+    "source": "canonical git archive (no Windows checkout newline conversion)",
+    "directory": "work/atlas-v2-canonical-6b9f6ce/dist",
+    "files": 32,
+    "committedCopyFiles": [
+      {
+        "path": "LICENSE",
+        "source": "LICENSE",
+        "sha256": "055ccdc8eb22f95ff180290ed620963e90ed34438956afc3a2a5b8d25c2358d9"
+      },
+      {
+        "path": "LICENSES/fonts/dmsans-OFL.txt",
+        "source": "LICENSES/fonts/dmsans-OFL.txt",
+        "sha256": "2af94f4fb533be8fa23282eb33e08ca311ddf47c2f32777e2040b282deeec65c"
+      },
+      {
+        "path": "LICENSES/fonts/manifest.json",
+        "source": "LICENSES/fonts/manifest.json",
+        "sha256": "bf41b3d13a8e241510773d49c1a69ae381c67d49183f2c0cbc8c197e26ee3773"
+      },
+      {
+        "path": "LICENSES/fonts/playfairdisplay-OFL.txt",
+        "source": "LICENSES/fonts/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      {
+        "path": "LICENSES/photos/manifest.json",
+        "source": "LICENSES/photos/manifest.json",
+        "sha256": "305824c25aaa7f2c25d816fefc79112fd6ef08d711b26590fc7c0489aec3489d"
+      },
+      {
+        "path": "THIRD_PARTY_NOTICES.md",
+        "source": "THIRD_PARTY_NOTICES.md",
+        "sha256": "118951803f3094c3f4d65feea3a9fde80c59b38d0ae4debd995a87b861ecc732"
+      },
+      {
+        "path": "docs/MEDIA.md",
+        "source": "docs/MEDIA.md",
+        "sha256": "ce98b2052e99a094f06b7484cb0ebb49d994bad2d99ed75eb41fb3b08cc19e0a"
+      },
+      {
+        "path": "favicon.svg",
+        "source": "public/favicon.svg",
+        "sha256": "a52658227a78d60b161b5f1a313fa7c8fd0d7864b8c8975e488d8d08e6d2036a"
+      },
+      {
+        "path": "fonts/font-1.ttf",
+        "source": "public/fonts/font-1.ttf",
+        "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+      },
+      {
+        "path": "fonts/font-2.ttf",
+        "source": "public/fonts/font-2.ttf",
+        "sha256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae"
+      },
+      {
+        "path": "fonts/font-3.ttf",
+        "source": "public/fonts/font-3.ttf",
+        "sha256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a"
+      },
+      {
+        "path": "fonts/font-4.ttf",
+        "source": "public/fonts/font-4.ttf",
+        "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+      },
+      {
+        "path": "fonts/font-5.ttf",
+        "source": "public/fonts/font-5.ttf",
+        "sha256": "ef1515fa19156794b36e5f362c677f78837c38ccdd6fa1fa76d1dd918ea7abbe"
+      },
+      {
+        "path": "fonts/font-6.ttf",
+        "source": "public/fonts/font-6.ttf",
+        "sha256": "b60ffb0ee2b4e09d71d67ff3ea16d6a23cf2e0cf637c5f4e36fff2e3b1465252"
+      },
+      {
+        "path": "icons/icon-192.png",
+        "source": "public/icons/icon-192.png",
+        "sha256": "6baf68da2dc8e90ccd10bfb8eeb37e320de9d0a7eeb00a9592ded03eb3dce71d"
+      },
+      {
+        "path": "icons/icon-512.png",
+        "source": "public/icons/icon-512.png",
+        "sha256": "591c57d187628b2ebf2801639b88e7dbef3baae92f55ce8190d2a23b18106a1d"
+      },
+      {
+        "path": "icons/icon.svg",
+        "source": "public/icons/icon.svg",
+        "sha256": "44197bc2403c36084e2360db57fd10b00837b2afea7fb2d7a2555050716c8f21"
+      },
+      {
+        "path": "index.html",
+        "source": "index.html",
+        "sha256": "efb6a67d7d1b3bb779744f4c1fe2b0aad41076de6aad56e59552a56167f654ba"
+      },
+      {
+        "path": "manifest.webmanifest",
+        "source": "public/manifest.webmanifest",
+        "sha256": "7bd818f56e12acfeb2fded7955a0d05bbb40587319d38989e7a5c314d09e8750"
+      },
+      {
+        "path": "media/dalat-flower-park.jpg",
+        "source": "public/media/dalat-flower-park.jpg",
+        "sha256": "9be9b6a1257da28606bac999a2e7fa66ea9dce3ace6eb0efe0521c77414c91a8"
+      },
+      {
+        "path": "media/dalat-station.jpg",
+        "source": "public/media/dalat-station.jpg",
+        "sha256": "535c1443baedc50dbe6cd36f308fb1e66f1cf8e32b7d58488359309c9386f5ae"
+      },
+      {
+        "path": "media/dalat-xuan-huong.jpg",
+        "source": "public/media/dalat-xuan-huong.jpg",
+        "sha256": "e4ed6e4f0c2b718dc4a5caae81e47f84699dca5066c886a578ddd688f6180d74"
+      },
+      {
+        "path": "media/hoian-japanese-bridge.jpg",
+        "source": "public/media/hoian-japanese-bridge.jpg",
+        "sha256": "ec5c3165a72307522411272b867863317164aade8af60e759a781da64e9cead8"
+      },
+      {
+        "path": "media/hoian-river.jpg",
+        "source": "public/media/hoian-river.jpg",
+        "sha256": "d23b50e84ebe5a9f701969722ad98d5a5d7f328e6b242d6b426944e1b772a782"
+      },
+      {
+        "path": "media/hoian-street.jpg",
+        "source": "public/media/hoian-street.jpg",
+        "sha256": "6e34d3d412531c277f230e4943d52a31fd57175bc0b8d6fbc17aef04ff58295c"
+      },
+      {
+        "path": "src/app.js",
+        "source": "src/app.js",
+        "sha256": "c5802e73f7021a7f2cc748eac3b4262b0e819cb6a6599e6d87e29852343f5b84"
+      },
+      {
+        "path": "src/catalog.js",
+        "source": "src/catalog.js",
+        "sha256": "e76b930879631ca35c2ccaab295c977740dbc9e0801ee374f76189c4651c49fa"
+      },
+      {
+        "path": "src/domain.js",
+        "source": "src/domain.js",
+        "sha256": "7b8dd695b3848511fc1a15d55a8cb9090458c35b49342593cb17968e69ef7aa9"
+      },
+      {
+        "path": "src/fonts.css",
+        "source": "src/fonts.css",
+        "sha256": "bd26994cb6aaf5933c93b80a52c8ec6a54a7cdfc041e066ac9884ca34592a471"
+      },
+      {
+        "path": "src/offline.js",
+        "source": "src/offline.js",
+        "sha256": "c07ad123890f9c4b3abed7d68cf7a04c21e7c3ae34ccf5a55c7ec365a2ef1b40"
+      },
+      {
+        "path": "src/styles.css",
+        "source": "src/styles.css",
+        "sha256": "55cc85fca45651445ca03d438734472e4af5b219d8d8ecdd72b5ac0c3785d815"
+      }
+    ],
+    "generatedWorkerVerified": true
+  },
+  "rootDocument": {
+    "status": 200,
+    "sha256": "efb6a67d7d1b3bb779744f4c1fe2b0aad41076de6aad56e59552a56167f654ba",
+    "exactIndexMatch": true
+  },
+  "browserEngine": {
+    "engine": "chromium",
+    "channel": "bundled",
+    "version": "156.0.8078.4",
+    "isolated": true
+  },
+  "installedOffline": {
+    "scope": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+    "controller": "https://nguyenhonggiang2407.github.io/YangAtlas/service-worker.js",
+    "cacheName": "yangatlas-offline:%2FYangAtlas%2F:72996fdc74c9b8d20a99a93e",
+    "cachedURLs": [
+      "https://nguyenhonggiang2407.github.io/YangAtlas/docs/MEDIA.md",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/favicon.svg",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-1.ttf",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-2.ttf",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-3.ttf",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-4.ttf",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-5.ttf",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-6.ttf",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/icons/icon-192.png",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/icons/icon-512.png",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/icons/icon.svg",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/index.html",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSE",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/dmsans-OFL.txt",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/manifest.json",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/playfairdisplay-OFL.txt",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/photos/manifest.json",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/manifest.webmanifest",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-flower-park.jpg",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-station.jpg",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-japanese-bridge.jpg",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-river.jpg",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/src/app.js",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/src/catalog.js",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/src/domain.js",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/src/fonts.css",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/src/offline.js",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/src/styles.css",
+      "https://nguyenhonggiang2407.github.io/YangAtlas/THIRD_PARTY_NOTICES.md"
+    ],
+    "reopenedOffline": true,
+    "editedOffline": true,
+    "persistedAfterOfflineReload": true
+  },
+  "browserDiagnostics": [
+    {
+      "viewport": "1440x1000",
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "writes": [],
+      "thirdPartyRequests": [],
+      "offline": false
+    },
+    {
+      "viewport": "390x844",
+      "errors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "writes": [],
+      "thirdPartyRequests": [],
+      "offline": false
+    }
+  ],
+  "finishedAt": "2026-11-05T01:52:48.480Z",
+  "visualReview": {
+    "reviewedAt": "2026-11-05T01:53:52.412Z",
+    "files": [
+      "welcome-desktop.png",
+      "welcome-mobile.png",
+      "expenses-desktop.png",
+      "planner-offline-desktop.png",
+      "checklist-mobile.png"
+    ],
+    "result": "Direct screenshots inspected: desktop/mobile layouts, real cover photography, distinct actual/estimated amounts, offline note and checklist state render correctly; no horizontal clipping observed."
+  },
+  "pathNote": "Local file paths are relative to the verification workspace; observations, timestamps and hashes are unchanged. Source screenshots are copied without editing to docs/screenshots/personal-*.png."
+}
