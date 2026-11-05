@@ -1,0 +1,1012 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-11-05T00:52:56.343Z",
+  "finishedAt": "2026-11-05T00:53:11.760Z",
+  "publicUrl": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+  "repository": "https://github.com/nguyenhonggiang2407/YangAtlas",
+  "expectedAppCommit": "6cdb956be85eb1d4018851d00f5da50bc0471429",
+  "expectedSourceTree": "180f9784ab9a681cdd801d0030ffab7653035bdb",
+  "expectationSource": "explicit CLI SHA",
+  "scope": {
+    "exactPublicBytesAgainst": "canonical Git blobs at expectedAppCommit; not local dist",
+    "browserEngine": "Playwright Chromium",
+    "isolatedBrowserContexts": true,
+    "backendWrites": false,
+    "exhaustiveLocalSuitesRepeated": false,
+    "limits": [
+      "One Chromium run and the reported viewport sizes, at the recorded time.",
+      "This verifies first-party deployed asset bytes, not the continuing availability of third-party destination/source links.",
+      "Fixture edits and downloaded exports use new browser-local storage; no user browser profile or backend is used."
+    ],
+    "chromiumVersion": "156.0.8078.4"
+  },
+  "resources": [
+    {
+      "sourcePath": "docs/MEDIA.md",
+      "deployedPath": "docs/MEDIA.md",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/docs/MEDIA.md",
+      "expectedGitBlob": "3e321f4b4df896f140cd716c71217e8d69ada1df",
+      "expectedSha256": "ce98b2052e99a094f06b7484cb0ebb49d994bad2d99ed75eb41fb3b08cc19e0a",
+      "expectedBytes": 12595,
+      "checkedAt": "2026-11-05T00:52:57.351Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "text/markdown; charset=utf-8",
+      "bytes": 12595,
+      "actualGitBlob": "3e321f4b4df896f140cd716c71217e8d69ada1df",
+      "actualSha256": "ce98b2052e99a094f06b7484cb0ebb49d994bad2d99ed75eb41fb3b08cc19e0a"
+    },
+    {
+      "sourcePath": "public/favicon.svg",
+      "deployedPath": "favicon.svg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/favicon.svg",
+      "expectedGitBlob": "9dbbff11967a70f05b5028b4a2397d425b64487e",
+      "expectedSha256": "a52658227a78d60b161b5f1a313fa7c8fd0d7864b8c8975e488d8d08e6d2036a",
+      "expectedBytes": 309,
+      "checkedAt": "2026-11-05T00:52:57.604Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 309,
+      "actualGitBlob": "9dbbff11967a70f05b5028b4a2397d425b64487e",
+      "actualSha256": "a52658227a78d60b161b5f1a313fa7c8fd0d7864b8c8975e488d8d08e6d2036a"
+    },
+    {
+      "sourcePath": "public/fonts/font-1.ttf",
+      "deployedPath": "fonts/font-1.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-1.ttf",
+      "expectedGitBlob": "6c789eadb84764a2d7f75fc989ccb78873ec1540",
+      "expectedSha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "expectedBytes": 48280,
+      "checkedAt": "2026-11-05T00:52:57.739Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "font/ttf",
+      "bytes": 48280,
+      "actualGitBlob": "6c789eadb84764a2d7f75fc989ccb78873ec1540",
+      "actualSha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    {
+      "sourcePath": "public/fonts/font-2.ttf",
+      "deployedPath": "fonts/font-2.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-2.ttf",
+      "expectedGitBlob": "dc447543b7d04d75f68cf303ea911f539c244922",
+      "expectedSha256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae",
+      "expectedBytes": 48308,
+      "checkedAt": "2026-11-05T00:52:57.800Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "font/ttf",
+      "bytes": 48308,
+      "actualGitBlob": "dc447543b7d04d75f68cf303ea911f539c244922",
+      "actualSha256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae"
+    },
+    {
+      "sourcePath": "public/fonts/font-3.ttf",
+      "deployedPath": "fonts/font-3.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-3.ttf",
+      "expectedGitBlob": "ec5dcf3e2f8f1c4e8a3e68370d8537147c9df2ad",
+      "expectedSha256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a",
+      "expectedBytes": 48280,
+      "checkedAt": "2026-11-05T00:52:57.854Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "font/ttf",
+      "bytes": 48280,
+      "actualGitBlob": "ec5dcf3e2f8f1c4e8a3e68370d8537147c9df2ad",
+      "actualSha256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a"
+    },
+    {
+      "sourcePath": "public/fonts/font-4.ttf",
+      "deployedPath": "fonts/font-4.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-4.ttf",
+      "expectedGitBlob": "811136c6dafecfa0880718f2709ef86e71dc2ff8",
+      "expectedSha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "expectedBytes": 48200,
+      "checkedAt": "2026-11-05T00:52:58.001Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "font/ttf",
+      "bytes": 48200,
+      "actualGitBlob": "811136c6dafecfa0880718f2709ef86e71dc2ff8",
+      "actualSha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    {
+      "sourcePath": "public/fonts/font-5.ttf",
+      "deployedPath": "fonts/font-5.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-5.ttf",
+      "expectedGitBlob": "cffca1b05946b2360e727a1b4caddf4f9248d327",
+      "expectedSha256": "ef1515fa19156794b36e5f362c677f78837c38ccdd6fa1fa76d1dd918ea7abbe",
+      "expectedBytes": 111168,
+      "checkedAt": "2026-11-05T00:52:58.117Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "font/ttf",
+      "bytes": 111168,
+      "actualGitBlob": "cffca1b05946b2360e727a1b4caddf4f9248d327",
+      "actualSha256": "ef1515fa19156794b36e5f362c677f78837c38ccdd6fa1fa76d1dd918ea7abbe"
+    },
+    {
+      "sourcePath": "public/fonts/font-6.ttf",
+      "deployedPath": "fonts/font-6.ttf",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/fonts/font-6.ttf",
+      "expectedGitBlob": "c918f2173671add6f60b364fc0fc6b268693d11c",
+      "expectedSha256": "b60ffb0ee2b4e09d71d67ff3ea16d6a23cf2e0cf637c5f4e36fff2e3b1465252",
+      "expectedBytes": 123608,
+      "checkedAt": "2026-11-05T00:52:58.230Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "font/ttf",
+      "bytes": 123608,
+      "actualGitBlob": "c918f2173671add6f60b364fc0fc6b268693d11c",
+      "actualSha256": "b60ffb0ee2b4e09d71d67ff3ea16d6a23cf2e0cf637c5f4e36fff2e3b1465252"
+    },
+    {
+      "sourcePath": "index.html",
+      "deployedPath": "index.html",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/index.html",
+      "expectedGitBlob": "2dcc04a3bc5e3de236ef682fdb9721401b54e2c1",
+      "expectedSha256": "985ccf84c1802fc14a525c0a20c2d6352fb78db9b44cf1348dea5a01cf2ea7f8",
+      "expectedBytes": 1059,
+      "checkedAt": "2026-11-05T00:52:57.405Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 1059,
+      "actualGitBlob": "2dcc04a3bc5e3de236ef682fdb9721401b54e2c1",
+      "actualSha256": "985ccf84c1802fc14a525c0a20c2d6352fb78db9b44cf1348dea5a01cf2ea7f8",
+      "responseHeaders": {
+        "last-modified": "Thu, 05 Nov 2026 00:50:23 GMT",
+        "etag": "W/\"6aebd2cf-423\"",
+        "cache-control": "max-age=600"
+      }
+    },
+    {
+      "sourcePath": "LICENSE",
+      "deployedPath": "LICENSE",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSE",
+      "expectedGitBlob": "7b766d0df3342faeef99af86c6ffe7006681f727",
+      "expectedSha256": "055ccdc8eb22f95ff180290ed620963e90ed34438956afc3a2a5b8d25c2358d9",
+      "expectedBytes": 1079,
+      "checkedAt": "2026-11-05T00:52:56.521Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "bytes": 1079,
+      "actualGitBlob": "7b766d0df3342faeef99af86c6ffe7006681f727",
+      "actualSha256": "055ccdc8eb22f95ff180290ed620963e90ed34438956afc3a2a5b8d25c2358d9"
+    },
+    {
+      "sourcePath": "LICENSES/fonts/dmsans-OFL.txt",
+      "deployedPath": "LICENSES/fonts/dmsans-OFL.txt",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/dmsans-OFL.txt",
+      "expectedGitBlob": "441171d68ee2fcc970bd0ad894f815050ef895ae",
+      "expectedSha256": "2af94f4fb533be8fa23282eb33e08ca311ddf47c2f32777e2040b282deeec65c",
+      "expectedBytes": 4389,
+      "checkedAt": "2026-11-05T00:52:56.589Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "bytes": 4389,
+      "actualGitBlob": "441171d68ee2fcc970bd0ad894f815050ef895ae",
+      "actualSha256": "2af94f4fb533be8fa23282eb33e08ca311ddf47c2f32777e2040b282deeec65c"
+    },
+    {
+      "sourcePath": "LICENSES/fonts/manifest.json",
+      "deployedPath": "LICENSES/fonts/manifest.json",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/manifest.json",
+      "expectedGitBlob": "b9015e31d5d8683232a53148cbeeac00f57c577b",
+      "expectedSha256": "bf41b3d13a8e241510773d49c1a69ae381c67d49183f2c0cbc8c197e26ee3773",
+      "expectedBytes": 2360,
+      "checkedAt": "2026-11-05T00:52:56.648Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "bytes": 2360,
+      "actualGitBlob": "b9015e31d5d8683232a53148cbeeac00f57c577b",
+      "actualSha256": "bf41b3d13a8e241510773d49c1a69ae381c67d49183f2c0cbc8c197e26ee3773"
+    },
+    {
+      "sourcePath": "LICENSES/fonts/playfairdisplay-OFL.txt",
+      "deployedPath": "LICENSES/fonts/playfairdisplay-OFL.txt",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/fonts/playfairdisplay-OFL.txt",
+      "expectedGitBlob": "13153890847ba9bde8a852596d1515261156e474",
+      "expectedSha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "expectedBytes": 4449,
+      "checkedAt": "2026-11-05T00:52:56.710Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "bytes": 4449,
+      "actualGitBlob": "13153890847ba9bde8a852596d1515261156e474",
+      "actualSha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+    },
+    {
+      "sourcePath": "LICENSES/photos/manifest.json",
+      "deployedPath": "LICENSES/photos/manifest.json",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/LICENSES/photos/manifest.json",
+      "expectedGitBlob": "763888b4c2f372dcbc0fe3f0dca8c32b77426eb8",
+      "expectedSha256": "305824c25aaa7f2c25d816fefc79112fd6ef08d711b26590fc7c0489aec3489d",
+      "expectedBytes": 7581,
+      "checkedAt": "2026-11-05T00:52:57.219Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "bytes": 7581,
+      "actualGitBlob": "763888b4c2f372dcbc0fe3f0dca8c32b77426eb8",
+      "actualSha256": "305824c25aaa7f2c25d816fefc79112fd6ef08d711b26590fc7c0489aec3489d"
+    },
+    {
+      "sourcePath": "public/media/dalat-flower-park.jpg",
+      "deployedPath": "media/dalat-flower-park.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-flower-park.jpg",
+      "expectedGitBlob": "c262cecaa91e569f0c5bc6715465563a0f2b4fae",
+      "expectedSha256": "9be9b6a1257da28606bac999a2e7fa66ea9dce3ace6eb0efe0521c77414c91a8",
+      "expectedBytes": 376949,
+      "checkedAt": "2026-11-05T00:52:58.292Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 376949,
+      "actualGitBlob": "c262cecaa91e569f0c5bc6715465563a0f2b4fae",
+      "actualSha256": "9be9b6a1257da28606bac999a2e7fa66ea9dce3ace6eb0efe0521c77414c91a8"
+    },
+    {
+      "sourcePath": "public/media/dalat-station.jpg",
+      "deployedPath": "media/dalat-station.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-station.jpg",
+      "expectedGitBlob": "903eeafee06a16226450cc429214a910b53a322b",
+      "expectedSha256": "535c1443baedc50dbe6cd36f308fb1e66f1cf8e32b7d58488359309c9386f5ae",
+      "expectedBytes": 239405,
+      "checkedAt": "2026-11-05T00:52:58.414Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 239405,
+      "actualGitBlob": "903eeafee06a16226450cc429214a910b53a322b",
+      "actualSha256": "535c1443baedc50dbe6cd36f308fb1e66f1cf8e32b7d58488359309c9386f5ae"
+    },
+    {
+      "sourcePath": "public/media/dalat-xuan-huong.jpg",
+      "deployedPath": "media/dalat-xuan-huong.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+      "expectedGitBlob": "03834424fa89399c002b910c4f3977d1054bc60f",
+      "expectedSha256": "e4ed6e4f0c2b718dc4a5caae81e47f84699dca5066c886a578ddd688f6180d74",
+      "expectedBytes": 392568,
+      "checkedAt": "2026-11-05T00:52:58.579Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 392568,
+      "actualGitBlob": "03834424fa89399c002b910c4f3977d1054bc60f",
+      "actualSha256": "e4ed6e4f0c2b718dc4a5caae81e47f84699dca5066c886a578ddd688f6180d74"
+    },
+    {
+      "sourcePath": "public/media/hoian-japanese-bridge.jpg",
+      "deployedPath": "media/hoian-japanese-bridge.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-japanese-bridge.jpg",
+      "expectedGitBlob": "0dcb20264398733d6790c89fc4d08dee6e9b912f",
+      "expectedSha256": "ec5c3165a72307522411272b867863317164aade8af60e759a781da64e9cead8",
+      "expectedBytes": 394467,
+      "checkedAt": "2026-11-05T00:52:58.644Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 394467,
+      "actualGitBlob": "0dcb20264398733d6790c89fc4d08dee6e9b912f",
+      "actualSha256": "ec5c3165a72307522411272b867863317164aade8af60e759a781da64e9cead8"
+    },
+    {
+      "sourcePath": "public/media/hoian-river.jpg",
+      "deployedPath": "media/hoian-river.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-river.jpg",
+      "expectedGitBlob": "effda58ceb91dbe74c2722a2d28660d1b477a468",
+      "expectedSha256": "d23b50e84ebe5a9f701969722ad98d5a5d7f328e6b242d6b426944e1b772a782",
+      "expectedBytes": 367193,
+      "checkedAt": "2026-11-05T00:52:59.183Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 367193,
+      "actualGitBlob": "effda58ceb91dbe74c2722a2d28660d1b477a468",
+      "actualSha256": "d23b50e84ebe5a9f701969722ad98d5a5d7f328e6b242d6b426944e1b772a782"
+    },
+    {
+      "sourcePath": "public/media/hoian-street.jpg",
+      "deployedPath": "media/hoian-street.jpg",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+      "expectedGitBlob": "49025d5382fded6dcaf14288627728e6132d9f76",
+      "expectedSha256": "6e34d3d412531c277f230e4943d52a31fd57175bc0b8d6fbc17aef04ff58295c",
+      "expectedBytes": 355759,
+      "checkedAt": "2026-11-05T00:52:59.402Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 355759,
+      "actualGitBlob": "49025d5382fded6dcaf14288627728e6132d9f76",
+      "actualSha256": "6e34d3d412531c277f230e4943d52a31fd57175bc0b8d6fbc17aef04ff58295c"
+    },
+    {
+      "sourcePath": "src/app.js",
+      "deployedPath": "src/app.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/app.js",
+      "expectedGitBlob": "821bce880ddf502489233a8fc301371f5976f6b3",
+      "expectedSha256": "893525181d0a28030c8c08c6f07d758f850317eab8350d708268f6579a090a5c",
+      "expectedBytes": 43927,
+      "checkedAt": "2026-11-05T00:52:59.668Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 43927,
+      "actualGitBlob": "821bce880ddf502489233a8fc301371f5976f6b3",
+      "actualSha256": "893525181d0a28030c8c08c6f07d758f850317eab8350d708268f6579a090a5c"
+    },
+    {
+      "sourcePath": "src/catalog.js",
+      "deployedPath": "src/catalog.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/catalog.js",
+      "expectedGitBlob": "50a2e9952a3699dc0b7522a79d381b7a26226cf2",
+      "expectedSha256": "e76b930879631ca35c2ccaab295c977740dbc9e0801ee374f76189c4651c49fa",
+      "expectedBytes": 15509,
+      "checkedAt": "2026-11-05T00:52:59.791Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 15509,
+      "actualGitBlob": "50a2e9952a3699dc0b7522a79d381b7a26226cf2",
+      "actualSha256": "e76b930879631ca35c2ccaab295c977740dbc9e0801ee374f76189c4651c49fa"
+    },
+    {
+      "sourcePath": "src/domain.js",
+      "deployedPath": "src/domain.js",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/domain.js",
+      "expectedGitBlob": "44930dc40d36d37a91005a7e9fac212cfd7405de",
+      "expectedSha256": "a1f76f43f1795fe4ea9f63837d76746efbd99806cdfe8afbf993b1319cfcf417",
+      "expectedBytes": 14819,
+      "checkedAt": "2026-11-05T00:53:00.122Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 14819,
+      "actualGitBlob": "44930dc40d36d37a91005a7e9fac212cfd7405de",
+      "actualSha256": "a1f76f43f1795fe4ea9f63837d76746efbd99806cdfe8afbf993b1319cfcf417"
+    },
+    {
+      "sourcePath": "src/fonts.css",
+      "deployedPath": "src/fonts.css",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/fonts.css",
+      "expectedGitBlob": "ada915c0e934e6fd32827ba3bfc22ce58e4f9a46",
+      "expectedSha256": "bd26994cb6aaf5933c93b80a52c8ec6a54a7cdfc041e066ac9884ca34592a471",
+      "expectedBytes": 1028,
+      "checkedAt": "2026-11-05T00:53:00.285Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "bytes": 1028,
+      "actualGitBlob": "ada915c0e934e6fd32827ba3bfc22ce58e4f9a46",
+      "actualSha256": "bd26994cb6aaf5933c93b80a52c8ec6a54a7cdfc041e066ac9884ca34592a471"
+    },
+    {
+      "sourcePath": "src/styles.css",
+      "deployedPath": "src/styles.css",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/src/styles.css",
+      "expectedGitBlob": "2b1cf9b4afb4bf815396fb44661d58f13b187db2",
+      "expectedSha256": "97924fafd5a717fffdae5bfec9284d5a17c0a1f586ef0252d5e4ca7a5b095522",
+      "expectedBytes": 35068,
+      "checkedAt": "2026-11-05T00:53:00.358Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "bytes": 35068,
+      "actualGitBlob": "2b1cf9b4afb4bf815396fb44661d58f13b187db2",
+      "actualSha256": "97924fafd5a717fffdae5bfec9284d5a17c0a1f586ef0252d5e4ca7a5b095522"
+    },
+    {
+      "sourcePath": "THIRD_PARTY_NOTICES.md",
+      "deployedPath": "THIRD_PARTY_NOTICES.md",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/THIRD_PARTY_NOTICES.md",
+      "expectedGitBlob": "008b80ce14016d66fe7243990593e5a99300f0cb",
+      "expectedSha256": "118951803f3094c3f4d65feea3a9fde80c59b38d0ae4debd995a87b861ecc732",
+      "expectedBytes": 1558,
+      "checkedAt": "2026-11-05T00:52:57.292Z",
+      "passed": true,
+      "status": 200,
+      "contentType": "text/markdown; charset=utf-8",
+      "bytes": 1558,
+      "actualGitBlob": "008b80ce14016d66fe7243990593e5a99300f0cb",
+      "actualSha256": "118951803f3094c3f4d65feea3a9fde80c59b38d0ae4debd995a87b861ecc732"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Every published artifact matches the exact expected Git commit",
+      "startedAt": "2026-11-05T00:52:56.408Z",
+      "passed": true,
+      "evidence": {
+        "resources": 26,
+        "photos": 6,
+        "fonts": 6,
+        "licenseOrProvenanceFiles": [
+          "LICENSE",
+          "LICENSES/fonts/dmsans-OFL.txt",
+          "LICENSES/fonts/manifest.json",
+          "LICENSES/fonts/playfairdisplay-OFL.txt",
+          "LICENSES/photos/manifest.json",
+          "THIRD_PARTY_NOTICES.md",
+          "docs/MEDIA.md"
+        ],
+        "allHttp200": true,
+        "allGitBlobAndSha256Matches": true
+      },
+      "finishedAt": "2026-11-05T00:53:00.714Z"
+    },
+    {
+      "name": "Public sample desktop: decoded photos, fonts, layout, library and budget screenshots",
+      "startedAt": "2026-11-05T00:53:00.854Z",
+      "passed": true,
+      "evidence": {
+        "name": "sample-desktop",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "abortedRequests": [],
+        "httpErrors": [],
+        "nonReadRequests": [],
+        "externalRequests": [],
+        "passed": true,
+        "homePhotos": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "alt": "",
+            "naturalWidth": 1280,
+            "naturalHeight": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "Ảnh phong cảnh minh họa Đà Lạt",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "Hồ Xuân Hương · P. Hughes · CC BY 4.0",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-flower-park.jpg",
+            "alt": "Vườn hoa Đà Lạt (2007) · hector garcia · CC BY-SA 2.0",
+            "naturalWidth": 1280,
+            "naturalHeight": 804
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-station.jpg",
+            "alt": "Ga Đà Lạt · Anh Khoa · CC BY-SA 2.0",
+            "naturalWidth": 1280,
+            "naturalHeight": 853
+          }
+        ],
+        "homeDimensions": {
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        "fonts": {
+          "status": "loaded",
+          "loaded": [
+            {
+              "family": "DM Sans",
+              "weight": "400",
+              "style": "normal"
+            },
+            {
+              "family": "DM Sans",
+              "weight": "500",
+              "style": "normal"
+            },
+            {
+              "family": "DM Sans",
+              "weight": "600",
+              "style": "normal"
+            },
+            {
+              "family": "DM Sans",
+              "weight": "700",
+              "style": "normal"
+            },
+            {
+              "family": "Playfair Display",
+              "weight": "500",
+              "style": "italic"
+            },
+            {
+              "family": "Playfair Display",
+              "weight": "500",
+              "style": "normal"
+            }
+          ]
+        },
+        "placePhotos": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+            "alt": "",
+            "naturalWidth": 1280,
+            "naturalHeight": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "Ảnh phong cảnh minh họa Đà Lạt",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "Hồ Xuân Hương · P. Hughes · CC BY 4.0",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-station.jpg",
+            "alt": "Ga Đà Lạt · Anh Khoa · CC BY-SA 2.0",
+            "naturalWidth": 1280,
+            "naturalHeight": 853
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-flower-park.jpg",
+            "alt": "Vườn hoa Đà Lạt (2007) · hector garcia · CC BY-SA 2.0",
+            "naturalWidth": 1280,
+            "naturalHeight": 804
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "Ảnh minh họa Đà Lạt: Hồ Xuân Hương; không phải ảnh địa điểm này.",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "Ảnh minh họa Đà Lạt: Hồ Xuân Hương; không phải ảnh địa điểm này.",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "Ảnh minh họa Đà Lạt: Hồ Xuân Hương; không phải ảnh địa điểm này.",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          }
+        ],
+        "placesDimensions": {
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        "budgetDimensions": {
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      },
+      "finishedAt": "2026-11-05T00:53:05.012Z"
+    },
+    {
+      "name": "Public sample mobile: decoded photos and 390px layout screenshots",
+      "startedAt": "2026-11-05T00:53:05.012Z",
+      "passed": true,
+      "evidence": {
+        "name": "sample-mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "abortedRequests": [],
+        "httpErrors": [],
+        "nonReadRequests": [],
+        "externalRequests": [],
+        "passed": true,
+        "homePhotos": [
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "Ảnh phong cảnh minh họa Đà Lạt",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+            "alt": "Hồ Xuân Hương · P. Hughes · CC BY 4.0",
+            "naturalWidth": 1280,
+            "naturalHeight": 850
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-flower-park.jpg",
+            "alt": "Vườn hoa Đà Lạt (2007) · hector garcia · CC BY-SA 2.0",
+            "naturalWidth": 1280,
+            "naturalHeight": 804
+          },
+          {
+            "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-station.jpg",
+            "alt": "Ga Đà Lạt · Anh Khoa · CC BY-SA 2.0",
+            "naturalWidth": 1280,
+            "naturalHeight": 853
+          }
+        ],
+        "homeDimensions": {
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        }
+      },
+      "finishedAt": "2026-11-05T00:53:07.850Z"
+    },
+    {
+      "name": "Public isolated local workflow: creation, persistence, search/filter/add and real exports",
+      "startedAt": "2026-11-05T00:53:07.850Z",
+      "passed": true,
+      "evidence": {
+        "name": "isolated-live-workflow",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "pageErrors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "abortedRequests": [],
+        "httpErrors": [],
+        "nonReadRequests": [],
+        "externalRequests": [],
+        "passed": true,
+        "crossYearHero": "Đà Lạt\n31-12/2030 — 02-01/2031\n2 người",
+        "tripAndActivityPersistAfterReload": true,
+        "searchResult": "Ga Đà Lạt",
+        "categoryResult": "Là Việt · Nguyễn Công Trứ",
+        "libraryPlaceAddedToDayTwo": true,
+        "jsonDownload": {
+          "filename": "yangatlas-backup.json",
+          "bytes": 12532,
+          "sha256": "6daf1a93c94920041e7e3c2a6194b7a8a9d9dc1fcfd22045252bea32281ad439",
+          "trips": 3,
+          "fixtureActivities": 2
+        },
+        "calendarDownload": {
+          "filename": "yangatlas-itinerary.ics",
+          "bytes": 1042,
+          "sha256": "8a68aad5ba1d4a97d5b75ab0089ed4cd23fceeece44ac995df8421e3f67e19cc",
+          "events": 2,
+          "crossYearDatesVerified": true
+        },
+        "savedStateMatchesActualJsonDownload": true,
+        "dimensions": {
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      },
+      "finishedAt": "2026-11-05T00:53:11.157Z"
+    }
+  ],
+  "browserContexts": [
+    {
+      "name": "sample-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageErrors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "abortedRequests": [],
+      "httpErrors": [],
+      "nonReadRequests": [],
+      "externalRequests": [],
+      "passed": true,
+      "homePhotos": [
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+          "alt": "",
+          "naturalWidth": 1280,
+          "naturalHeight": 853
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "Ảnh phong cảnh minh họa Đà Lạt",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "Hồ Xuân Hương · P. Hughes · CC BY 4.0",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-flower-park.jpg",
+          "alt": "Vườn hoa Đà Lạt (2007) · hector garcia · CC BY-SA 2.0",
+          "naturalWidth": 1280,
+          "naturalHeight": 804
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-station.jpg",
+          "alt": "Ga Đà Lạt · Anh Khoa · CC BY-SA 2.0",
+          "naturalWidth": 1280,
+          "naturalHeight": 853
+        }
+      ],
+      "homeDimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "body": 1440
+      },
+      "fonts": {
+        "status": "loaded",
+        "loaded": [
+          {
+            "family": "DM Sans",
+            "weight": "400",
+            "style": "normal"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "500",
+            "style": "normal"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "600",
+            "style": "normal"
+          },
+          {
+            "family": "DM Sans",
+            "weight": "700",
+            "style": "normal"
+          },
+          {
+            "family": "Playfair Display",
+            "weight": "500",
+            "style": "italic"
+          },
+          {
+            "family": "Playfair Display",
+            "weight": "500",
+            "style": "normal"
+          }
+        ]
+      },
+      "placePhotos": [
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/hoian-street.jpg",
+          "alt": "",
+          "naturalWidth": 1280,
+          "naturalHeight": 853
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "Ảnh phong cảnh minh họa Đà Lạt",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "Hồ Xuân Hương · P. Hughes · CC BY 4.0",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-station.jpg",
+          "alt": "Ga Đà Lạt · Anh Khoa · CC BY-SA 2.0",
+          "naturalWidth": 1280,
+          "naturalHeight": 853
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-flower-park.jpg",
+          "alt": "Vườn hoa Đà Lạt (2007) · hector garcia · CC BY-SA 2.0",
+          "naturalWidth": 1280,
+          "naturalHeight": 804
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "Ảnh minh họa Đà Lạt: Hồ Xuân Hương; không phải ảnh địa điểm này.",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "Ảnh minh họa Đà Lạt: Hồ Xuân Hương; không phải ảnh địa điểm này.",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "Ảnh minh họa Đà Lạt: Hồ Xuân Hương; không phải ảnh địa điểm này.",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        }
+      ],
+      "placesDimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "body": 1440
+      },
+      "budgetDimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "body": 1440
+      }
+    },
+    {
+      "name": "sample-mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "pageErrors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "abortedRequests": [],
+      "httpErrors": [],
+      "nonReadRequests": [],
+      "externalRequests": [],
+      "passed": true,
+      "homePhotos": [
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "Ảnh phong cảnh minh họa Đà Lạt",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-xuan-huong.jpg",
+          "alt": "Hồ Xuân Hương · P. Hughes · CC BY 4.0",
+          "naturalWidth": 1280,
+          "naturalHeight": 850
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-flower-park.jpg",
+          "alt": "Vườn hoa Đà Lạt (2007) · hector garcia · CC BY-SA 2.0",
+          "naturalWidth": 1280,
+          "naturalHeight": 804
+        },
+        {
+          "src": "https://nguyenhonggiang2407.github.io/YangAtlas/media/dalat-station.jpg",
+          "alt": "Ga Đà Lạt · Anh Khoa · CC BY-SA 2.0",
+          "naturalWidth": 1280,
+          "naturalHeight": 853
+        }
+      ],
+      "homeDimensions": {
+        "viewport": 390,
+        "document": 390,
+        "body": 390
+      }
+    },
+    {
+      "name": "isolated-live-workflow",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageErrors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "abortedRequests": [],
+      "httpErrors": [],
+      "nonReadRequests": [],
+      "externalRequests": [],
+      "passed": true,
+      "crossYearHero": "Đà Lạt\n31-12/2030 — 02-01/2031\n2 người",
+      "tripAndActivityPersistAfterReload": true,
+      "searchResult": "Ga Đà Lạt",
+      "categoryResult": "Là Việt · Nguyễn Công Trứ",
+      "libraryPlaceAddedToDayTwo": true,
+      "jsonDownload": {
+        "filename": "yangatlas-backup.json",
+        "bytes": 12532,
+        "sha256": "6daf1a93c94920041e7e3c2a6194b7a8a9d9dc1fcfd22045252bea32281ad439",
+        "trips": 3,
+        "fixtureActivities": 2
+      },
+      "calendarDownload": {
+        "filename": "yangatlas-itinerary.ics",
+        "bytes": 1042,
+        "sha256": "8a68aad5ba1d4a97d5b75ab0089ed4cd23fceeece44ac995df8421e3f67e19cc",
+        "events": 2,
+        "crossYearDatesVerified": true
+      },
+      "savedStateMatchesActualJsonDownload": true,
+      "dimensions": {
+        "viewport": 1440,
+        "document": 1440,
+        "body": 1440
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "outputs/yangatlas-live/home-desktop.png",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fullPage": false,
+      "capturedAt": "2026-11-05T00:53:03.459Z",
+      "sha256": "6f18d964806e0330521d927fbedef08070afdc29be9d87410d4e9382b94d51e3"
+    },
+    {
+      "path": "outputs/yangatlas-live/places-desktop.png",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fullPage": true,
+      "capturedAt": "2026-11-05T00:53:04.493Z",
+      "sha256": "83b799d6eeceb7531584e4d52cb781816651f9f1bea01b9c906f403bcea35b4c"
+    },
+    {
+      "path": "outputs/yangatlas-live/budget-desktop.png",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "fullPage": true,
+      "capturedAt": "2026-11-05T00:53:04.995Z",
+      "sha256": "5291c97b5c6396261a28058c581f44cd03fee7e015b489256896e1865d5a385a"
+    },
+    {
+      "path": "outputs/yangatlas-live/home-mobile.png",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullPage": false,
+      "capturedAt": "2026-11-05T00:53:07.597Z",
+      "sha256": "91adc45e169e8b1df706cf883f917b8b605e9869a736cad16c56b40037e933c4"
+    },
+    {
+      "path": "outputs/yangatlas-live/home-mobile-full.png",
+      "url": "https://nguyenhonggiang2407.github.io/YangAtlas/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullPage": true,
+      "capturedAt": "2026-11-05T00:53:07.830Z",
+      "sha256": "d7efb7dbc68e0209d423dcdcd956111d51e799b4963f4145228c8f81580cdea8"
+    }
+  ],
+  "passed": true
+}

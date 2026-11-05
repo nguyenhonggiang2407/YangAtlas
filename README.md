@@ -6,9 +6,12 @@ A quiet travel-planning workspace for visual day-by-day itineraries, editable
 budgets and calendar export. Designed in Vietnamese with an editorial layout,
 warm paper tones, pine green and genuine destination photography.
 
-The public demo link will be added after its actual deployment is verified.
+**[Open Live Demo →](https://nguyenhonggiang2407.github.io/YangAtlas/)** · [Verified CI](https://github.com/nguyenhonggiang2407/YangAtlas/actions/runs/41944144524) · [Photography credits](docs/MEDIA.md)
 
-![YangAtlas itinerary workspace, captured from the actual running build](docs/screenshots/itinerary-desktop.png)
+Public deployment verified on **5 November 2026**, including browser-local editing,
+reload, real JSON/ICS downloads, desktop/mobile photographs and exact source hashes.
+
+![YangAtlas itinerary workspace, captured from the public GitHub Pages application](docs/screenshots/itinerary-desktop.png)
 
 ## Use the product
 
