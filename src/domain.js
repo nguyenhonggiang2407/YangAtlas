@@ -108,10 +108,15 @@ function activity(input) {
     cost: integer(input.cost, 0, 100_000_000, "Chi phí"),
     costMode: input.costMode,
     notes: text(input.notes, 2000, "Ghi chú", { empty: true, multiline: true }),
-    address: text(input.address === undefined ? "" : input.address, 400, "Địa chỉ", {
-      empty: true,
-      multiline: true,
-    }),
+    address: text(
+      input.address === undefined ? "" : input.address,
+      400,
+      "Địa chỉ",
+      {
+        empty: true,
+        multiline: true,
+      },
+    ),
     done: input.done,
   };
 }
@@ -119,7 +124,8 @@ function activity(input) {
 function expense(input) {
   object(input, "Khoản chi");
   calendarDate(input.date);
-  if (!CATEGORIES.includes(input.category)) fail("Nhóm khoản chi không hợp lệ.");
+  if (!CATEGORIES.includes(input.category))
+    fail("Nhóm khoản chi không hợp lệ.");
   return {
     id: identifier(input.id, "Mã khoản chi"),
     title: text(input.title, 120, "Tên khoản chi"),
@@ -138,7 +144,8 @@ function expense(input) {
 
 function checklistItem(input) {
   object(input, "Việc cần chuẩn bị");
-  if (typeof input.done !== "boolean") fail("Trạng thái chuẩn bị không hợp lệ.");
+  if (typeof input.done !== "boolean")
+    fail("Trạng thái chuẩn bị không hợp lệ.");
   return {
     id: identifier(input.id, "Mã việc cần chuẩn bị"),
     title: text(input.title, 200, "Việc cần chuẩn bị"),
@@ -280,6 +287,58 @@ export function createTrip(input = {}) {
   });
 }
 
+/** Reuse a plan, not a payment ledger or a previous trip's completed state. */
+export function duplicateTrip(input, options = {}) {
+  const source = trip(input);
+  object(options, "Thông tin bản sao");
+  const suffix = " — bản sao";
+  let base = "";
+  for (const character of source.title) {
+    // Count the same UTF-16 units as title validation without splitting a
+    // Unicode code point (in particular, an emoji's surrogate pair).
+    if (base.length + character.length > 120 - suffix.length) break;
+    base += character;
+  }
+  const prepared = trip({
+    ...source,
+    title:
+      options.title === undefined ? base.trimEnd() + suffix : options.title,
+    startDate:
+      options.startDate === undefined ? source.startDate : options.startDate,
+  });
+  const used = new Set([
+    source.id,
+    ...source.activities.map((item) => item.id),
+    ...source.expenses.map((item) => item.id),
+    ...source.checklist.map((item) => item.id),
+  ]);
+  const freshId = () => {
+    for (let attempt = 0; attempt < 8; attempt += 1) {
+      const id = newId();
+      if (!used.has(id)) {
+        used.add(id);
+        return id;
+      }
+    }
+    fail("Chưa tạo được mã mới cho bản sao. Vui lòng thử lại.");
+  };
+  return trip({
+    ...prepared,
+    id: freshId(),
+    activities: prepared.activities.map((item) => ({
+      ...item,
+      id: freshId(),
+      done: false,
+    })),
+    expenses: [],
+    checklist: prepared.checklist.map((item) => ({
+      ...item,
+      id: freshId(),
+      done: false,
+    })),
+  });
+}
+
 export function createActivity(input = {}) {
   object(input, "Hoạt động");
   return activity({
@@ -364,7 +423,10 @@ export function expenseSummary(input) {
     CATEGORIES.map((category) => [category, 0]),
   );
   for (const item of plan.expenses) byCategory[item.category] += item.amount;
-  const total = Object.values(byCategory).reduce((sum, amount) => sum + amount, 0);
+  const total = Object.values(byCategory).reduce(
+    (sum, amount) => sum + amount,
+    0,
+  );
   const remaining = plan.budget - total;
   return { total, remaining, over: Math.max(0, -remaining), byCategory };
 }
@@ -391,8 +453,12 @@ function csvCell(value) {
  */
 export function exportExpensesCSV(input) {
   const plan = trip(input);
-  const rows = [["Ngày", "Khoản chi", "Nhóm", "Số tiền (VND)", "Người trả", "Ghi chú"]];
-  for (const item of [...plan.expenses].sort((a, b) => a.date.localeCompare(b.date))) {
+  const rows = [
+    ["Ngày", "Khoản chi", "Nhóm", "Số tiền (VND)", "Người trả", "Ghi chú"],
+  ];
+  for (const item of [...plan.expenses].sort((a, b) =>
+    a.date.localeCompare(b.date),
+  )) {
     rows.push([
       item.date,
       item.title,
@@ -402,7 +468,11 @@ export function exportExpensesCSV(input) {
       item.notes,
     ]);
   }
-  return "\ufeff" + rows.map((row) => row.map(csvCell).join(",")).join("\r\n") + "\r\n";
+  return (
+    "\ufeff" +
+    rows.map((row) => row.map(csvCell).join(",")).join("\r\n") +
+    "\r\n"
+  );
 }
 
 export function sortActivities(input, day) {

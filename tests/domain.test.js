@@ -4,6 +4,7 @@ import { execFileSync } from "node:child_process";
 import {
   validateState,
   createTrip,
+  duplicateTrip,
   createActivity,
   createExpense,
   createChecklistItem,
@@ -654,4 +655,92 @@ test("ICS LOCATION includes custom addresses as folded escaped text without inve
   assert.ok(!calendar.includes("GEO:"));
   for (const line of calendar.split("\r\n")) assert.ok(Buffer.byteLength(line, "utf8") <= 75);
   assert.ok(!exportCalendar(trip({ activities: [activity()] })).includes("LOCATION:"));
+});
+
+test("duplicateTrip preserves the reusable plan while clearing actual payments and all completed flags", () => {
+  const source = trip({
+    destination: "Huế", days: 3, travelers: 4, budget: 6_000_000,
+    activities: [
+      activity({ id: "a-1", placeId: "dalat-station", day: 0, start: "08:30", duration: 90, cost: 120_000, costMode: "group", address: "23 Lê Lợi\nTầng 2, Huế", notes: "Mang máy ảnh", done: true }),
+      activity({ id: "a-2", day: 2, start: "14:15", category: "food", cost: 80_000, done: false }),
+    ],
+    expenses: [expense({ id: "paid-1", amount: 555_000, payer: "An" })],
+    checklist: [checklist({ id: "c-1", done: true }), checklist({ id: "c-2", title: "Áo mưa", done: false })],
+  });
+  const before = JSON.stringify(source);
+  Object.freeze(source);
+  source.activities.forEach(Object.freeze);
+  source.checklist.forEach(Object.freeze);
+  const copy = duplicateTrip(source);
+  assert.equal(copy.title, source.title + " — bản sao");
+  for (const field of ["destination", "startDate", "days", "travelers", "budget", "cover"]) assert.equal(copy[field], source[field]);
+  assert.deepEqual(copy.expenses, []);
+  assert.equal(expenseSummary(copy).total, 0);
+  assert.equal(expenseSummary(source).total, 555_000);
+  assert.deepEqual(budgetForTrip(copy), budgetForTrip(source));
+  const reusableActivity = ({ id: _id, done: _done, ...fields }) => fields;
+  assert.deepEqual(copy.activities.map(reusableActivity), source.activities.map(reusableActivity));
+  assert.ok(copy.activities.every((item) => item.done === false));
+  assert.deepEqual(copy.checklist.map((item) => ({ title: item.title, done: item.done })), source.checklist.map((item) => ({ title: item.title, done: false })));
+  assert.equal(JSON.stringify(source), before);
+  copy.activities[0].notes = "Ghi chú của chuyến mới";
+  copy.checklist[0].title = "Việc riêng cho chuyến mới";
+  assert.equal(source.activities[0].notes, "Mang máy ảnh");
+  assert.equal(source.checklist[0].title, "Sạc dự phòng");
+});
+
+test("duplicateTrip gives every new entity a fresh globally distinct ID and a separate calendar identity", () => {
+  const source = trip({ activities: [activity({ id: "a-1" }), activity({ id: "a-2", day: 1 })], expenses: [expense()], checklist: [checklist()] });
+  const first = duplicateTrip(source);
+  const second = duplicateTrip(source);
+  const ids = (plan) => [plan.id, ...plan.activities.map((item) => item.id), ...plan.expenses.map((item) => item.id), ...plan.checklist.map((item) => item.id)];
+  const all = [...ids(source), ...ids(first), ...ids(second)];
+  assert.equal(new Set(all).size, all.length);
+  for (const id of [...ids(first), ...ids(second)]) assert.match(id, /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i);
+  const now = new Date("2026-11-05T00:00:00Z");
+  const calendarIds = [source, first, second].flatMap((plan) => [...exportCalendar(plan, { now }).matchAll(/^UID:(.+)\r$/gm)].map((match) => match[1]));
+  assert.equal(new Set(calendarIds).size, calendarIds.length);
+});
+
+test("duplicateTrip shifts the start date across a year without changing day positions or floating times", () => {
+  const source = trip({ activities: [activity({ day: 2, start: "23:30", duration: 90, address: "Nhà nhỏ" })] });
+  const copy = duplicateTrip(source, { title: "Chuyến đi năm mới", startDate: "2030-12-31" });
+  assert.equal(copy.title, "Chuyến đi năm mới");
+  assert.equal(dateForDay(copy.startDate, copy.activities[0].day), "2031-01-02");
+  assert.equal(copy.activities[0].start, "23:30");
+  const calendar = exportCalendar(copy, { now: new Date("2026-11-05T00:00:00Z") });
+  assert.ok(calendar.includes("DTSTART:20310102T233000\r\nDTEND:20310103T010000"));
+  assert.equal(source.startDate, "2028-02-28");
+});
+
+test("duplicateTrip default title remains bounded without cutting emoji code points", () => {
+  const suffix = " — bản sao";
+  for (const title of ["🌿".repeat(60), "Huế rất đẹp ".repeat(10)]) {
+    const source = trip({ title });
+    const copy = duplicateTrip(source);
+    assert.ok(copy.title.length <= 120);
+    assert.equal(copy.title.isWellFormed(), true);
+    assert.ok(copy.title.endsWith(suffix));
+    const prefix = copy.title.slice(0, -suffix.length);
+    assert.ok(source.title.startsWith(prefix));
+    if (title.startsWith("🌿")) assert.ok([...prefix].every((character) => character === "🌿"));
+  }
+  assert.equal(duplicateTrip(trip(), { title: "Tên tự chọn" }).title, "Tên tự chọn");
+});
+
+test("duplicateTrip rejects invalid source/date/title before touching an existing plan", () => {
+  const source = trip({ expenses: [expense()], checklist: [checklist({ done: true })] });
+  const before = JSON.stringify(source);
+  for (const options of [{ startDate: "2026-02-29" }, { startDate: "2199-12-31" }, { title: "" }, { title: "x".repeat(121) }]) assert.throws(() => duplicateTrip(source, options));
+  assert.throws(() => duplicateTrip({ ...source, activities: [activity({ day: 5 })] }));
+  assert.throws(() => duplicateTrip({ ...source, expenses: [{ ...expense(), amount: -1 }] }));
+  assert.equal(JSON.stringify(source), before);
+});
+
+test("duplicateTrip retries an ID collision instead of reusing a source or newly allocated entity ID", (t) => {
+  const source = trip({ activities: [activity()], checklist: [checklist()] });
+  const candidates = [source.id, "new-trip", "new-trip", source.activities[0].id, "new-activity", source.checklist[0].id, "new-checklist"];
+  t.mock.method(globalThis.crypto, "randomUUID", () => candidates.shift());
+  const copy = duplicateTrip(source);
+  assert.deepEqual([copy.id, copy.activities[0].id, copy.checklist[0].id], ["new-trip", "new-activity", "new-checklist"]);
 });

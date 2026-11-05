@@ -59,6 +59,11 @@ debt allocation. CSV uses BOM, CRLF, quoted cells and doubled quotation marks.
 Formula-looking text is prefixed with an apostrophe on export without modifying
 the source data; no claim is made about every spreadsheet's re-save behavior.
 
+Trip duplication creates fresh identifiers for the new trip, activities and
+checklist items. It preserves the reusable itinerary and day positions, accepts a
+new start date, resets completion flags and clears actual expenses. It does not
+change the original trip or carry previous payments into the new ledger.
+
 Calendar export follows [RFC 5545](https://www.rfc-editor.org/rfc/rfc5545.html):
 CRLF,75-octet UTF-8 folding without broken code points, escaped text and stable
 event UIDs. DTSTAMP uses the real export instant; an injected clock supports tests.
@@ -84,3 +89,10 @@ An incomplete installation deletes only its own failed cache; activation cleans
 only previous caches for this app scope. Updates wait; acceptance never silently
 reloads another tab or writes user data. Initial connectivity and successful
 offline preparation are required. Browser storage remains subject to eviction.
+
+The UI checks for an open dialog, protected/conflicting storage and save errors
+again after asynchronous update activation, immediately before any reload. An
+unsafe reload is deferred with a save/export/reopen message. Other tabs retain
+their documents; a worker activation never directly reloads them. Rendering also
+restores a visible action's keyboard focus and reveals the current day only
+horizontally, preserving the reader's vertical position.

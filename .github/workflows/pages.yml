@@ -40,6 +40,7 @@ jobs:
           path: |
             artifacts/browser/
             artifacts/product/
+            artifacts/reuse/
           retention-days: 14
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request'

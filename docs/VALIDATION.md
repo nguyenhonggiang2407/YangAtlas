@@ -1,5 +1,26 @@
 # Verification
 
+## Trip reuse and interaction refinements — v2.1, 5 November 2026
+
+- **50/50 native checks passed locally:** the previous 40 plus 6 trip-duplication
+  checks and 4 regressions for the real UI's asynchronous update/reload policy.
+- **4/4 focused new browser cases passed:** desktop/mobile plan reuse, final-day
+  visibility in a 90-day trip, and repeated keyboard checklist toggling. These
+  cover cancellation and invalid dates without mutation, fresh IDs, preserved
+  source payments/completion, reset copy state, independent JSON data and calendar
+  events on the new dates. The unchanged 17 flows will run alongside these in CI.
+- Local review reproduced the initiating-tab update race using the actual app
+  and a RAM-only waiting-worker response that delays activation. Production
+  source/artifacts were not substituted. The new final reload guard preserves an
+  open form or protected in-memory changes that appeared after update acceptance.
+  Both actual fixed-browser scenarios passed: the initiating tab kept its new
+  form, the other tab kept its draft, and a protected in-memory activity remained
+  visible and available in a real JSON download after activation. See the
+  [local before/after review](evidence/update-race-review.md). These are local
+  controlled-timing checks, not artificial traffic to the public deployment.
+- Syntax, static build, all 12 existing licensed photo/font hashes and diff checks
+  passed. Data remains schema v2 with the same browser storage key and backup limits.
+
 ## Personal application v2 — 5 November 2026
 
 The personal release adds arbitrary destinations and addresses, a separate actual

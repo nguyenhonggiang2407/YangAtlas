@@ -34,6 +34,10 @@ These are direct screenshots with isolated verification data, not real purchases
   separate. Edit or undo deletions; export the ledger as a UTF-8 CSV.
 - **Prepare calmly.** Maintain a checklist for each trip and tick off completed
   tasks. Trip edits preserve activities, expenses and preparation items.
+- **Reuse a plan.** Choose **Nhân bản** on a trip, give it a new name and start
+  date, and take its itinerary and preparation list along. The new trip has fresh
+  IDs, unfinished activities/checklist and an empty actual-expense ledger; the
+  previous trip stays intact.
 - **Take it along.** After the app reports offline readiness, reopen it and edit
   trips without a network connection. Install through a supported browser, export
   a Unicode-safe ICS calendar, or print a complete itinerary, ledger and checklist.
@@ -41,6 +45,11 @@ These are direct screenshots with isolated verification data, not real purchases
   atomic validation. Version 1 backups migrate to version 2 without discarding
   old trips. Empty workspaces are valid. Conflicting changes from another tab,
   corrupt data and denied/full storage are shown explicitly.
+
+For longer journeys, the selected day stays visible in the day strip. Keyboard
+focus remains on controls after checklist/visited-state changes. If a draft form
+or storage conflict appears while an accepted update is activating, the app keeps
+the current screen so you can save or export before reopening.
 
 Fonts, photos and application code are self-hosted. There is no analytics, AI API,
 server database, login, payment processing or cloud synchronization. Map queries

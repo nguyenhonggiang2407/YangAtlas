@@ -1044,6 +1044,43 @@ button {
   padding: 8px 12px;
   min-height: 30px;
 }
+.cover-tools {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+}
+.cover-tools .cover-edit {
+  position: static;
+}
+.copy-summary {
+  background: var(--sage);
+  border-radius: 8px;
+  padding: 16px;
+  line-height: 1.8;
+  color: #506849;
+}
+.copy-summary strong {
+  font-size: 13px;
+}
+.copy-summary p {
+  font-size: 12px;
+  margin-top: 8px;
+}
+@media (max-width: 700px) {
+  .cover-tools {
+    right: 13px;
+    top: 13px;
+    gap: 7px;
+  }
+  .cover-tools .cover-edit {
+    min-height: 38px;
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+}
 .cover-credit {
   position: absolute;
   right: 16px;

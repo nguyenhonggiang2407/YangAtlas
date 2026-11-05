@@ -2,6 +2,7 @@ import { places, destinations, sampleTrips, photoCredits } from "./catalog.js";
 import {
   validateState,
   createTrip,
+  duplicateTrip,
   createActivity,
   dateForDay,
   budgetForTrip,
@@ -64,6 +65,7 @@ const shapes = {
   menu: "M4 6h16M4 12h16M4 18h16",
   image: "M3 4h18v16H3Zm0 12 6-6 5 5 3-3 4 4M16 8h.1",
   printer: "M6 8V3h12v5M6 17H3V8h18v9h-3M6 14h12v7H6Zm11-3h.1",
+  copy: "M8 8h13v13H8ZM16 8V3H3v13h5",
   dots: "M5 12h.1M12 12h.1M19 12h.1",
 };
 const icon = (name, extra = "") =>
@@ -228,6 +230,11 @@ function control(action, label, name, attrs = "") {
 }
 
 function render() {
+  const focusedAction = document.activeElement?.closest("[data-action]");
+  const focusKey =
+    focusedAction && app.contains(focusedAction)
+      ? { ...focusedAction.dataset }
+      : null;
   const trip = active(),
     destination = trip ? destinationOf(trip) : null,
     budget = trip ? budgetForTrip(trip) : null;
@@ -257,7 +264,7 @@ function render() {
       ${storageError ? `<div class="storage-alert" role="status">${icon("info")} ${esc(storageError)} <button data-action="backup">Xuất bản sao JSON</button></div>` : ""}
       ${
         trip
-          ? `<section class="cover" aria-label="Chuyến đi ${esc(trip.title)}"><img src="${esc(destination.cover)}" alt="${esc(destination.coverAlt || "Ảnh phong cảnh minh họa " + destination.name)}" fetchpriority="high"/><div class="cover-content"><p class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT CHAPTER</p><h1>${esc(trip.title)}</h1><div class="trip-meta"><span>${icon("pin")}${esc(destinationName(trip))}</span><span>${icon("calendar")}${dateRange(trip)}</span><span>${icon("users")}${trip.travelers} người</span></div></div><button class="button cover-edit" data-action="edit-trip">${icon("edit")} Chỉnh sửa chuyến đi</button><button class="cover-credit" data-action="about">${icon("image")} Ảnh chụp minh họa · Nguồn ảnh</button></section>
+          ? `<section class="cover" aria-label="Chuyến đi ${esc(trip.title)}"><img src="${esc(destination.cover)}" alt="${esc(destination.coverAlt || "Ảnh phong cảnh minh họa " + destination.name)}" fetchpriority="high"/><div class="cover-content"><p class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT CHAPTER</p><h1>${esc(trip.title)}</h1><div class="trip-meta"><span>${icon("pin")}${esc(destinationName(trip))}</span><span>${icon("calendar")}${dateRange(trip)}</span><span>${icon("users")}${trip.travelers} người</span></div></div><div class="cover-tools"><button class="button cover-edit" data-action="duplicate-trip" aria-label="Nhân bản chuyến đi">${icon("copy")} Nhân bản</button><button class="button cover-edit" data-action="edit-trip">${icon("edit")} Chỉnh sửa chuyến đi</button></div><button class="cover-credit" data-action="about">${icon("image")} Ảnh chụp minh họa · Nguồn ảnh</button></section>
       <div class="intro-bar"><nav class="view-tabs" aria-label="Nội dung chuyến đi">${[
         ["plan", "route", "Lịch trình"],
         ["places", "pin", "Địa điểm"],
@@ -276,6 +283,37 @@ function render() {
       }
       <footer class="bottomline"><span>YangAtlas · Dành chỗ cho những điều bất ngờ.<br>Lịch trình, chi tiêu và hành trang của riêng bạn.</span><button data-action="about">Riêng tư & nguồn ảnh ${icon("external")}</button></footer>
     </main></div></div><input type="file" id="import-file" accept=".json,application/json" hidden>`;
+  // Reveal the current day horizontally without moving the reader up the page.
+  const strip = app.querySelector(".days"),
+    day = strip?.querySelector('[aria-pressed="true"]');
+  if (strip && day) {
+    const bounds = strip.getBoundingClientRect(),
+      current = day.getBoundingClientRect();
+    if (current.right > bounds.right)
+      strip.scrollLeft += current.right - bounds.right;
+    else if (current.left < bounds.left)
+      strip.scrollLeft -= bounds.left - current.left;
+  }
+  if (focusKey) {
+    const replacement = [...app.querySelectorAll("[data-action]")].find(
+      (element) =>
+        Object.entries(focusKey).every(
+          ([key, value]) => element.dataset[key] === value,
+        ),
+    );
+    if (replacement && !replacement.disabled) {
+      const box = replacement.getBoundingClientRect();
+      if (
+        box.width &&
+        box.height &&
+        box.left >= 0 &&
+        box.right <= innerWidth + 1 &&
+        box.top >= 0 &&
+        box.bottom <= innerHeight + 1
+      )
+        replacement.focus({ preventScroll: true });
+    }
+  }
 }
 
 function renderWelcome() {
@@ -647,6 +685,44 @@ function tripDialog(edit = false) {
       confirmDeleteTrip(trip);
     });
 }
+function duplicateTripDialog() {
+  const trip = active(),
+    suffix = " — bản sao";
+  let base = "";
+  for (const character of trip.title) {
+    if ((base + character + suffix).length > 120) break;
+    base += character;
+  }
+  dialog(
+    "Dành kế hoạch này cho một chuyến mới.",
+    "Chọn tên và ngày khởi hành; lịch trình sẽ đi theo ngày mới.",
+    `<form><div class="form-grid">${field("Tên chuyến đi mới", "title", base.trimEnd() + suffix, "text", 'required maxlength="120" autofocus', true)}${field("Ngày khởi hành mới", "startDate", trip.startDate, "date", 'required min="1900-01-01" max="2199-12-31"', true)}<div class="copy-summary field full"><strong>${trip.activities.length} hoạt động · ${trip.checklist.length} việc chuẩn bị</strong><p>Giữ địa chỉ, giờ, ghi chú, dự tính và hạn mức. Các hoạt động và việc chuẩn bị ở bản mới bắt đầu ở trạng thái chưa hoàn thành. Sổ chi tiêu thực tế của bản mới bắt đầu trống.</p></div></div><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button secondary" data-cancel>Để sau</button><button type="submit" class="button primary">Tạo bản sao</button></div></form>`,
+    (data, node) => {
+      if (state.trips.length >= 50)
+        throw new Error(
+          "Đã có 50 chuyến đi. Hãy xuất bản sao hoặc xóa một chuyến trước.",
+        );
+      const copied = duplicateTrip(trip, {
+        title: data.get("title"),
+        startDate: data.get("startDate"),
+      });
+      selectedDay = 0;
+      view = "plan";
+      category = "all";
+      search = "";
+      sidebarOpen = false;
+      commit({
+        ...state,
+        activeTripId: copied.id,
+        trips: [...state.trips, copied],
+      });
+      node.close();
+      notify(
+        "Đã tạo lịch trình mới. Khoản đã chi vẫn thuộc chuyến đi ban đầu.",
+      );
+    },
+  );
+}
 function confirmDeleteTrip(trip) {
   dialog(
     "Xóa chuyến đi này?",
@@ -867,6 +943,10 @@ app.addEventListener("click", (event) => {
       tripDialog(true);
       return;
     }
+    if (action === "duplicate-trip") {
+      duplicateTripDialog();
+      return;
+    }
     if (action === "add-activity") {
       activityDialog();
       return;
@@ -1023,8 +1103,23 @@ function awaitOfflineUpdate() {
   offlineController
     .applyUpdate()
     .then((applied) => {
-      if (applied) location.reload();
-      else notify("Bạn đang dùng bản hiện tại.");
+      if (!applied) {
+        notify("Bạn đang dùng bản hiện tại.");
+        return;
+      }
+      // Activation is asynchronous: a form or a conflicting edit may have
+      // appeared after the original update click. Keep those edits on screen.
+      if (
+        protectStored ||
+        storageError ||
+        document.querySelector("dialog[open]")
+      ) {
+        notify(
+          "Bản mới đã sẵn sàng. Hãy lưu bản nháp, xuất JSON nếu chưa lưu được, rồi chủ động tải lại trang.",
+        );
+        return;
+      }
+      location.reload();
     })
     .catch(() =>
       notify("Chưa thể cập nhật. Dữ liệu vẫn còn; hãy thử lại khi có mạng."),

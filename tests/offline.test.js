@@ -10,6 +10,7 @@ import { createHash } from "node:crypto";
 
 const workerSource = await readFile(new URL("../public/service-worker.js", import.meta.url), "utf8");
 const clientSource = await readFile(new URL("../src/offline.js", import.meta.url), "utf8");
+const appSource = await readFile(new URL("../src/app.js", import.meta.url), "utf8");
 const integrity = (value) => "sha256-" + createHash("sha256").update(value).digest("base64");
 
 // An isolated Cache API/event harness exercises worker boundaries without real
@@ -280,4 +281,69 @@ test("install manifest remains relative and supplies real standard/maskable icon
     assert.equal(bytes.readUInt32BE(16), size);
     assert.equal(bytes.readUInt32BE(20), size);
   }
+});
+
+// Exercise the actual caller's reload policy, not a replacement app or a copy of
+// its conditions. Activation may finish after a new form/conflict/storage error.
+function updateReloadPolicy() {
+  const start = appSource.indexOf("function awaitOfflineUpdate() {");
+  const end = appSource.indexOf("\nsetupOffline(", start);
+  assert.ok(start >= 0 && end > start, "The real UI update handler must be available");
+  let finishActivation, reloads = 0;
+  const messages = [];
+  const pending = new Promise((resolve) => { finishActivation = resolve; });
+  const context = {
+    protectStored: false, storageError: "", openDialog: null,
+    offlineController: { applyUpdate: () => pending },
+    document: { querySelector: (selector) => { assert.equal(selector, "dialog[open]"); return context.openDialog; } },
+    notify: (message) => messages.push(message),
+    location: { reload: () => { reloads++; } },
+  };
+  vm.runInNewContext(appSource.slice(start, end) + "\nglobalThis.requestUpdate = awaitOfflineUpdate;", context);
+  return {
+    context, messages,
+    begin: () => context.requestUpdate(),
+    finish: async () => { finishActivation(true); await pending; await Promise.resolve(); },
+    reloads: () => reloads,
+  };
+}
+
+test("real app update policy reloads a clean initiating document only after activation finishes", async () => {
+  const policy = updateReloadPolicy();
+  assert.equal(policy.begin(), true);
+  assert.equal(policy.reloads(), 0);
+  await policy.finish();
+  assert.equal(policy.reloads(), 1);
+});
+
+test("real app update policy preserves a draft opened while activation was pending", async () => {
+  const policy = updateReloadPolicy();
+  policy.begin();
+  const draft = { title: "Bản nháp mở sau khi chọn cập nhật" };
+  policy.context.openDialog = draft;
+  await policy.finish();
+  assert.equal(policy.reloads(), 0);
+  assert.equal(policy.context.openDialog, draft);
+  assert.match(policy.messages.at(-1), /bản nháp|JSON/);
+});
+
+test("real app update policy preserves protected in-memory edits when another tab saves during activation", async () => {
+  const policy = updateReloadPolicy();
+  policy.begin();
+  const unsaved = { activities: [{ title: "Bản sửa chưa lưu ở tab này" }] };
+  policy.context.memoryDraft = unsaved;
+  policy.context.protectStored = true;
+  await policy.finish();
+  assert.equal(policy.reloads(), 0);
+  assert.equal(policy.context.memoryDraft, unsaved);
+  assert.match(policy.messages.at(-1), /JSON/);
+});
+
+test("real app update policy keeps the current document if storage fails after the update click", async () => {
+  const policy = updateReloadPolicy();
+  policy.begin();
+  policy.context.storageError = "Trình duyệt chưa lưu được thay đổi.";
+  await policy.finish();
+  assert.equal(policy.reloads(), 0);
+  assert.match(policy.messages.at(-1), /JSON/);
 });
