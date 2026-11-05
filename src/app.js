@@ -84,8 +84,12 @@ const shortDate = (trip, day) =>
     day: "2-digit",
     month: "2-digit",
   });
-const dateRange = (trip) =>
-  `${shortDate(trip, 0)} — ${shortDate(trip, trip.days - 1)}/${trip.startDate.slice(0, 4)}`;
+const dateRange = (trip) => {
+  const startYear = trip.startDate.slice(0, 4);
+  const endYear = dateForDay(trip.startDate, trip.days - 1).slice(0, 4);
+  const beginning = shortDate(trip, 0) + (startYear === endYear ? "" : `/${startYear}`);
+  return `${beginning} — ${shortDate(trip, trip.days - 1)}/${endYear}`;
+};
 let view = "plan",
   selectedDay = 0,
   search = "",

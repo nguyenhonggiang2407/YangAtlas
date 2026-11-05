@@ -516,6 +516,8 @@ test(
     const { page } = await pageFor(t, { timezoneId: "Pacific/Honolulu" });
     await openApp(page);
     await newTrip(page, { title: "Lịch qua năm", startDate: "2030-12-31" });
+    await expect(page.locator(".trip-meta")).toContainText("2030");
+    await expect(page.locator(".trip-meta")).toContainText("2031");
     const literal = "<img src=x onerror=alert(1)>";
     await addActivity(page, {
       title: literal,
