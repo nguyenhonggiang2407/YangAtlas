@@ -1,6 +1,6 @@
 /** Pure planning rules. No network, DOM, storage or third-party runtime code. */
 const CATEGORIES = ["visit", "food", "stay", "move", "other"];
-const MAX_BYTES = 1024 * 1024;
+const MAX_BYTES = 4 * 1024 * 1024;
 const encoder = new TextEncoder();
 const fail = (message) => {
   throw new Error(message);
@@ -100,7 +100,7 @@ function activity(input) {
   return {
     id: identifier(input.id, "Mã hoạt động"),
     placeId: identifier(input.placeId, "Mã địa điểm", true),
-    day: integer(input.day, 0, 13, "Ngày hoạt động"),
+    day: integer(input.day, 0, 89, "Ngày hoạt động"),
     title: text(input.title, 120, "Tên hoạt động"),
     category,
     start,
@@ -108,21 +108,67 @@ function activity(input) {
     cost: integer(input.cost, 0, 100_000_000, "Chi phí"),
     costMode: input.costMode,
     notes: text(input.notes, 2000, "Ghi chú", { empty: true, multiline: true }),
+    address: text(input.address === undefined ? "" : input.address, 400, "Địa chỉ", {
+      empty: true,
+      multiline: true,
+    }),
     done: input.done,
   };
+}
+
+function expense(input) {
+  object(input, "Khoản chi");
+  calendarDate(input.date);
+  if (!CATEGORIES.includes(input.category)) fail("Nhóm khoản chi không hợp lệ.");
+  return {
+    id: identifier(input.id, "Mã khoản chi"),
+    title: text(input.title, 120, "Tên khoản chi"),
+    amount: integer(input.amount, 0, 1_000_000_000, "Số tiền"),
+    date: input.date,
+    category: input.category,
+    payer: text(input.payer === undefined ? "" : input.payer, 80, "Người trả", {
+      empty: true,
+    }),
+    notes: text(input.notes === undefined ? "" : input.notes, 2000, "Ghi chú", {
+      empty: true,
+      multiline: true,
+    }),
+  };
+}
+
+function checklistItem(input) {
+  object(input, "Việc cần chuẩn bị");
+  if (typeof input.done !== "boolean") fail("Trạng thái chuẩn bị không hợp lệ.");
+  return {
+    id: identifier(input.id, "Mã việc cần chuẩn bị"),
+    title: text(input.title, 200, "Việc cần chuẩn bị"),
+    done: input.done,
+  };
+}
+
+function collection(input, validate, label) {
+  const value = input === undefined ? [] : input;
+  if (!Array.isArray(value) || value.length > 500) {
+    fail(`Một chuyến đi có tối đa 500 ${label}.`);
+  }
+  const items = value.map(validate);
+  if (new Set(items.map((item) => item.id)).size !== items.length) {
+    fail(`Mã ${label} bị trùng.`);
+  }
+  return items;
 }
 
 function trip(input) {
   object(input, "Chuyến đi");
   calendarDate(input.startDate);
-  const days = integer(input.days, 1, 14, "Số ngày");
+  const days = integer(input.days, 1, 90, "Số ngày");
   // The whole trip must fit the supported calendar range.
   const lastDate = calendarDate(input.startDate);
   lastDate.setUTCDate(lastDate.getUTCDate() + days - 1);
   if (lastDate.getUTCFullYear() > 2199)
     fail("Ngày kết thúc vượt ngoài năm 2199.");
-  if (!Array.isArray(input.activities) || input.activities.length > 100) {
-    fail("Một chuyến đi có tối đa 100 hoạt động.");
+  if (!Array.isArray(input.activities) || input.activities.length > 500) {
+    fail("Một chuyến đi có tối đa 500 hoạt động.");
   }
   const activities = input.activities.map(activity);
   if (new Set(activities.map((item) => item.id)).size !== activities.length)
@@ -132,19 +178,22 @@ function trip(input) {
   return {
     id: identifier(input.id, "Mã chuyến đi"),
     title: text(input.title, 120, "Tên chuyến đi"),
-    destination: key(input.destination, "Điểm đến"),
+    destination: text(input.destination, 120, "Điểm đến"),
     startDate: input.startDate,
     days,
-    travelers: integer(input.travelers, 1, 20, "Số người"),
+    travelers: integer(input.travelers, 1, 100, "Số người"),
     budget: integer(input.budget, 0, 1_000_000_000, "Ngân sách"),
     cover: key(input.cover, "Ảnh bìa"),
     activities,
+    expenses: collection(input.expenses, expense, "khoản chi"),
+    checklist: collection(input.checklist, checklistItem, "việc cần chuẩn bị"),
   };
 }
 
 /** Reject cycles/accessors/prototypes before JSON size measurement invokes code. */
 function inspectJson(value, seen = new Set(), depth = 0, count = { nodes: 0 }) {
-  if (depth > 30 || ++count.nodes > 20_000) fail("Tệp sao lưu quá phức tạp.");
+  if (depth > 30 || ++count.nodes > 1_000_000)
+    fail("Tệp sao lưu quá phức tạp.");
   if (value === null || ["string", "number", "boolean"].includes(typeof value))
     return;
   if (typeof value !== "object")
@@ -175,7 +224,7 @@ export function validateState(input) {
   let parsed = input;
   if (typeof input === "string") {
     if (encoder.encode(input).byteLength > MAX_BYTES)
-      fail("Tệp sao lưu vượt quá 1 MB.");
+      fail("Tệp sao lưu vượt quá 4 MB.");
     try {
       parsed = JSON.parse(input);
     } catch {
@@ -184,11 +233,12 @@ export function validateState(input) {
   }
   inspectJson(parsed);
   if (encoder.encode(JSON.stringify(parsed)).byteLength > MAX_BYTES)
-    fail("Tệp sao lưu vượt quá 1 MB.");
+    fail("Tệp sao lưu vượt quá 4 MB.");
   object(parsed, "Bản sao lưu");
-  if (parsed.version !== 1) fail("Phiên bản sao lưu chưa được hỗ trợ.");
-  if (!Array.isArray(parsed.trips) || parsed.trips.length > 10)
-    fail("Có thể lưu tối đa 10 chuyến đi.");
+  if (![1, 2].includes(parsed.version))
+    fail("Phiên bản sao lưu chưa được hỗ trợ.");
+  if (!Array.isArray(parsed.trips) || parsed.trips.length > 50)
+    fail("Có thể lưu tối đa 50 chuyến đi.");
   const trips = parsed.trips.map(trip);
   if (new Set(trips.map((item) => item.id)).size !== trips.length)
     fail("Mã chuyến đi bị trùng.");
@@ -204,7 +254,9 @@ export function validateState(input) {
   ) {
     fail("Chuyến đi đang chọn không có trong bản sao lưu.");
   }
-  return { version: 1, activeTripId, trips };
+  // V1 uses the same storage key: only append empty new collections/address.
+  // In particular, do not rename legacy destination keys or regenerate IDs.
+  return { version: 2, activeTripId, trips };
 }
 
 export function createTrip(input = {}) {
@@ -217,8 +269,14 @@ export function createTrip(input = {}) {
     days: input.days ?? 3,
     travelers: input.travelers ?? 2,
     budget: input.budget ?? 3_000_000,
-    cover: input.cover ?? input.destination ?? "dalat",
+    cover:
+      input.cover ??
+      (["dalat", "hoian"].includes(input.destination)
+        ? input.destination
+        : "dalat"),
     activities: [],
+    expenses: [],
+    checklist: [],
   });
 }
 
@@ -235,13 +293,36 @@ export function createActivity(input = {}) {
     cost: input.cost ?? 0,
     costMode: input.costMode ?? "person",
     notes: input.notes ?? "",
+    address: input.address ?? "",
+    done: input.done ?? false,
+  });
+}
+
+export function createExpense(input = {}) {
+  object(input, "Khoản chi");
+  return expense({
+    id: input.id ?? newId(),
+    title: input.title ?? "Khoản chi mới",
+    amount: input.amount ?? 0,
+    date: input.date,
+    category: input.category ?? "other",
+    payer: input.payer ?? "",
+    notes: input.notes ?? "",
+  });
+}
+
+export function createChecklistItem(input = {}) {
+  object(input, "Việc cần chuẩn bị");
+  return checklistItem({
+    id: input.id ?? newId(),
+    title: input.title ?? "Việc cần chuẩn bị mới",
     done: input.done ?? false,
   });
 }
 
 export function defaultState(trips = []) {
   if (!Array.isArray(trips)) fail("Danh sách chuyến đi không hợp lệ.");
-  return validateState({ version: 1, activeTripId: trips[0]?.id ?? "", trips });
+  return validateState({ version: 2, activeTripId: trips[0]?.id ?? "", trips });
 }
 
 /** Calendar arithmetic uses UTC only as a date counter; browser timezone is irrelevant. */
@@ -274,6 +355,54 @@ export function budgetForTrip(input) {
       plan.budget === 0 ? 0 : Math.round((total / plan.budget) * 10_000) / 100,
     byCategory,
   };
+}
+
+/** Actual expenses are whole-party amounts, independent of itinerary estimates. */
+export function expenseSummary(input) {
+  const plan = trip(input);
+  const byCategory = Object.fromEntries(
+    CATEGORIES.map((category) => [category, 0]),
+  );
+  for (const item of plan.expenses) byCategory[item.category] += item.amount;
+  const total = Object.values(byCategory).reduce((sum, amount) => sum + amount, 0);
+  const remaining = plan.budget - total;
+  return { total, remaining, over: Math.max(0, -remaining), byCategory };
+}
+
+const CATEGORY_NAMES = {
+  visit: "Tham quan",
+  food: "Ăn uống",
+  stay: "Lưu trú",
+  move: "Di chuyển",
+  other: "Khác",
+};
+
+function csvCell(value) {
+  const source = String(value);
+  // Detect full-width equivalents without altering the user's original text.
+  const candidate = source.normalize("NFKC").replace(/^[\s\u200b\ufeff]+/u, "");
+  const safe = /^[=+@-]/u.test(candidate) ? "'" + source : source;
+  return '"' + safe.replace(/"/g, '""').replace(/\r\n?|\n/g, "\r\n") + '"';
+}
+
+/** CSV is UTF-8 text with BOM, header, quoted fields and CRLF (RFC 4180).
+ * Formula-looking user text is prefixed with an apostrophe in this export only;
+ * the source records stay unchanged. This is not a spreadsheet roundtrip format.
+ */
+export function exportExpensesCSV(input) {
+  const plan = trip(input);
+  const rows = [["Ngày", "Khoản chi", "Nhóm", "Số tiền (VND)", "Người trả", "Ghi chú"]];
+  for (const item of [...plan.expenses].sort((a, b) => a.date.localeCompare(b.date))) {
+    rows.push([
+      item.date,
+      item.title,
+      CATEGORY_NAMES[item.category],
+      item.amount,
+      item.payer,
+      item.notes,
+    ]);
+  }
+  return "\ufeff" + rows.map((row) => row.map(csvCell).join(",")).join("\r\n") + "\r\n";
 }
 
 export function sortActivities(input, day) {
@@ -412,6 +541,7 @@ export function exportCalendar(input, { now = new Date() } = {}) {
               .filter(Boolean)
               .join("\n"),
           ),
+        ...(item.address ? ["LOCATION:" + icalText(item.address)] : []),
         "STATUS:CONFIRMED",
         "TRANSP:OPAQUE",
         "END:VEVENT",

@@ -24,6 +24,8 @@ const mime = {
   ".png": "image/png",
   ".woff2": "font/woff2",
   ".woff": "font/woff",
+  ".ttf": "font/ttf",
+  ".webmanifest": "application/manifest+json",
 };
 let server, browser, base;
 const diagnostics = new WeakMap();
@@ -158,6 +160,16 @@ async function openApp(page) {
     throw error;
   }
   await expect(page).toHaveTitle(/YangAtlas/);
+  // These regression cases intentionally exercise the curated sample planner.
+  // Product tests separately assert that a new installation begins empty.
+  const samples = page.getByRole("button", {
+    name: "Xem hành trình mẫu",
+    exact: true,
+  });
+  if (await samples.count()) {
+    await samples.click();
+    await expect(page.locator("h1")).toHaveText("Đà Lạt, chậm một nhịp");
+  }
 }
 
 async function noOverflow(page) {
@@ -232,8 +244,11 @@ async function newTrip(page, values = {}) {
   const dialog = page.getByRole("dialog", { name: "Bắt đầu một hành trình." });
   await dialog.getByLabel("Tên chuyến đi", { exact: true }).fill(title);
   await dialog
-    .getByRole("combobox", { name: /^Điểm đến/ })
-    .selectOption(values.destination || "dalat");
+    .getByLabel("Điểm đến", { exact: true })
+    .fill({ dalat: "Đà Lạt", hoian: "Hội An" }[values.destination || "dalat"] || values.destination);
+  await dialog
+    .getByRole("combobox", { name: "Ảnh bìa minh họa", exact: true })
+    .selectOption(values.cover || (values.destination === "hoian" ? "hoian" : "dalat"));
   await dialog
     .getByLabel("Ngày khởi hành", { exact: true })
     .fill(values.startDate || "2030-06-10");
@@ -545,8 +560,8 @@ test(
     for (const content of [
       "{",
       JSON.stringify(invalidMoney),
-      '{"version":1,"activeTripId":"","trips":[]}',
-      Buffer.alloc(1024 * 1024 + 1, 32),
+      '{"version":999,"activeTripId":"","trips":[]}',
+      Buffer.alloc(4 * 1024 * 1024 + 1, 32),
     ]) {
       await uploadBackup(page, content, "invalid.json");
       await expect(page.locator("#toast")).toContainText("Không nhập dữ liệu");

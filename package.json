@@ -1,16 +1,17 @@
 {
   "name": "yangatlas",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "A quiet, visual trip planner with local-first itineraries, budgets and calendar export.",
+  "description": "A personal, offline-capable travel planner with itineraries, actual expenses and packing checklists.",
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.js",
     "test:browser": "node --test tests/e2e/*.mjs",
     "assets:check": "node scripts/check-assets.mjs",
-    "check": "node --check src/app.js && node --check src/domain.js && node --check src/catalog.js"
+    "check": "node --check src/app.js && node --check src/domain.js && node --check src/catalog.js && node --check src/offline.js && node --check public/service-worker.js && node --check scripts/build.mjs",
+    "preview": "node scripts/serve.mjs --dist"
   },
   "engines": {
     "node": ">=24"

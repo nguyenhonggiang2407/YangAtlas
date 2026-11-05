@@ -1,5 +1,40 @@
 # Verification
 
+## Personal application v2 — 5 November 2026
+
+The personal release adds arbitrary destinations and addresses, a separate actual
+expense ledger, CSV export, preparation checklists, complete printing, v1 data
+migration, empty workspaces and installable offline use. It follows the requested
+account-free, browser-local model.
+
+- **40/40 native checks passed locally:** 31 domain/migration/export checks and
+  9 offline lifecycle/build checks. These include realistic backups above the old
+  1 MiB boundary, explicit collection limits, actual versus estimated expenses,
+  formula-looking CSV text, ICS LOCATION, cache integrity, update waiting and
+  isolation from other apps and non-GET/third-party requests.
+- Syntax, deterministic build and all **12 existing photo/font hashes passed**.
+  The build publishes **32 files**, including a generated service worker and
+  relative install manifest. All 31 other resources have precache SHA-256 integrity.
+- The initial full browser run passed 16/17 cases; a prefilled-textarea locator
+  failed before an edit. The same migration case passed after selecting the
+  semantic textbox, without a product workaround. All 17 cases have passed;
+  focused final mobile/offline/export checks also passed. Hosted CI will run the
+  complete 17 on one exact source commit before publication.
+- Root inspected actual local desktop 1440px and mobile 390px captures: blank
+  workspace, itinerary and expense ledger, loaded photographs/fonts, no horizontal
+  overflow or runtime errors. Offline readiness was reported by the installed worker.
+- Independent review reproduced an address line-break loss on unrelated edits
+  and an inherited-property destination alias. Both were fixed (textarea and
+  own-property lookup). The final built release passed focused regressions for
+  multiline address edit/JSON/ICS/map fidelity and the literal `constructor`
+  destination, alongside genuine offline navigation/edit/reload.
+
+The public-release evidence below currently describes **v1**. New v2 CI and public
+resource/browser verification will be appended after the exact source is deployed;
+v1 observations are not reused as evidence of new features.
+
+## Historical v1 release
+
 Development date: 4 November 2026. Results below distinguish completed checks
 from pending publication. They are not claims of production traffic or user counts.
 

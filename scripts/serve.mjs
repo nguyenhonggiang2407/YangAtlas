@@ -1,12 +1,16 @@
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { resolve, relative, extname } from "node:path";
-const root = resolve(process.env.ATLAS_SERVE_DIR || ".");
+const root = resolve(
+  process.env.ATLAS_SERVE_DIR ||
+    (process.argv.includes("--dist") ? "dist" : "."),
+);
 const mime = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".css": "text/css; charset=utf-8",
   ".json": "application/json",
+  ".webmanifest": "application/manifest+json",
   ".svg": "image/svg+xml",
   ".webp": "image/webp",
   ".jpg": "image/jpeg",

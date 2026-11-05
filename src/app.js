@@ -9,7 +9,12 @@ import {
   conflictsForDay,
   moveActivity,
   exportCalendar,
+  createExpense,
+  createChecklistItem,
+  expenseSummary,
+  exportExpensesCSV,
 } from "./domain.js";
+import { setupOffline } from "./offline.js";
 
 const KEY = "yangatlas:v1";
 const app = document.querySelector("#app");
@@ -58,6 +63,7 @@ const shapes = {
   spark: "m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z",
   menu: "M4 6h16M4 12h16M4 18h16",
   image: "M3 4h18v16H3Zm0 12 6-6 5 5 3-3 4 4M16 8h.1",
+  printer: "M6 8V3h12v5M6 17H3V8h18v9h-3M6 14h12v7H6Zm11-3h.1",
   dots: "M5 12h.1M12 12h.1M19 12h.1",
 };
 const icon = (name, extra = "") =>
@@ -77,6 +83,28 @@ const number = (value) =>
   new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 0 }).format(value);
 const placeById = (id) => places.find((p) => p.id === id);
 const destinationOf = (trip) => destinations[trip.cover] || destinations.dalat;
+const destinationName = (trip) =>
+  Object.hasOwn(destinations, trip.destination)
+    ? destinations[trip.destination].name
+    : trip.destination;
+const catalogDestination = (trip) => {
+  const name = destinationName(trip)
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/đ/gi, "d")
+    .toLowerCase();
+  return name === "da lat"
+    ? "dalat"
+    : name === "hoi an"
+      ? "hoian"
+      : trip.destination;
+};
+const mapQuery = (trip, a) =>
+  a.address ||
+  placeById(a.placeId)?.mapQuery ||
+  `${a.title}, ${destinationName(trip)}`;
+const mapLink = (query) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 const dayDate = (trip, day) =>
   new Date(dateForDay(trip.startDate, day) + "T12:00:00");
 const shortDate = (trip, day) =>
@@ -87,7 +115,8 @@ const shortDate = (trip, day) =>
 const dateRange = (trip) => {
   const startYear = trip.startDate.slice(0, 4);
   const endYear = dateForDay(trip.startDate, trip.days - 1).slice(0, 4);
-  const beginning = shortDate(trip, 0) + (startYear === endYear ? "" : `/${startYear}`);
+  const beginning =
+    shortDate(trip, 0) + (startYear === endYear ? "" : `/${startYear}`);
   return `${beginning} — ${shortDate(trip, trip.days - 1)}/${endYear}`;
 };
 let view = "plan",
@@ -98,22 +127,17 @@ let view = "plan",
   toastTimer,
   undoAction,
   storageError = "",
-  protectStored = false;
+  protectStored = false,
+  storedSnapshot = null,
+  offlineStatus = "Đang chuẩn bị bản ngoại tuyến…",
+  offlineController,
+  updateReady = false,
+  installPrompt;
 function validWorkspace(input) {
   const value = validateState(input);
-  if (!value.trips.length)
+  if (value.trips.some((t) => !Object.hasOwn(destinations, t.cover)))
     throw new Error(
-      "Bản sao cần có ít nhất một chuyến đi. Dữ liệu hiện tại vẫn giữ nguyên.",
-    );
-  if (
-    value.trips.some(
-      (t) =>
-        !Object.hasOwn(destinations, t.destination) ||
-        !Object.hasOwn(destinations, t.cover),
-    )
-  )
-    throw new Error(
-      "Bản sao có điểm đến chưa được hỗ trợ. Dữ liệu hiện tại vẫn giữ nguyên.",
+      "Bản sao có ảnh bìa chưa được hỗ trợ. Dữ liệu hiện tại vẫn giữ nguyên.",
     );
   return value;
 }
@@ -133,9 +157,12 @@ const sample = () => {
 let state;
 try {
   const stored = localStorage.getItem(KEY);
-  state = stored ? validWorkspace(stored) : sample();
+  storedSnapshot = stored;
+  state = stored
+    ? validWorkspace(stored)
+    : validateState({ version: 2, activeTripId: "", trips: [] });
 } catch {
-  state = sample();
+  state = validateState({ version: 2, activeTripId: "", trips: [] });
   storageError =
     "Không thể đọc bản lưu. Thay đổi chỉ giữ trong phiên này; bản lưu cũ chưa bị ghi đè.";
   protectStored = true;
@@ -165,20 +192,29 @@ function commit(next, { restore = false } = {}) {
   }
   if (!protectStored) {
     try {
-      localStorage.setItem(KEY, JSON.stringify(state));
+      if (!restore && localStorage.getItem(KEY) !== storedSnapshot) {
+        protectStored = true;
+        throw new Error(
+          "Chuyến đi đã đổi trong tab khác. Bản sửa ở tab này vẫn còn; hãy xuất JSON trước khi tải lại.",
+        );
+      }
+      const serialized = JSON.stringify(state);
+      localStorage.setItem(KEY, serialized);
+      storedSnapshot = serialized;
       storageError = "";
-    } catch {
-      storageError =
-        "Trình duyệt chưa lưu được thay đổi. Hãy xuất bản sao trước khi đóng trang.";
+    } catch (error) {
+      storageError = protectStored
+        ? error.message
+        : "Trình duyệt chưa lưu được thay đổi. Hãy xuất bản sao trước khi đóng trang.";
     }
   }
-  selectedDay = Math.min(selectedDay, active().days - 1);
+  selectedDay = Math.max(0, Math.min(selectedDay, (active()?.days || 1) - 1));
   render();
 }
 function replaceTrip(trip) {
   commit({
     ...state,
-    trips: state.trips.map((t) => (t.id === trip.id ? trip : t)),
+    trips: state.trips.map((t) => (t.id === trip?.id ? trip : t)),
   });
 }
 function changeView(next) {
@@ -193,8 +229,8 @@ function control(action, label, name, attrs = "") {
 
 function render() {
   const trip = active(),
-    destination = destinationOf(trip),
-    budget = budgetForTrip(trip);
+    destination = trip ? destinationOf(trip) : null,
+    budget = trip ? budgetForTrip(trip) : null;
   app.innerHTML = `<div class="workspace">
     ${sidebarOpen ? '<button class="sidebar-shade" data-action="close-sidebar" aria-label="Đóng điều hướng"></button>' : ""}
     <aside class="sidebar ${sidebarOpen ? "open" : ""}" aria-label="Điều hướng">
@@ -204,6 +240,7 @@ function render() {
         ["plan", "compass", "Hành trình"],
         ["places", "map", "Khám phá địa điểm"],
         ["budget", "wallet", "Ngân sách"],
+        ["prepare", "check", "Chuẩn bị"],
       ]
         .map(
           ([key, symbol, title]) =>
@@ -211,18 +248,21 @@ function render() {
         )
         .join("")}</nav>
       <p class="sidebar-label">CHUYẾN ĐI CỦA BẠN</p>
-      <div class="trip-nav">${state.trips.map((t) => `<button class="trip-switch ${t.id === trip.id ? "selected" : ""}" data-action="trip" data-id="${esc(t.id)}" aria-label="Mở chuyến đi ${esc(t.title)}" ${t.id === trip.id ? 'aria-current="true"' : ""}><img src="${esc(destinationOf(t).cover)}" alt=""/><span><strong>${esc(t.title)}</strong><small>${t.days} ngày · ${t.travelers} người</small></span>${t.id === trip.id ? '<i class="dot"></i>' : ""}</button>`).join("")}</div>
+      <div class="trip-nav">${state.trips.map((t) => `<button class="trip-switch ${t.id === trip?.id ? "selected" : ""}" data-action="trip" data-id="${esc(t.id)}" aria-label="Mở chuyến đi ${esc(t.title)}" ${t.id === trip?.id ? 'aria-current="true"' : ""}><img src="${esc(destinationOf(t).cover)}" alt=""/><span><strong>${esc(t.title)}</strong><small>${t.days} ngày · ${t.travelers} người</small></span>${t.id === trip?.id ? '<i class="dot"></i>' : ""}</button>`).join("")}</div>
       <button class="new-trip" id="new-trip" data-action="new-trip">${icon("plus")} Chuyến đi mới</button>
-      <div class="sidebar-bottom"><div class="privacy-line">${icon("lock")}<span><strong>Một góc nhỏ, của riêng bạn.</strong>Không tài khoản. Lưu trên trình duyệt.</span></div><p class="save-state ${storageError ? "warn" : ""}">${storageError ? "Chưa lưu · hãy xuất bản sao" : "Sẵn sàng lưu trên thiết bị"}</p><button class="about-link" data-action="about">${icon("info")} Về YangAtlas & nguồn ảnh</button></div>
+      <div class="sidebar-bottom"><div class="privacy-line">${icon("lock")}<span><strong>Một góc nhỏ, của riêng bạn.</strong>Không tài khoản. Lưu trên trình duyệt.</span></div><p class="offline-state" data-offline-status>${esc(offlineStatus)}</p><button class="about-link" data-action="install-app">${icon("download")} Cài trên thiết bị</button><button class="about-link" data-action="update-app" ${updateReady ? "" : "hidden"}>Cập nhật ứng dụng</button><p class="save-state ${storageError ? "warn" : ""}">${storageError ? "Chưa lưu · hãy xuất bản sao" : "Sẵn sàng lưu trên thiết bị"}</p><button class="about-link" data-action="about">${icon("info")} Về YangAtlas & nguồn ảnh</button></div>
     </aside>
-    <div class="main-shell"><header class="topbar"><div class="breadcrumbs"><button class="icon-button mobile-menu" data-action="open-sidebar" aria-label="Mở menu">${icon("menu")}</button><span>Không gian riêng</span>${icon("chevron")}<strong>Hành trình của bạn</strong></div><div class="top-actions">${control("import", "Nhập bản sao JSON", "upload")}${control("backup", "Xuất bản sao JSON", "download")}<button class="button secondary" data-action="calendar">${icon("calendar")} Xuất lịch .ics</button><span class="avatar" title="Lưu riêng trên trình duyệt">YA</span></div></header>
+    <div class="main-shell"><header class="topbar"><div class="breadcrumbs"><button class="icon-button mobile-menu" data-action="open-sidebar" aria-label="Mở menu">${icon("menu")}</button><span>Không gian riêng</span>${icon("chevron")}<strong>Hành trình của bạn</strong></div><div class="top-actions">${control("import", "Nhập bản sao JSON", "upload")}${control("backup", "Xuất bản sao JSON", "download")}${trip ? control("print", "In chuyến đi / Lưu PDF", "printer") : ""}<button class="button secondary" data-action="calendar" ${trip ? "" : "disabled"}>${icon("calendar")} Xuất lịch .ics</button><span class="avatar" title="Lưu riêng trên trình duyệt">YA</span></div></header>
     <main id="main" class="main-inner" tabindex="-1">
       ${storageError ? `<div class="storage-alert" role="status">${icon("info")} ${esc(storageError)} <button data-action="backup">Xuất bản sao JSON</button></div>` : ""}
-      <section class="cover" aria-label="Chuyến đi ${esc(trip.title)}"><img src="${esc(destination.cover)}" alt="${esc(destination.coverAlt || "Ảnh phong cảnh minh họa " + destination.name)}" fetchpriority="high"/><div class="cover-content"><p class="eyebrow"><span class="eyebrow-line"></span> VIỆT NAM · YOUR NEXT CHAPTER</p><h1>${esc(trip.title)}</h1><div class="trip-meta"><span>${icon("pin")}${esc(destinations[trip.destination]?.name || trip.destination)}</span><span>${icon("calendar")}${dateRange(trip)}</span><span>${icon("users")}${trip.travelers} người</span></div></div><button class="button cover-edit" data-action="edit-trip">${icon("edit")} Chỉnh sửa chuyến đi</button><button class="cover-credit" data-action="about">${icon("image")} Ảnh chụp minh họa · Nguồn ảnh</button></section>
+      ${
+        trip
+          ? `<section class="cover" aria-label="Chuyến đi ${esc(trip.title)}"><img src="${esc(destination.cover)}" alt="${esc(destination.coverAlt || "Ảnh phong cảnh minh họa " + destination.name)}" fetchpriority="high"/><div class="cover-content"><p class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT CHAPTER</p><h1>${esc(trip.title)}</h1><div class="trip-meta"><span>${icon("pin")}${esc(destinationName(trip))}</span><span>${icon("calendar")}${dateRange(trip)}</span><span>${icon("users")}${trip.travelers} người</span></div></div><button class="button cover-edit" data-action="edit-trip">${icon("edit")} Chỉnh sửa chuyến đi</button><button class="cover-credit" data-action="about">${icon("image")} Ảnh chụp minh họa · Nguồn ảnh</button></section>
       <div class="intro-bar"><nav class="view-tabs" aria-label="Nội dung chuyến đi">${[
         ["plan", "route", "Lịch trình"],
         ["places", "pin", "Địa điểm"],
         ["budget", "wallet", "Ngân sách"],
+        ["prepare", "check", "Chuẩn bị"],
       ]
         .map(
           ([key, symbol, title]) =>
@@ -231,9 +271,135 @@ function render() {
         .join(
           "",
         )}</nav><p class="hint-line">${icon("lock")} Chỉ bạn và những dự định nhỏ</p></div>
-      ${view === "plan" ? renderPlan(trip, budget) : view === "places" ? renderPlaces(trip) : renderBudget(trip, budget)}
-      <footer class="bottomline"><span>YangAtlas · Dành chỗ cho những điều bất ngờ.<br>Địa điểm gợi mở. Chi phí mẫu có thể chỉnh sửa.</span><button data-action="about">Riêng tư & nguồn ảnh ${icon("external")}</button></footer>
+      ${view === "plan" ? renderPlan(trip, budget) : view === "places" ? renderPlaces(trip) : view === "prepare" ? renderPrepare(trip) : renderBudget(trip, budget)}`
+          : renderWelcome()
+      }
+      <footer class="bottomline"><span>YangAtlas · Dành chỗ cho những điều bất ngờ.<br>Lịch trình, chi tiêu và hành trang của riêng bạn.</span><button data-action="about">Riêng tư & nguồn ảnh ${icon("external")}</button></footer>
     </main></div></div><input type="file" id="import-file" accept=".json,application/json" hidden>`;
+}
+
+function renderWelcome() {
+  return `<section class="welcome" aria-labelledby="welcome-title"><div class="welcome-copy"><p class="eyebrow">MỘT KHÔNG GIAN RIÊNG CHO NHỮNG CHUYẾN ĐI</p><h1 id="welcome-title">Đi đến nơi<br>mình <em>muốn đến.</em></h1><p class="welcome-description">Một chuyến đi của chính bạn. Gom những điểm muốn ghé, ghi lại từng khoản chi và chuẩn bị hành trang — thong thả, ở cùng một nơi.</p><div class="welcome-actions"><button class="button primary" data-action="new-trip">${icon("plus")} Tạo chuyến đi đầu tiên</button><button class="button secondary" data-action="samples">Xem hành trình mẫu</button></div><p class="welcome-privacy">${icon("lock")} Không cần tài khoản. Dữ liệu lưu trên thiết bị của bạn.</p><div class="welcome-features"><div><strong>01 / LÊN ĐƯỜNG</strong><p>Lịch trình từng ngày, địa chỉ và bản đồ khi cần.</p></div><div><strong>02 / NHẸ ĐẦU</strong><p>Dự tính trước, ghi chi thực tế và kiểm tra hành trang.</p></div><div><strong>03 / MANG THEO</strong><p>Dùng ngoại tuyến, sao lưu JSON, xuất lịch và bản in.</p></div></div></div><figure class="welcome-photo"><img src="./media/hoian-street.jpg" alt="Phố cổ Hội An, ảnh minh họa cảm hứng du lịch của lumoplank" fetchpriority="high"><figcaption>Mỗi chuyến đi, một câu chuyện.<button data-action="about">Ảnh thật · xem nguồn ${icon("external")}</button></figcaption></figure></section>`;
+}
+
+function renderPrepare(trip) {
+  const done = trip.checklist.filter((item) => item.done).length;
+  return `<section class="prepare-panel" aria-label="Danh sách chuẩn bị"><div class="budget-header"><div><p class="eyebrow">TRƯỚC KHI LÊN ĐƯỜNG</p><h2 class="section-title">Mang vừa đủ, đi thật nhẹ.</h2><p class="section-subtitle">${done} / ${trip.checklist.length} việc đã xong. Giấy tờ, hành lý hay điều cần nhớ — bạn tự chọn.</p></div><button class="button primary" data-action="add-checklist">${icon("plus")} Thêm việc cần chuẩn bị</button></div><div class="checklist-progress" role="progressbar" aria-label="Tiến độ chuẩn bị" aria-valuemin="0" aria-valuemax="${Math.max(1, trip.checklist.length)}" aria-valuenow="${done}"><span style="width:${trip.checklist.length ? (done / trip.checklist.length) * 100 : 0}%"></span></div><div class="checklist-list">${trip.checklist.map((item) => `<article class="checklist-item ${item.done ? "done" : ""}"><button class="check-toggle" data-action="toggle-checklist" data-id="${esc(item.id)}" aria-label="${item.done ? "Đánh dấu chưa xong" : "Đánh dấu đã xong"}: ${esc(item.title)}" aria-pressed="${item.done}">${item.done ? icon("check") : ""}</button><span>${esc(item.title)}</span>${control("edit-checklist", "Sửa việc: " + item.title, "edit", `data-id="${esc(item.id)}"`)}${control("remove-checklist", "Xóa việc: " + item.title, "trash", `data-id="${esc(item.id)}"`)}</article>`).join("") || `<div class="empty">${icon("check")}<h3>Một chút chuẩn bị, nhiều an tâm.</h3><p>Thêm điều bạn cần mang theo hoặc hoàn thành trước chuyến đi.</p><button class="button secondary" data-action="add-checklist">Thêm việc đầu tiên</button></div>`}</div><p class="places-note">Danh sách lưu riêng cho chuyến đi này và đi cùng bản sao JSON. Bạn có thể in toàn bộ lịch trình, chi tiêu và hành trang ở nút in trên thanh công cụ.</p></section>`;
+}
+
+function renderExpenses(trip) {
+  const summary = expenseSummary(trip);
+  return `<section class="actual-expenses" aria-label="Chi tiêu thực tế"><div class="budget-header"><div><p class="eyebrow">SỔ CHI TIÊU CỦA BẠN</p><h2 class="section-title">Chi rõ ràng, nhớ trọn vẹn.</h2><p class="section-subtitle">Ghi số tiền cả nhóm đã trả. Các khoản này độc lập với dự tính trong lịch trình.</p></div><div class="expense-actions"><button class="button secondary" data-action="expense-csv" ${trip.expenses.length ? "" : "disabled"}>${icon("download")} Xuất CSV</button><button class="button primary" data-action="add-expense">${icon("plus")} Ghi khoản chi</button></div></div><div class="actual-stats"><div><small>ĐÃ CHI THỰC TẾ</small><strong data-actual-total>${money(summary.total)}</strong><p>${trip.expenses.length} khoản · trung bình ${money(summary.total / trip.travelers)} / người</p></div><div class="${summary.over ? "expense-over" : ""}"><small>${summary.over ? "VƯỢT HẠN MỨC" : "CÒN TRONG HẠN MỨC"}</small><strong>${money(Math.abs(summary.remaining))}</strong><p>Hạn mức ${money(trip.budget)} <button data-action="edit-trip">Chỉnh sửa</button></p></div></div><div class="expense-ledger">${
+    trip.expenses
+      .slice()
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .map(
+        (item) =>
+          `<article class="expense-row" data-expense-id="${esc(item.id)}"><div class="expense-category">${icon(categoryIcons[item.category])}</div><div class="expense-description"><strong>${esc(item.title)}</strong><small>${esc(item.date.split("-").reverse().join("/"))} · ${labels[item.category]}${item.payer ? " · " + esc(item.payer) : ""}</small>${item.notes ? `<p>${esc(item.notes)}</p>` : ""}</div><strong class="expense-amount">${money(item.amount)}</strong><div class="expense-tools">${control("edit-expense", "Sửa khoản chi: " + item.title, "edit", `data-id="${esc(item.id)}"`)}${control("remove-expense", "Xóa khoản chi: " + item.title, "trash", `data-id="${esc(item.id)}"`)}</div></article>`,
+      )
+      .join("") ||
+    '<div class="empty compact"><h3>Chưa ghi khoản chi thực tế.</h3><p>Tiền vé, chỗ ở, bữa ăn hay một khoản phát sinh — ghi lại khi bạn đã thanh toán.</p></div>'
+  }</div><p class="places-note">Đơn vị VND. Tổng thực tế chỉ gồm các khoản bạn nhập, không tự cộng chi phí dự kiến. Trung bình mỗi người là phép chia tham khảo, không phải quyết toán công nợ.</p></section>`;
+}
+
+function expenseDialog(existing) {
+  const trip = active(),
+    today = new Date();
+  const date = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  dialog(
+    existing ? "Điều chỉnh khoản chi." : "Ghi một khoản đã chi.",
+    "Nhập số tiền thực tế cho cả nhóm; không nhân lại theo số người.",
+    `<form><div class="form-grid">${field("Tên khoản chi", "title", existing?.title || "", "text", 'required maxlength="120" autofocus placeholder="Ví dụ: Vé tàu đi Huế"', true)}${field("Số tiền đã trả (VND)", "amount", existing?.amount ?? "", "number", 'required min="0" max="1000000000" step="1"')}${field("Ngày chi", "date", existing?.date || date, "date", 'required min="1900-01-01" max="2199-12-31"')}<label class="field">Nhóm chi<select name="category" aria-label="Nhóm chi">${Object.entries(
+      labels,
+    )
+      .map(
+        ([key, label]) =>
+          `<option value="${key}" ${key === (existing?.category || "other") ? "selected" : ""}>${label}</option>`,
+      )
+      .join(
+        "",
+      )}</select></label>${field("Người trả (tùy chọn)", "payer", existing?.payer || "", "text", 'maxlength="80"')}<label class="field full">Ghi chú khoản chi<textarea name="notes" maxlength="2000">${esc(existing?.notes || "")}</textarea></label></div><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button secondary" data-cancel>Để sau</button><button type="submit" class="button primary">${existing ? "Lưu khoản chi" : "Thêm khoản chi"}</button></div></form>`,
+    (data, node) => {
+      const item = createExpense({
+        id: existing?.id,
+        title: data.get("title"),
+        amount: Number(data.get("amount")),
+        date: data.get("date"),
+        category: data.get("category"),
+        payer: data.get("payer"),
+        notes: data.get("notes"),
+      });
+      replaceTrip({
+        ...trip,
+        expenses: existing
+          ? trip.expenses.map((e) => (e.id === existing.id ? item : e))
+          : [...trip.expenses, item],
+      });
+      node.close();
+      notify(existing ? "Đã lưu khoản chi." : "Đã ghi chi tiêu thực tế.");
+    },
+  );
+}
+function checklistDialog(existing) {
+  const trip = active();
+  dialog(
+    existing ? "Sửa việc cần chuẩn bị." : "Nhớ mang theo điều cần thiết.",
+    "Một việc nhỏ cho chuyến đi nhẹ đầu hơn.",
+    `<form><div class="form-grid">${field("Việc cần chuẩn bị", "title", existing?.title || "", "text", 'required maxlength="200" autofocus placeholder="Ví dụ: Căn cước, vé tàu, sạc dự phòng…"', true)}</div><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button secondary" data-cancel>Để sau</button><button type="submit" class="button primary">${existing ? "Lưu việc" : "Thêm việc"}</button></div></form>`,
+    (data, node) => {
+      const item = createChecklistItem({
+        id: existing?.id,
+        title: data.get("title"),
+        done: existing?.done ?? false,
+      });
+      replaceTrip({
+        ...trip,
+        checklist: existing
+          ? trip.checklist.map((c) => (c.id === existing.id ? item : c))
+          : [...trip.checklist, item],
+      });
+      node.close();
+      notify("Đã lưu việc cần chuẩn bị.");
+    },
+  );
+}
+function removeItem(trip, collection, id) {
+  const removed = trip[collection].find((item) => item.id === id);
+  if (!removed) return;
+  replaceTrip({
+    ...trip,
+    [collection]: trip[collection].filter((item) => item.id !== id),
+  });
+  notify("Đã xóa mục này.", () => {
+    const current = state.trips.find((t) => t.id === trip.id);
+    if (!current) throw new Error("Chuyến đi không còn tồn tại.");
+    if (!current[collection].some((item) => item.id === id))
+      replaceTrip({
+        ...current,
+        [collection]: [...current[collection], removed],
+      });
+  });
+}
+function printTrip(trip) {
+  const sheet = document.createElement("section");
+  sheet.id = "print-sheet";
+  sheet.innerHTML = `<p>YANGATLAS · BẢN LỊCH TRÌNH CÁ NHÂN</p><h1>${esc(trip.title)}</h1><p>${esc(destinationName(trip))} · ${dateRange(trip)} · ${trip.travelers} người</p>${Array.from(
+    { length: trip.days },
+    (_, day) =>
+      `<h2>Ngày ${day + 1} · ${shortDate(trip, day)}</h2>${
+        sortActivities(trip, day)
+          .map(
+            (a) =>
+              `<article><strong>${esc(a.start)} · ${esc(a.title)}</strong><p>${a.duration} phút · Dự tính ${money(a.cost * (a.costMode === "person" ? trip.travelers : 1))}${a.address ? " · " + esc(a.address) : ""}</p><p>${esc(a.notes)}</p></article>`,
+          )
+          .join("") || "<p>Chưa lên lịch.</p>"
+      }`,
+  ).join(
+    "",
+  )}<h2>Chi tiêu thực tế · ${money(expenseSummary(trip).total)}</h2>${trip.expenses.map((e) => `<p>${esc(e.date)} · ${esc(e.title)} · ${money(e.amount)}${e.payer ? " · " + esc(e.payer) : ""}</p>`).join("") || "<p>Chưa ghi khoản chi.</p>"}<h2>Chuẩn bị</h2>${trip.checklist.map((c) => `<p>${c.done ? "☑" : "☐"} ${esc(c.title)}</p>`).join("") || "<p>Chưa có việc.</p>"}<footer>Xuất từ YangAtlas · Giờ địa phương · Chi phí dự kiến và chi tiêu thực tế được ghi riêng.</footer>`;
+  document.querySelector("#print-sheet")?.remove();
+  document.body.append(sheet);
+  window.print();
 }
 
 function renderPlan(trip, budget) {
@@ -250,38 +416,15 @@ function renderActivity(trip, a, index, count, conflict) {
     cost = a.cost * (a.costMode === "person" ? trip.travelers : 1);
   return `<article class="timeline-row" data-activity-id="${esc(a.id)}"><div class="time-col">${esc(a.start)}</div><div class="activity-card ${a.done ? "complete" : ""} ${conflict ? "conflict" : ""}">
     ${place?.image ? `<figure class="activity-visual"><img class="activity-photo" src="${esc(place.image)}" alt="${esc(place.imageCaption || "Ảnh minh họa " + destinations[place.destination]?.name)}" loading="lazy"><figcaption>${/không phải|minh họa/.test(place.imageCaption || "") ? "Ảnh điểm đến" : "Ảnh chụp"}</figcaption></figure>` : `<div class="photo-placeholder">${icon(categoryIcons[a.category])}</div>`}
-    <div class="activity-info"><div class="category ${a.category}">${icon(categoryIcons[a.category])}${labels[a.category]}</div><h3>${esc(a.title)}</h3><p class="activity-note">${esc(a.notes || place?.description || "Một trải nghiệm do bạn tự lên kế hoạch.")}</p><div class="activity-details"><span>${icon("clock")}${a.duration} phút</span><span class="price">${icon("wallet")}${cost ? money(cost) : "Chưa dự tính chi phí"}${cost ? ` / ${trip.travelers} người` : ""}</span></div>${conflict ? '<p class="activity-conflict">Trùng giờ với một hoạt động khác.</p>' : ""}<div class="activity-tools">${control("move", "Chuyển sớm hơn: " + a.title, "up", `data-id="${esc(a.id)}" data-direction="-1" ${index === 0 ? "disabled" : ""}`)}${control("move", "Chuyển muộn hơn: " + a.title, "down", `data-id="${esc(a.id)}" data-direction="1" ${index === count - 1 ? "disabled" : ""}`)}${control("edit-activity", "Sửa: " + a.title, "edit", `data-id="${esc(a.id)}"`)}${control("remove-activity", "Xóa: " + a.title, "trash", `data-id="${esc(a.id)}"`)}</div></div>
+    <div class="activity-info"><div class="category ${a.category}">${icon(categoryIcons[a.category])}${labels[a.category]}</div><h3>${esc(a.title)}</h3><p class="activity-note">${esc(a.notes || place?.description || "Một trải nghiệm do bạn tự lên kế hoạch.")}</p><div class="activity-details"><span>${icon("clock")}${a.duration} phút</span><span class="price">${icon("wallet")}${cost ? money(cost) : "Chưa dự tính chi phí"}${cost ? ` / ${trip.travelers} người` : ""}</span></div><a class="activity-map-link" href="${esc(mapLink(mapQuery(trip, a)))}" target="_blank" rel="noopener noreferrer">${icon("pin")}${esc(a.address || "Tìm địa điểm trên Google Maps")}${icon("external")}</a>${conflict ? '<p class="activity-conflict">Trùng giờ với một hoạt động khác.</p>' : ""}<div class="activity-tools">${control("move", "Chuyển sớm hơn: " + a.title, "up", `data-id="${esc(a.id)}" data-direction="-1" ${index === 0 ? "disabled" : ""}`)}${control("move", "Chuyển muộn hơn: " + a.title, "down", `data-id="${esc(a.id)}" data-direction="1" ${index === count - 1 ? "disabled" : ""}`)}${control("edit-activity", "Sửa: " + a.title, "edit", `data-id="${esc(a.id)}"`)}${control("remove-activity", "Xóa: " + a.title, "trash", `data-id="${esc(a.id)}"`)}</div></div>
     <button class="done-button ${a.done ? "done" : ""}" data-action="done" data-id="${esc(a.id)}" aria-label="${a.done ? "Đánh dấu chưa ghé" : "Đánh dấu đã ghé"}: ${esc(a.title)}" aria-pressed="${a.done}">${a.done ? icon("check") : ""}</button>
   </div></article>`;
 }
 function renderMap(trip, activities) {
-  const selected = activities
-    .map((a) => placeById(a.placeId))
-    .filter((p) => p && Number.isFinite(p.lat) && Number.isFinite(p.lng));
-  const pool = places.filter(
-    (p) =>
-      p.destination === trip.destination &&
-      Number.isFinite(p.lat) &&
-      Number.isFinite(p.lng),
-  );
-  const basis = [...pool, ...selected];
-  const latitudes = basis.map((p) => p.lat),
-    longitudes = basis.map((p) => p.lng);
-  const minLat = Math.min(...latitudes),
-    maxLat = Math.max(...latitudes),
-    minLng = Math.min(...longitudes),
-    maxLng = Math.max(...longitudes);
-  const points = selected.map((p) => ({
-    x: 35 + ((p.lng - minLng) / Math.max(maxLng - minLng, 0.01)) * 180,
-    y: 155 - ((p.lat - minLat) / Math.max(maxLat - minLat, 0.01)) * 110,
-  }));
-  const href = selected[0]
-    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selected[0].mapQuery || selected[0].name)}`
-    : "";
-  return `<section class="side-card" aria-label="Sơ đồ địa điểm"><div class="card-top"><h3>Những điểm mình sẽ ghé</h3><span>${selected.length} địa điểm</span></div><div class="route-map"><svg viewBox="0 0 250 200" role="img" aria-label="Sơ đồ tọa độ gần đúng của các địa điểm, không dùng để dẫn đường"><defs><pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0v25" class="map-grid" fill="none"/></pattern></defs><rect width="250" height="200" fill="url(#grid)"/><path class="map-contour" d="M-20 30Q40-15 80 20T180 55 275 15M-20 43Q40-2 80 33T180 68 275 28M-20 56Q40 11 80 46T180 81 275 41M-20 150Q70 100 130 140T270 125M-20 163Q70 113 130 153T270 138M-20 176Q70 126 130 166T270 151"/>${points.length > 1 ? `<polyline class="route-line" points="${points.map((p) => p.x + "," + p.y).join(" ")}"/>` : ""}${points.map((p, i) => `<circle class="map-point" cx="${p.x}" cy="${p.y}" r="11"/><text class="map-point-text" x="${p.x}" y="${p.y}">${i + 1}</text>`).join("")}${!points.length ? '<text class="map-point-caption" x="125" y="100">Thêm địa điểm để thấy sơ đồ</text>' : ""}</svg></div><p class="map-caption">Tọa độ gần đúng · Đường nối là thứ tự ghé, không phải tuyến đường dẫn đường.</p>${href ? `<a class="map-link" href="${esc(href)}" target="_blank" rel="noopener noreferrer">Mở điểm đầu trên Google Maps ${icon("external")}</a>` : '<button class="map-link" data-action="view" data-view="places">Khám phá thư viện địa điểm</button>'}</section>`;
+  return `<section class="side-card route-list" aria-label="Địa điểm trong ngày"><div class="card-top"><h3>Những điểm mình sẽ ghé</h3><span>${activities.length} điểm dừng</span></div><ol>${activities.map((a, i) => `<li><span>${i + 1}</span><a href="${esc(mapLink(mapQuery(trip, a)))}" target="_blank" rel="noopener noreferrer"><strong>${esc(a.title)}</strong><small>${esc(a.address || destinationName(trip))}</small></a>${icon("external")}</li>`).join("")}</ol>${!activities.length ? '<p class="map-caption">Thêm tên và địa chỉ điểm dừng để mở bản đồ khi cần.</p>' : '<p class="map-caption">Mở từng điểm trên Google Maps để tra cứu hoặc dẫn đường. Chỉ gửi truy vấn khi bạn bấm liên kết; cần kết nối mạng.</p>'}</section>`;
 }
 function budgetCard(trip, budget) {
-  return `<section class="side-card" aria-label="Ngân sách dự kiến"><div class="card-top"><h3>Ngân sách chuyến đi</h3><button class="icon-button" data-action="edit-trip" aria-label="Chỉnh ngân sách">${icon("edit")}</button></div><div class="budget-content"><p class="budget-total">${number(budget.total)}<small>₫</small></p><p class="budget-caption">Chi phí dự kiến · ${money(budget.perPerson)} / người</p><div class="budget-track"><div class="budget-fill ${budget.remaining < 0 ? "over" : ""}" style="width:${Math.min(100, Math.max(0, budget.percent))}%"></div></div><div class="budget-comparison"><span>${trip.budget ? Math.round(budget.percent) + "% dự tính" : "Chưa đặt hạn mức"}</span><span>Hạn mức ${money(trip.budget)}</span></div><div class="budget-foot">${icon("info")}<span>${budget.remaining < 0 ? "Dự tính vượt hạn mức " + money(-budget.remaining) + "." : "Chi phí mẫu chỉ để lên kế hoạch; không phải giá bán hoặc báo giá hiện tại."}</span></div></div></section>`;
+  return `<section class="side-card" aria-label="Ngân sách dự kiến"><div class="card-top"><h3>Ngân sách chuyến đi</h3><button class="icon-button" data-action="edit-trip" aria-label="Chỉnh ngân sách">${icon("edit")}</button></div><div class="budget-content"><p class="budget-total">${number(budget.total)}<small>₫</small></p><p class="budget-caption">Chi phí dự kiến · ${money(budget.perPerson)} / người</p><div class="budget-track"><div class="budget-fill ${budget.remaining < 0 ? "over" : ""}" style="width:${Math.min(100, Math.max(0, budget.percent))}%"></div></div><div class="budget-comparison"><span>${trip.budget ? Math.round(budget.percent) + "% dự tính" : "Chưa đặt hạn mức"}</span><span>Hạn mức ${money(trip.budget)}</span></div><div class="budget-foot">${icon("info")}<span>${budget.remaining < 0 ? "Dự tính vượt hạn mức " + money(-budget.remaining) + "." : "Đây là khoản dự tính. Ghi chi tiêu thực tế riêng ở phần Ngân sách."}</span></div></div></section>`;
 }
 function filteredPlaces(trip) {
   const query = search
@@ -291,7 +434,7 @@ function filteredPlaces(trip) {
     .toLowerCase();
   return places.filter(
     (p) =>
-      p.destination === trip.destination &&
+      p.destination === catalogDestination(trip) &&
       (category === "all" || p.category === category) &&
       (!query ||
         (p.name + " " + p.description + " " + (p.tags || []).join(" "))
@@ -313,7 +456,7 @@ function placeCards(trip) {
     : `<div class="empty"><h3>Chưa thấy địa điểm phù hợp.</h3><p>Thử một từ khóa khác hoặc tự thêm hoạt động vào lịch trình.</p><button class="button secondary" data-action="add-activity">Tự thêm hoạt động</button></div>`;
 }
 function renderPlaces(trip) {
-  return `<section aria-label="Thư viện địa điểm"><div class="places-header"><div><h2 class="section-title">Những nơi đáng để dành thời gian.</h2><p class="section-subtitle">Một vài gợi mở ở ${esc(destinations[trip.destination]?.name || trip.destination)}. Câu chuyện còn lại do bạn viết.</p></div><label class="search-field">${icon("search")}<input id="place-search" type="search" placeholder="Tìm một địa điểm…" aria-label="Tìm địa điểm" value="${esc(search)}"></label></div><div class="filter-row" aria-label="Loại địa điểm">${[
+  return `<section aria-label="Thư viện địa điểm"><div class="places-header"><div><h2 class="section-title">Những nơi đáng để dành thời gian.</h2><p class="section-subtitle">Tự thêm điểm dừng ở ${esc(destinationName(trip))}; tham khảo bộ sưu tập khi đi Đà Lạt hoặc Hội An.</p></div><label class="search-field">${icon("search")}<input id="place-search" type="search" placeholder="Tìm một địa điểm…" aria-label="Tìm địa điểm" value="${esc(search)}"></label></div><div class="filter-row" aria-label="Loại địa điểm">${[
     ["all", "Tất cả"],
     ["visit", "Tham quan"],
     ["food", "Ăn & uống"],
@@ -325,11 +468,11 @@ function renderPlaces(trip) {
     )
     .join(
       "",
-    )}</div><div class="place-grid" id="place-grid">${placeCards(trip)}</div><p class="places-note">Ảnh chụp minh họa điểm đến có thể được dùng lại giữa các thẻ, không đại diện từng cơ sở. Thời lượng và chi phí là dữ liệu mẫu có thể sửa; hãy kiểm tra lịch mở cửa và giá trước khi đi.</p></section>`;
+    )}</div><div class="place-actions"><button class="button primary" data-action="add-activity">${icon("plus")} Thêm địa điểm của tôi</button><a class="button secondary" href="${esc(mapLink(destinationName(trip)))}" target="_blank" rel="noopener noreferrer">Tìm trên Google Maps ${icon("external")}</a></div><div class="place-grid" id="place-grid">${placeCards(trip)}</div><p class="places-note">Ảnh chụp minh họa điểm đến có thể được dùng lại giữa các thẻ, không đại diện từng cơ sở. Thời lượng và chi phí là dữ liệu mẫu có thể sửa; hãy kiểm tra lịch mở cửa và giá trước khi đi.</p></section>`;
 }
 function renderBudget(trip, budget) {
   const list = trip.activities;
-  return `<section aria-label="Bảng chi phí"><div class="budget-header"><div><h2 class="section-title">Đi nhẹ đầu, chi rõ ràng.</h2><p class="section-subtitle">Ước tính cho ${trip.travelers} người · ${trip.days} ngày. Chỉnh từng khoản theo kế hoạch của bạn.</p></div><button class="button secondary" data-action="edit-trip">${icon("edit")} Đặt hạn mức</button></div><div class="budget-overview">${budgetCard(trip, budget)}<section class="side-card budget-breakdown"><h3>Dự tính theo trải nghiệm</h3>${Object.entries(
+  return `<section aria-label="Bảng chi phí">${renderExpenses(trip)}<div class="estimate-divider"><span>KẾ HOẠCH DỰ KIẾN</span></div><div class="budget-header"><div><h2 class="section-title">Đi nhẹ đầu, chi rõ ràng.</h2><p class="section-subtitle">Ước tính cho ${trip.travelers} người · ${trip.days} ngày. Chỉnh từng khoản theo kế hoạch của bạn.</p></div><button class="button secondary" data-action="edit-trip">${icon("edit")} Đặt hạn mức</button></div><div class="budget-overview">${budgetCard(trip, budget)}<section class="side-card budget-breakdown"><h3>Dự tính theo trải nghiệm</h3>${Object.entries(
     labels,
   )
     .map(
@@ -443,20 +586,20 @@ function tripDialog(edit = false) {
     edit
       ? "Điều chỉnh theo nhịp của bạn. Dữ liệu chỉ lưu trên trình duyệt."
       : "Không cần có đủ kế hoạch. Chỉ cần một nơi muốn đến.",
-    `<form><div class="form-grid">${field("Tên chuyến đi", "title", trip?.title || "", "text", 'required maxlength="120" placeholder="Ví dụ: Đà Lạt, chậm một nhịp" autofocus', true)}<label class="field">Điểm đến<select name="destination" aria-label="Điểm đến">${Object.entries(
+    `<form><div class="form-grid">${field("Tên chuyến đi", "title", trip?.title || "", "text", 'required maxlength="120" placeholder="Ví dụ: Một tuần ở Huế" autofocus', true)}${field("Điểm đến", "destination", trip ? destinationName(trip) : "", "text", 'required maxlength="120" placeholder="Thành phố, vùng hoặc quốc gia"')}<label class="field">Ảnh bìa minh họa<select name="cover" aria-label="Ảnh bìa minh họa">${Object.entries(
       destinations,
     )
       .map(
         ([key, d]) =>
-          `<option value="${key}" ${trip?.destination === key ? "selected" : ""}>${esc(d.name)}</option>`,
+          `<option value="${key}" ${trip?.cover === key ? "selected" : ""}>Ảnh phong cảnh ${esc(d.name)}</option>`,
       )
       .join(
         "",
-      )}</select></label>${field("Ngày khởi hành", "startDate", trip?.startDate || defaultDate, "date", 'required min="1900-01-01" max="2199-12-31"')}${field("Số ngày", "days", trip?.days || 3, "number", 'required min="1" max="14" step="1"')}${field("Số người", "travelers", trip?.travelers || 2, "number", 'required min="1" max="20" step="1"')}${field("Hạn mức cả chuyến đi (VND)", "budget", trip?.budget ?? 3000000, "number", 'required min="0" max="1000000000" step="1"', true)}<p class="field-note-small field full">Hạn mức dùng để so với dự tính, không phải một khoản thanh toán. Tối đa 14 ngày và 20 người.</p></div><p class="form-error" role="alert"></p><div class="dialog-actions">${edit && state.trips.length > 1 ? '<button type="button" class="delete-trip" data-delete-trip>Xóa chuyến đi</button>' : ""}<button type="button" class="button secondary" data-cancel>Để sau</button><button class="button primary" type="submit">${edit ? "Lưu chuyến đi" : "Tạo chuyến đi"}</button></div></form>`,
+      )}</select></label>${field("Ngày khởi hành", "startDate", trip?.startDate || defaultDate, "date", 'required min="1900-01-01" max="2199-12-31"')}${field("Số ngày", "days", trip?.days || 3, "number", 'required min="1" max="90" step="1"')}${field("Số người", "travelers", trip?.travelers || 1, "number", 'required min="1" max="100" step="1"')}${field("Hạn mức cả chuyến đi (VND)", "budget", trip?.budget ?? 3000000, "number", 'required min="0" max="1000000000" step="1"')}<p class="field-note-small field full">Điểm đến do bạn chọn. Ảnh bìa là phong cảnh minh họa có ghi nguồn, không khẳng định ảnh chụp nơi bạn đến. Hỗ trợ tối đa 90 ngày, 100 người.</p></div><p class="form-error" role="alert"></p><div class="dialog-actions">${edit ? '<button type="button" class="delete-trip" data-delete-trip>Xóa chuyến đi</button>' : ""}<button type="button" class="button secondary" data-cancel>Để sau</button><button class="button primary" type="submit">${edit ? "Lưu chuyến đi" : "Tạo chuyến đi"}</button></div></form>`,
     (data, node) => {
-      if (!edit && state.trips.length >= 10)
+      if (!edit && state.trips.length >= 50)
         throw new Error(
-          "Bạn đã có 10 chuyến đi. Hãy xuất bản sao hoặc xóa một chuyến trước.",
+          "Bạn đã có 50 chuyến đi. Hãy xuất bản sao hoặc xóa một chuyến trước.",
         );
       const input = {
         title: data.get("title"),
@@ -465,7 +608,7 @@ function tripDialog(edit = false) {
         days: Number(data.get("days")),
         travelers: Number(data.get("travelers")),
         budget: Number(data.get("budget")),
-        cover: data.get("destination"),
+        cover: data.get("cover"),
       };
       const created = createTrip(input);
       if (edit) {
@@ -473,7 +616,14 @@ function tripDialog(edit = false) {
           throw new Error(
             "Hãy chuyển hoặc xóa hoạt động ở những ngày bị rút ngắn trước.",
           );
-        replaceTrip({ ...created, id: trip.id, activities: trip.activities });
+        replaceTrip({
+          ...trip,
+          ...created,
+          id: trip.id,
+          activities: trip.activities,
+          expenses: trip.expenses,
+          checklist: trip.checklist,
+        });
       } else {
         selectedDay = 0;
         view = "plan";
@@ -501,13 +651,17 @@ function confirmDeleteTrip(trip) {
   dialog(
     "Xóa chuyến đi này?",
     "Bạn có thể xuất bản sao JSON trước khi xóa.",
-    `<p class="dialog-copy">${esc(trip.title)} và ${trip.activities.length} hoạt động sẽ được xóa khỏi trình duyệt này.</p><form><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button secondary" data-cancel>Giữ lại</button><button type="submit" class="button danger">Xóa chuyến đi</button></div></form>`,
+    `<p class="dialog-copy">${esc(trip.title)} và ${trip.activities.length} hoạt động, ${trip.expenses.length} khoản chi và ${trip.checklist.length} việc chuẩn bị sẽ được xóa khỏi trình duyệt này.</p><form><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button secondary" data-cancel>Giữ lại</button><button type="submit" class="button danger">Xóa chuyến đi</button></div></form>`,
     (_, node) => {
       const remaining = state.trips.filter((t) => t.id !== trip.id);
-      commit({ ...state, activeTripId: remaining[0].id, trips: remaining });
+      commit({
+        ...state,
+        activeTripId: remaining[0]?.id || "",
+        trips: remaining,
+      });
       node.close();
       notify("Đã xóa chuyến đi.", () => {
-        if (!state.trips.some((t) => t.id === trip.id))
+        if (!state.trips.some((t) => t.id === trip?.id))
           commit({
             ...state,
             activeTripId: trip.id,
@@ -547,14 +701,15 @@ function activityDialog(activity, place) {
       )
       .join(
         "",
-      )}</select></label>${field("Bắt đầu", "start", start, "time", "required")}${field("Thời lượng (phút)", "duration", activity?.duration || place?.duration || 60, "number", 'required min="5" max="720" step="1"')}${field("Chi phí dự kiến (VND)", "cost", activity?.cost ?? place?.cost ?? 0, "number", 'required min="0" max="100000000" step="1"')}<label class="field">Cách tính<select name="costMode" aria-label="Cách tính"><option value="person" ${(activity?.costMode || place?.costMode || "person") === "person" ? "selected" : ""}>Cho mỗi người</option><option value="group" ${(activity?.costMode || place?.costMode) === "group" ? "selected" : ""}>Cho cả nhóm</option></select></label><label class="field full">Ghi chú<textarea name="notes" maxlength="2000" placeholder="Những điều muốn nhớ cho điểm dừng này…">${esc(activity?.notes || "")}</textarea></label></div><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button secondary" data-cancel>Để sau</button><button type="submit" class="button primary">${activity ? "Lưu hoạt động" : "Thêm vào lịch trình"}</button></div></form>`,
+      )}</select></label><label class="field full">Địa chỉ / vị trí<textarea name="address" maxlength="400" placeholder="Ví dụ: 23 Lê Lợi, Huế">${esc(activity?.address ?? place?.mapQuery ?? "")}</textarea></label>${field("Bắt đầu", "start", start, "time", "required")}${field("Thời lượng (phút)", "duration", activity?.duration || place?.duration || 60, "number", 'required min="5" max="720" step="1"')}${field("Chi phí dự kiến (VND)", "cost", activity?.cost ?? place?.cost ?? 0, "number", 'required min="0" max="100000000" step="1"')}<label class="field">Cách tính<select name="costMode" aria-label="Cách tính"><option value="person" ${(activity?.costMode || place?.costMode || "person") === "person" ? "selected" : ""}>Cho mỗi người</option><option value="group" ${(activity?.costMode || place?.costMode) === "group" ? "selected" : ""}>Cho cả nhóm</option></select></label><label class="field full">Ghi chú<textarea name="notes" maxlength="2000" placeholder="Những điều muốn nhớ cho điểm dừng này…">${esc(activity?.notes || "")}</textarea></label></div><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button secondary" data-cancel>Để sau</button><button type="submit" class="button primary">${activity ? "Lưu hoạt động" : "Thêm vào lịch trình"}</button></div></form>`,
     (data, node) => {
-      if (!activity && trip.activities.length >= 100)
-        throw new Error("Tối đa 100 hoạt động mỗi chuyến đi.");
+      if (!activity && trip.activities.length >= 500)
+        throw new Error("Tối đa 500 hoạt động mỗi chuyến đi.");
       const created = createActivity({
         id: activity?.id,
         placeId: activity?.placeId || place?.id || "",
         title: data.get("title"),
+        address: data.get("address"),
         day: Number(data.get("day")),
         category: data.get("category"),
         start: data.get("start"),
@@ -597,7 +752,7 @@ function about() {
   dialog(
     "Một nơi cho những dự định.",
     "YangAtlas · Lên lịch chuyến đi, dành chỗ cho điều bất ngờ.",
-    `<div class="dialog-copy"><p><strong>Dữ liệu ở trên trình duyệt của bạn.</strong> Không đăng nhập, không đồng bộ máy chủ và không gửi lịch trình tới dịch vụ AI. Hãy xuất bản sao JSON để chuyển thiết bị hoặc đề phòng trình duyệt xóa dữ liệu.</p><p>Các chuyến đi ban đầu là mẫu minh họa. Chi phí và thời lượng không phải báo giá. YangAtlas không đặt vé, không xử lý thanh toán, không hiển thị thời tiết hay đánh giá trực tiếp.</p><p>Sơ đồ chỉ nối các tọa độ gần đúng theo thứ tự trong ngày. Khi đi thực tế, hãy dùng công cụ dẫn đường và kiểm tra thông tin địa điểm.</p><p>Lịch .ics dùng giờ địa phương (floating time); ứng dụng lịch nhận file sẽ sử dụng múi giờ thiết bị. Thời lượng qua nửa đêm được chuyển sang ngày kế tiếp.</p><p><a href="https://github.com/nguyenhonggiang2407/YangAtlas" target="_blank" rel="noopener noreferrer">Mã nguồn trên GitHub</a></p><div class="credit-list"><strong>Ảnh chụp thật, có nguồn.</strong>${photoCredits.map((p) => `<div class="credit-entry"><strong>${esc(p.title)}</strong>${esc(p.author)} · ${esc(p.license)}<br><a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener noreferrer">Trang ảnh gốc</a><a href="${esc(p.licenseUrl)}" target="_blank" rel="noopener noreferrer">Giấy phép</a></div>`).join("")}</div></div>`,
+    `<div class="dialog-copy"><p><strong>Dữ liệu ở trên trình duyệt của bạn.</strong> Không đăng nhập, không đồng bộ máy chủ và không gửi lịch trình tới dịch vụ AI. Hãy xuất bản sao JSON để chuyển thiết bị hoặc đề phòng trình duyệt xóa dữ liệu.</p><p>Ứng dụng bắt đầu trống. Chỉ nạp hành trình mẫu khi bạn chọn xem mẫu. Chi phí và thời lượng không phải báo giá. YangAtlas không đặt vé, không xử lý thanh toán, không hiển thị thời tiết hay đánh giá trực tiếp.</p><p>Bạn có thể nhập bất kỳ điểm đến và địa chỉ nào. Liên kết Google Maps mở dịch vụ bên ngoài, gửi tên hoặc địa chỉ khi được bấm. Kiểm tra đúng vị trí trước khi đi. Sau khi báo sẵn sàng ngoại tuyến, lịch trình và chi tiêu có thể dùng khi mất mạng; bản đồ bên ngoài cần mạng.</p><p>Lịch .ics dùng giờ địa phương (floating time); ứng dụng lịch nhận file sẽ sử dụng múi giờ thiết bị. Thời lượng qua nửa đêm được chuyển sang ngày kế tiếp.</p><p><a href="https://github.com/nguyenhonggiang2407/YangAtlas" target="_blank" rel="noopener noreferrer">Mã nguồn trên GitHub</a></p><div class="credit-list"><strong>Ảnh chụp thật, có nguồn.</strong>${photoCredits.map((p) => `<div class="credit-entry"><strong>${esc(p.title)}</strong>${esc(p.author)} · ${esc(p.license)}<br><a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener noreferrer">Trang ảnh gốc</a><a href="${esc(p.licenseUrl)}" target="_blank" rel="noopener noreferrer">Giấy phép</a></div>`).join("")}</div></div>`,
   );
 }
 
@@ -607,6 +762,81 @@ app.addEventListener("click", (event) => {
   const action = button.dataset.action,
     trip = active();
   try {
+    if (action === "samples") {
+      if (state.trips.length) return;
+      commit(sample());
+      notify("Đã nạp hai hành trình mẫu. Bạn có thể sửa hoặc xóa từng chuyến.");
+      return;
+    }
+    if (action === "print" && trip) {
+      printTrip(trip);
+      return;
+    }
+    if (action === "install-app") {
+      if (installPrompt) {
+        installPrompt.prompt().finally(() => {
+          installPrompt = undefined;
+        });
+      } else {
+        dialog(
+          "Mang YangAtlas theo bên mình.",
+          "Mở như một ứng dụng, không cần tài khoản.",
+          '<div class="dialog-copy"><p>Trên Chrome hoặc Edge: mở menu trình duyệt và chọn <strong>Cài đặt ứng dụng</strong> nếu được hỗ trợ. Trên iPhone/iPad: mở Safari, bấm <strong>Chia sẻ → Thêm vào Màn hình chính</strong>.</p><p>Đợi trạng thái <strong>Sẵn sàng ngoại tuyến</strong> trước khi mất mạng. Lịch trình, chi tiêu và hành trang được lưu trên thiết bị; Google Maps và các nguồn bên ngoài cần mạng. Cài đặt không đồng bộ dữ liệu sang thiết bị khác.</p><p>Xuất bản sao JSON trước khi xóa dữ liệu trình duyệt hoặc chuyển thiết bị.</p></div>',
+        );
+      }
+      return;
+    }
+    if (action === "update-app") {
+      if (storageError || protectStored) {
+        notify(
+          "Hãy xuất bản sao JSON trước, rồi tải lại trang để cập nhật ứng dụng.",
+        );
+        return;
+      }
+      if (awaitOfflineUpdate()) return;
+    }
+    if (action === "add-expense" || action === "edit-expense") {
+      expenseDialog(
+        action === "edit-expense"
+          ? trip.expenses.find((e) => e.id === button.dataset.id)
+          : undefined,
+      );
+      return;
+    }
+    if (action === "expense-csv") {
+      download(
+        "yangatlas-chi-tieu.csv",
+        exportExpensesCSV(trip),
+        "text/csv;charset=utf-8",
+      );
+      notify("Đã xuất chi tiêu thực tế ra CSV.");
+      return;
+    }
+    if (action === "remove-expense" || action === "remove-checklist") {
+      removeItem(
+        trip,
+        action === "remove-expense" ? "expenses" : "checklist",
+        button.dataset.id,
+      );
+      return;
+    }
+    if (action === "add-checklist" || action === "edit-checklist") {
+      checklistDialog(
+        action === "edit-checklist"
+          ? trip.checklist.find((c) => c.id === button.dataset.id)
+          : undefined,
+      );
+      return;
+    }
+    if (action === "toggle-checklist") {
+      replaceTrip({
+        ...trip,
+        checklist: trip.checklist.map((c) =>
+          c.id === button.dataset.id ? { ...c, done: !c.done } : c,
+        ),
+      });
+      return;
+    }
     if (action === "view") {
       changeView(button.dataset.view);
       return;
@@ -672,7 +902,7 @@ app.addEventListener("click", (event) => {
         activities: trip.activities.filter((a) => a.id !== button.dataset.id),
       });
       notify("Đã bỏ hoạt động khỏi lịch trình.", () => {
-        const current = state.trips.find((t) => t.id === trip.id);
+        const current = state.trips.find((t) => t.id === trip?.id);
         if (!current) throw new Error("Chuyến đi không còn tồn tại.");
         if (!current.activities.some((a) => a.id === removed.id))
           replaceTrip({
@@ -697,7 +927,7 @@ app.addEventListener("click", (event) => {
       return;
     }
     if (action === "calendar") {
-      if (!trip.activities.length) {
+      if (!trip?.activities.length) {
         notify("Thêm một hoạt động trước khi xuất lịch.");
         return;
       }
@@ -732,7 +962,7 @@ app.addEventListener("change", async (event) => {
   const file = event.target.files?.[0];
   if (!file) return;
   try {
-    if (file.size > 1024 * 1024) throw new Error("Bản sao tối đa 1 MB.");
+    if (file.size > 4 * 1024 * 1024) throw new Error("Bản sao tối đa 4 MB.");
     const imported = validWorkspace(await file.text());
     dialog(
       "Khôi phục bản sao?",
@@ -779,3 +1009,63 @@ document.addEventListener("keydown", (event) => {
   }
 });
 render();
+function refreshOfflineStatus() {
+  document
+    .querySelectorAll("[data-offline-status]")
+    .forEach((node) => (node.textContent = offlineStatus));
+  document
+    .querySelectorAll('[data-action="update-app"]')
+    .forEach((node) => (node.hidden = !updateReady));
+}
+function awaitOfflineUpdate() {
+  if (!offlineController) return false;
+  notify("Đang áp dụng bản cập nhật…");
+  offlineController
+    .applyUpdate()
+    .then((applied) => {
+      if (applied) location.reload();
+      else notify("Bạn đang dùng bản hiện tại.");
+    })
+    .catch(() =>
+      notify("Chưa thể cập nhật. Dữ liệu vẫn còn; hãy thử lại khi có mạng."),
+    );
+  return true;
+}
+setupOffline({
+  onStatus(status) {
+    offlineStatus = status.message;
+    updateReady = status.updateReady;
+    refreshOfflineStatus();
+  },
+  onUpdate() {
+    updateReady = true;
+    refreshOfflineStatus();
+  },
+})
+  .then((controller) => {
+    offlineController = controller;
+  })
+  .catch(() => {
+    offlineStatus = "Chưa chuẩn bị được ngoại tuyến. Hãy giữ bản sao JSON.";
+    refreshOfflineStatus();
+  });
+window.addEventListener("storage", (event) => {
+  if (event.key !== KEY && event.key !== null) return;
+  if (event.newValue === storedSnapshot && event.key !== null) return;
+  protectStored = true;
+  storageError =
+    "Dữ liệu đã đổi ở tab khác. Bản sửa ở tab này vẫn còn; xuất JSON trước khi tải lại.";
+  const save = document.querySelector(".save-state");
+  if (save) {
+    save.textContent = "Tab khác đã thay đổi dữ liệu · hãy xuất bản sao";
+    save.classList.add("warn");
+  }
+  notify(storageError);
+});
+window.addEventListener("afterprint", () =>
+  document.querySelector("#print-sheet")?.remove(),
+);
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  installPrompt = event;
+});

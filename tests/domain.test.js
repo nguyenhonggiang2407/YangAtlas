@@ -5,6 +5,8 @@ import {
   validateState,
   createTrip,
   createActivity,
+  createExpense,
+  createChecklistItem,
   defaultState,
   dateForDay,
   budgetForTrip,
@@ -12,6 +14,8 @@ import {
   sortActivities,
   moveActivity,
   exportCalendar,
+  expenseSummary,
+  exportExpensesCSV,
 } from "../src/domain.js";
 
 const activity = (extra = {}) =>
@@ -25,7 +29,7 @@ const trip = (extra = {}) => ({
   ...extra,
 });
 const state = (plan = trip()) => ({
-  version: 1,
+  version: 2,
   activeTripId: plan.id,
   trips: [plan],
 });
@@ -89,13 +93,13 @@ test("malformed JSON, unsupported versions and missing active trip fail atomical
     "{",
     "null",
     "[]",
-    { ...existing, version: 2 },
+    { ...existing, version: 3 },
     { ...existing, activeTripId: "missing" },
   ]) {
     assert.throws(() => validateState(input));
   }
   assert.equal(JSON.stringify(existing), snapshot);
-  assert.deepEqual(defaultState(), { version: 1, activeTripId: "", trips: [] });
+  assert.deepEqual(defaultState(), { version: 2, activeTripId: "", trips: [] });
   assert.throws(() =>
     validateState({ version: 1, activeTripId: "missing", trips: [] }),
   );
@@ -126,10 +130,10 @@ test("prototype payloads, unusual prototypes, accessors and cycles cannot execut
 });
 
 test("import byte limits count UTF-8 and prevent oversized input before parsing", () => {
-  assert.throws(() => validateState(" ".repeat(1024 * 1024 + 1)), /1 MB/);
+  assert.throws(() => validateState(" ".repeat(4 * 1024 * 1024 + 1)), /4 MB/);
   assert.throws(
-    () => validateState({ ...state(), extra: "đ".repeat(530_000) }),
-    /1 MB/,
+    () => validateState({ ...state(), extra: "đ".repeat(2_100_000) }),
+    /4 MB/,
   );
   const plan = trip({ activities: [activity({ notes: "đ".repeat(2000) })] });
   assert.equal(
@@ -139,7 +143,7 @@ test("import byte limits count UTF-8 and prevent oversized input before parsing"
 });
 
 test("trip/activity count limits and duplicate identifiers are checked", () => {
-  const plans = Array.from({ length: 11 }, (_, i) => trip({ id: "trip-" + i }));
+  const plans = Array.from({ length: 51 }, (_, i) => trip({ id: "trip-" + i }));
   assert.throws(() =>
     validateState({ version: 1, activeTripId: "trip-0", trips: plans }),
   );
@@ -161,13 +165,13 @@ test("trip/activity count limits and duplicate identifiers are checked", () => {
       validateState(
         state(
           trip({
-            activities: Array.from({ length: 101 }, (_, i) =>
+            activities: Array.from({ length: 501 }, (_, i) =>
               activity({ id: "a-" + i }),
             ),
           }),
         ),
       ),
-    /100/,
+    /500/,
   );
 });
 
@@ -175,12 +179,13 @@ test("invalid money, roles, dates, time and out-of-trip days are rejected", () =
   for (const field of [
     { budget: -1 },
     { travelers: 0 },
-    { travelers: 21 },
-    { days: 15 },
+    { travelers: 101 },
+    { days: 91 },
     { days: 1.5 },
     { startDate: "2026-02-29" },
     { cover: "https://x.test/a.jpg" },
-    { destination: "../dalat" },
+    { destination: "" },
+    { destination: "d".repeat(121) },
   ]) {
     assert.throws(() => validateState(state(trip(field))));
   }
@@ -444,4 +449,209 @@ test("malformed Unicode is rejected rather than silently replacing part of user 
   assert.throws(() => createActivity({ notes: "bad\ud800" }));
   assert.throws(() => createActivity({ title: "\udc00bad" }));
   assert.equal(createActivity({ title: "Đi dạo 🌿" }).title, "Đi dạo 🌿");
+});
+
+const expense = (extra = {}) => createExpense({
+  id: "expense-a", title: "Bữa trưa", amount: 120_000, date: "2028-02-28", category: "food", ...extra,
+});
+const checklist = (extra = {}) => createChecklistItem({ id: "pack-a", title: "Sạc dự phòng", ...extra });
+
+test("v1 migrates in place logically without regenerating IDs or changing legacy destinations/data", () => {
+  for (const destination of ["dalat", "hoian"]) {
+    const legacyTrip = trip({ destination, cover: destination, activities: [activity({ done: true, notes: "Ghi chú đã lưu" })] });
+    delete legacyTrip.expenses;
+    delete legacyTrip.checklist;
+    delete legacyTrip.activities[0].address;
+    const legacy = { version: 1, activeTripId: legacyTrip.id, trips: [legacyTrip] };
+    const original = JSON.stringify(legacy);
+    const migrated = validateState(original);
+    assert.equal(migrated.version, 2);
+    assert.equal(migrated.activeTripId, legacy.activeTripId);
+    assert.deepEqual(migrated.trips[0], {
+      ...legacyTrip, activities: [{ ...legacyTrip.activities[0], address: "" }], expenses: [], checklist: [],
+    });
+    assert.equal(JSON.stringify(legacy), original, "Migration must not mutate an existing in-memory state");
+    assert.deepEqual(validateState(migrated), migrated, "Migration is idempotent");
+  }
+  assert.deepEqual(validateState({ version: 1, activeTripId: "", trips: [] }), { version: 2, activeTripId: "", trips: [] });
+});
+
+test("v2 arbitrary destination, activity address, expense and checklist survive JSON backup/restore", () => {
+  const destination = "Kyoto · 京都 / một nơi tự chọn";
+  const plan = trip({
+    destination,
+    activities: [activity({ address: "12 Đường nhỏ\nTầng 2, Kyoto", notes: "Lịch trình riêng" })],
+    expenses: [expense({ payer: "An", notes: "Đã trả tiền mặt" })],
+    checklist: [checklist({ done: true })],
+  });
+  const restored = validateState(JSON.stringify(state(plan)));
+  assert.deepEqual(restored, state(plan));
+  assert.equal(restored.trips[0].destination, destination);
+  const created = createTrip({ title: "Đi một nơi khác", destination, startDate: "2028-03-01" });
+  assert.equal(created.destination, destination);
+  assert.equal(created.cover, "dalat", "A free-form destination cannot become an arbitrary image URL/key");
+  assert.deepEqual(created.expenses, []);
+  assert.deepEqual(created.checklist, []);
+  assert.equal(createTrip({ title: "Phố cổ", destination: "hoian", startDate: "2028-03-01" }).cover, "hoian");
+});
+
+test("new personal limits accept 50 trips, 90 days, 100 travelers and 500 activities", () => {
+  const plans = Array.from({ length: 50 }, (_, index) => trip({ id: "trip-" + index, days: 90, travelers: 100 }));
+  plans[0].activities = Array.from({ length: 500 }, (_, index) => activity({ id: "activity-" + index, day: index % 90 }));
+  const restored = validateState({ version: 2, activeTripId: "trip-0", trips: plans });
+  assert.equal(restored.trips.length, 50);
+  assert.equal(restored.trips[0].activities.length, 500);
+  assert.equal(restored.trips[0].travelers, 100);
+  assert.equal(sortActivities(restored.trips[0], 89)[0].day, 89);
+  const calendar = exportCalendar(trip({ days: 90, activities: [activity({ day: 89 })] }), { now: new Date("2026-11-05T00:00:00Z") });
+  assert.ok(calendar.includes("DTSTART:20280527T090000"));
+  assert.throws(() => createActivity({ day: 90 }));
+});
+
+test("a real canonical backup above the old 1 MiB/node limits restores within the new 4 MiB limit", () => {
+  const plans = Array.from({ length: 5 }, (_, planIndex) => trip({
+    id: "large-" + planIndex,
+    days: 90,
+    activities: Array.from({ length: 500 }, (_, index) => activity({ id: "a-" + index, day: index % 90, notes: "đ".repeat(200) })),
+    expenses: Array.from({ length: 100 }, (_, index) => expense({ id: "e-" + index, notes: "đ".repeat(200) })),
+    checklist: Array.from({ length: 100 }, (_, index) => checklist({ id: "c-" + index })),
+  }));
+  const input = JSON.stringify({ version: 2, activeTripId: "large-0", trips: plans });
+  assert.ok(Buffer.byteLength(input, "utf8") > 1024 * 1024);
+  assert.ok(Buffer.byteLength(input, "utf8") < 4 * 1024 * 1024);
+  const restored = validateState(input);
+  assert.equal(restored.trips[4].activities.length, 500);
+  assert.equal(restored.trips[4].expenses[99].notes, "đ".repeat(200));
+});
+
+test("expense/checklist creation uses fresh IDs and explicit conservative defaults", () => {
+  const first = createExpense({ date: "2028-02-28" });
+  const second = createExpense({ date: "2028-02-28" });
+  assert.notEqual(first.id, second.id);
+  assert.equal(first.amount, 0);
+  assert.equal(first.category, "other");
+  assert.equal(first.payer, "");
+  assert.equal(first.notes, "");
+  assert.throws(() => createExpense(), /Ngày/);
+  const item = createChecklistItem({ title: "  Giấy tờ  " });
+  assert.equal(item.title, "Giấy tờ");
+  assert.equal(item.done, false);
+  assert.notEqual(item.id, createChecklistItem().id);
+});
+
+test("expenses validate integer amounts, calendar dates, category and bounded user text", () => {
+  for (const patch of [
+    { amount: -1 }, { amount: 1.5 }, { amount: 1_000_000_001 }, { amount: "100" },
+    { amount: NaN }, { date: "2026-02-29" }, { date: "2028-02-30" }, { date: "2028-2-28" },
+    { category: "transfer" }, { title: "" }, { title: "t".repeat(121) },
+    { payer: "a".repeat(81) }, { notes: "a".repeat(2001) }, { payer: "A\nB" },
+  ]) assert.throws(() => expense(patch));
+  assert.equal(expense({ amount: 1_000_000_000, date: "2028-02-29" }).amount, 1_000_000_000);
+  assert.equal(expense({ date: "2020-01-01" }).date, "2020-01-01", "Pre-trip deposits may have an earlier date");
+  assert.throws(() => validateState(state(trip({ expenses: [{ ...expense(), payer: null }] }))));
+  assert.throws(() => validateState(state(trip({ activities: [activity({ address: "a".repeat(401) })] }))));
+});
+
+test("expense/checklist collections reject duplicate IDs, malformed collections and counts above 500", () => {
+  for (const plan of [
+    trip({ expenses: [expense(), expense()] }),
+    trip({ checklist: [checklist(), checklist()] }),
+    trip({ expenses: null }), trip({ checklist: {} }),
+    trip({ expenses: Array.from({ length: 501 }, (_, i) => expense({ id: "e-" + i })) }),
+    trip({ checklist: Array.from({ length: 501 }, (_, i) => checklist({ id: "c-" + i })) }),
+    trip({ checklist: [{ ...checklist(), done: "true" }] }),
+    trip({ checklist: [{ ...checklist(), title: "x".repeat(201) }] }),
+  ]) assert.throws(() => validateState(state(plan)));
+});
+
+test("actual expense summaries never multiply whole-party amounts or mix in itinerary estimates", () => {
+  const plan = trip({
+    travelers: 100, budget: 300_000,
+    activities: [activity({ cost: 9_999_999, costMode: "person" })],
+    expenses: [expense(), expense({ id: "taxi", category: "move", amount: 240_000 })],
+  });
+  const before = JSON.stringify(plan);
+  assert.deepEqual(expenseSummary(plan), {
+    total: 360_000, remaining: -60_000, over: 60_000,
+    byCategory: { visit: 0, food: 120_000, stay: 0, move: 240_000, other: 0 },
+  });
+  assert.equal(expenseSummary({ ...plan, travelers: 1 }).total, 360_000);
+  assert.equal(JSON.stringify(plan), before);
+  assert.deepEqual(expenseSummary(trip({ budget: 0 })), {
+    total: 0, remaining: 0, over: 0,
+    byCategory: { visit: 0, food: 0, stay: 0, move: 0, other: 0 },
+  });
+  const full = trip({ expenses: Array.from({ length: 500 }, (_, index) => expense({ id: "e-" + index, amount: 1_000_000_000 })) });
+  assert.equal(expenseSummary(full).total, 500_000_000_000);
+});
+
+test("invalid expense/checklist restore does not mutate a usable existing state", () => {
+  const existing = state(trip({ expenses: [expense()], checklist: [checklist()] }));
+  const snapshot = JSON.stringify(existing);
+  const incoming = JSON.parse(snapshot);
+  incoming.trips[0].expenses[0].amount = -1;
+  assert.throws(() => validateState(incoming));
+  assert.equal(JSON.stringify(existing), snapshot);
+  assert.equal(expenseSummary(existing.trips[0]).total, 120_000);
+});
+
+// Independent minimal CSV reader checks the output's record/cell boundaries.
+function readCsv(source) {
+  const rows = [];
+  let row = [], cell = "", quoted = false;
+  for (let index = source.startsWith("\ufeff") ? 1 : 0; index < source.length; index += 1) {
+    const character = source[index];
+    if (character === '"') {
+      if (quoted && source[index + 1] === '"') { cell += '"'; index += 1; }
+      else quoted = !quoted;
+    } else if (!quoted && character === ",") { row.push(cell); cell = ""; }
+    else if (!quoted && character === "\r" && source[index + 1] === "\n") {
+      row.push(cell); rows.push(row); row = []; cell = ""; index += 1;
+    } else cell += character;
+  }
+  assert.equal(quoted, false, "Every CSV quote must be closed");
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  return rows;
+}
+
+test("expense CSV is UTF-8 with header, stable date order, quotes/commas/newlines and no extra records", () => {
+  const plan = trip({ expenses: [
+    expense({ id: "later", date: "2028-03-01", title: 'Phí xe, "buổi tối"', payer: "Hằng 🌿", notes: 'Dòng một\nDòng hai, "đã trả"' }),
+    expense({ id: "earlier", date: "2028-02-28", title: "Cà phê", amount: 0 }),
+  ] });
+  const before = JSON.stringify(plan);
+  const csv = exportExpensesCSV(plan);
+  assert.ok(csv.startsWith("\ufeff"));
+  assert.ok(csv.endsWith("\r\n"));
+  assert.ok(!csv.includes("\ufffd"));
+  assert.deepEqual(readCsv(csv), [
+    ["Ngày", "Khoản chi", "Nhóm", "Số tiền (VND)", "Người trả", "Ghi chú"],
+    ["2028-02-28", "Cà phê", "Ăn uống", "0", "", ""],
+    ["2028-03-01", 'Phí xe, "buổi tối"', "Ăn uống", "120000", "Hằng 🌿", 'Dòng một\r\nDòng hai, "đã trả"'],
+  ]);
+  assert.equal(JSON.stringify(plan), before);
+  assert.equal(csv.replace(/\r\n/g, "").includes("\n"), false);
+});
+
+test("formula-looking CSV cells are exported as text without changing saved records", () => {
+  const values = ["=HYPERLINK(\"https://example.test\",\"x\")", "+1", "-1", "@SUM(1,2)", "＝1+2", "＋1", "－1", "＠SUM(1,2)", "\u200b=1+2"];
+  const plan = trip({ expenses: values.map((value, index) => expense({ id: "e-" + index, title: value, payer: value.slice(0, 80), notes: value })) });
+  const before = JSON.stringify(plan);
+  const rows = readCsv(exportExpensesCSV(plan));
+  for (let index = 1; index < rows.length; index += 1) {
+    for (const column of [1, 4, 5]) assert.equal(rows[index][column], "'" + values[index - 1]);
+  }
+  assert.equal(JSON.stringify(plan), before);
+  assert.equal(readCsv(exportExpensesCSV(trip())).length, 1, "An empty ledger exports only its header");
+});
+
+test("ICS LOCATION includes custom addresses as folded escaped text without invented coordinates", () => {
+  const address = 'Ngõ 1, Nhà "Gió"; lối sau\\cổng\n' + "Đà Lạt 🌿 ".repeat(20);
+  const plan = trip({ activities: [activity({ address })] });
+  const calendar = exportCalendar(plan, { now: new Date("2026-11-05T00:00:00Z") });
+  const unfolded = calendar.replace(/\r\n[ \t]/g, "");
+  assert.ok(unfolded.includes('LOCATION:Ngõ 1\\, Nhà "Gió"\\; lối sau\\\\cổng\\n'));
+  assert.ok(!calendar.includes("GEO:"));
+  for (const line of calendar.split("\r\n")) assert.ok(Buffer.byteLength(line, "utf8") <= 75);
+  assert.ok(!exportCalendar(trip({ activities: [activity()] })).includes("LOCATION:"));
 });

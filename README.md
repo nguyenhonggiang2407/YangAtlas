@@ -2,98 +2,109 @@
 
 **Mỗi chuyến đi, một câu chuyện.**
 
-A quiet travel-planning workspace for visual day-by-day itineraries, editable
-budgets and calendar export. Designed in Vietnamese with an editorial layout,
-warm paper tones, pine green and genuine destination photography.
+A personal travel planner for real itineraries, actual expenses and the little
+things to pack. Vietnamese interface, warm paper tones, pine green and licensed
+destination photography. No account required.
 
-**[Open Live Demo →](https://nguyenhonggiang2407.github.io/YangAtlas/)** · [Verified CI](https://github.com/nguyenhonggiang2407/YangAtlas/actions/runs/41944144524) · [Photography credits](docs/MEDIA.md)
+**[Open YangAtlas →](https://nguyenhonggiang2407.github.io/YangAtlas/)** · [Build & browser checks](https://github.com/nguyenhonggiang2407/YangAtlas/actions/workflows/pages.yml) · [Photography credits](docs/MEDIA.md)
 
-Public deployment verified on **5 November 2026**, including browser-local editing,
-reload, real JSON/ICS downloads, desktop/mobile photographs and exact source hashes.
+![YangAtlas, captured from the running application](docs/screenshots/itinerary-desktop.png)
 
-![YangAtlas itinerary workspace, captured from the public GitHub Pages application](docs/screenshots/itinerary-desktop.png)
+## Make it your own
 
-## Use the product
+- **Start with your own trip.** Enter any destination, dates, 1–90 days, up to
+  100 travelers and a VND budget. Example Đà Lạt / Hội An journeys are optional;
+  they are never inserted into a new workspace automatically.
+- **Plan every day.** Add your own stops, addresses, meals, transfers and lodging.
+  Edit time, duration, cost and notes, mark visits complete, swap neighboring
+  activities and see time conflicts. Open each address on Google Maps when needed.
+- **Record what you actually paid.** A separate expense ledger tracks date,
+  amount, category, payer and notes. Actual spending and itinerary estimates stay
+  separate. Edit or undo deletions; export the ledger as a UTF-8 CSV.
+- **Prepare calmly.** Maintain a checklist for each trip and tick off completed
+  tasks. Trip edits preserve activities, expenses and preparation items.
+- **Take it along.** After the app reports offline readiness, reopen it and edit
+  trips without a network connection. Install through a supported browser, export
+  a Unicode-safe ICS calendar, or print a complete itinerary, ledger and checklist.
+- **Keep control of your data.** Export/import JSON backups with confirmation and
+  atomic validation. Version 1 backups migrate to version 2 without discarding
+  old trips. Empty workspaces are valid. Conflicting changes from another tab,
+  corrupt data and denied/full storage are shown explicitly.
 
-- Start with the Đà Lạt or Hội An example, or create your own trip to either
-  supported destination. Choose dates, 1–14 days, 1–20 travelers and a VND budget.
-- Search the curated place library, filter by category and add a place to a day.
-  Add your own meals, accommodation, transfers or other activities as well.
-- Edit times, duration, notes and costs. Move neighboring activities earlier/later;
-  the schedule updates while retaining each duration. Time overlaps are flagged.
-- Track per-person and whole-group estimates, compare them with your budget and
-  mark a stop as visited. Removing an activity has an undo action that preserves
-  other changes made after removal.
-- Export a complete JSON backup and restore only after validation and confirmation.
-  Export an RFC 5545 calendar with Unicode-safe line folding and midnight rollover.
-- Data stays in the browser's local storage. There is no login, backend, AI API,
-  payment processing or cloud synchronization. Fonts and photographs are bundled.
-
-The two example itineraries contain fictional costs and durations. They are not
-current prices, booking offers or verified package tours. The map is a schematic
-of approximate coordinates, not a navigation route. Some cards reuse a clearly
-labeled destination photograph. See [photography and place sources](docs/MEDIA.md).
+Fonts, photos and application code are self-hosted. There is no analytics, AI API,
+server database, login, payment processing or cloud synchronization. Map queries
+only leave the app when you choose a Google Maps link.
 
 ## Run locally
 
-Requires Node.js 24 or newer. Runtime has **zero third-party JavaScript dependencies**.
-Playwright is a development-only dependency for browser tests.
+Requires **Node.js 24+**. There are **zero third-party JavaScript runtime
+dependencies**; Playwright is used only for development checks.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open the Local URL printed by the server, normally `http://127.0.0.1:4177/`.
+The preview URL is printed by the server, normally `http://127.0.0.1:4177/`.
+The raw source preview does not install an offline release. To preview the
+generated offline application, build it first and use `npm run preview`.
 
 ```sh
 npm run check
 npm test
+npm run assets:check
 npm run build
 npx playwright install chromium
 npm run test:browser
 ```
 
-`npm run build` copies the source and public assets to `dist/`; it does not embed
-credentials or require an external API. All runtime paths are relative, including
-fonts, so the application works below a GitHub Pages repository subpath.
+The deterministic build writes `dist/`, derives an integrity-checked offline
+cache from the actual file bytes, and needs no external API or credentials.
+Relative paths support GitHub Pages repository subpaths. The workflow verifies
+the app before publishing the static artifact to the existing free Pages site.
 
-## Structure
+## Data, privacy and practical limits
 
-| Path                              | Responsibility                                                        |
-| --------------------------------- | --------------------------------------------------------------------- |
-| `src/app.js`                      | Accessible UI, dialogs, browser storage, safe rendering and downloads |
-| `src/domain.js`                   | Pure validation, dates, money, overlaps, reorder and ICS rules        |
-| `src/catalog.js`                  | Curated places and clearly fictional example itineraries              |
-| `src/styles.css`, `src/fonts.css` | Responsive visual system and self-hosted typography                   |
-| `public/`                         | Licensed photography, fonts and original favicon                      |
-| `tests/`                          | Native Node domain checks and real browser workflows                  |
-| `scripts/`                        | Static build, asset integrity and local preview                       |
+Data belongs to the current origin, browser and device. Installation does not
+sync it. Export a JSON backup before clearing browser data or changing devices;
+browser storage can still be removed by the browser or operating system.
+Storage failures leave the current edits in memory with an explicit warning.
+Corrupt stored content and conflicting tabs are not silently overwritten.
 
-See [architecture and data rules](docs/ARCHITECTURE.md),
-[validation evidence](docs/VALIDATION.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+Offline use requires an initial successful online build download and a browser
+that supports service workers. Updates wait for acceptance or for previous tabs
+to close; the app never silently reloads an open form. External maps and source
+links require connectivity. The planner does not calculate travel times, resolve
+addresses automatically, verify opening hours, sell trips or fetch live prices.
 
-## Practical limits
+Backups: 4 MiB, 50 trips, 500 activities / expenses / checklist items per trip.
+Amounts are integer VND. Expenses can be recorded before or after the itinerary
+dates. The per-person figure is a simple average, not a debt settlement.
+CSV text cells that resemble spreadsheet formulas are prefixed on export;
+spreadsheet re-saving behavior varies. Calendars use floating local times, so
+check the receiving calendar's timezone after import.
 
-Local storage is per origin, browser and device. Export backups before clearing
-browser data or switching devices. Storage denial/quota failure is shown explicitly;
-the planner remains usable in memory. Invalid stored data is preserved rather than
-silently overwritten. An initial page load needs connectivity; no service-worker
-offline installation or cross-device synchronization is promised.
+The two optional sample itineraries contain fictional costs and durations. The
+curated library covers Đà Lạt and Hội An; your own destinations and addresses are
+unrestricted. Cover photos are explicitly illustrative scenery and retain their
+real locations and attribution. They do not claim to depict a custom destination.
 
-JSON imports are limited to 1 MiB, 10 trips and 100 activities per trip. Imported
-values are reconstructed and validated; malformed or empty workspace backups do
-not replace the existing planner. Current UI destinations are Đà Lạt and Hội An.
-Calendar files use floating local times, so the receiving calendar's timezone
-matters. Check your calendar after import.
+## Source and verification
 
-Meals, accommodation and transport not connected to a curated place are editable
-placeholders. The app does not calculate travel times, guarantee opening hours,
-live conditions or entry arrangements, or include costs you have not entered.
+| Path                                         | Responsibility                                                           |
+| -------------------------------------------- | ------------------------------------------------------------------------ |
+| `src/app.js`                                 | UI, local storage, dialogs, print and downloads                          |
+| `src/domain.js`                              | Schema migration, strict validation, dates, budgets, ledger, CSV and ICS |
+| `src/offline.js`, `public/service-worker.js` | Offline lifecycle and deliberate updates                                 |
+| `src/catalog.js`                             | Curated venues and optional example itineraries                          |
+| `src/styles.css`, `src/fonts.css`            | Responsive design and self-hosted typography                             |
+| `tests/`                                     | Domain, offline-build and real browser workflows                         |
+| `scripts/`                                   | Deterministic static build, integrity checks and local preview           |
 
-## License and provenance
+See [architecture](docs/ARCHITECTURE.md), [validation evidence](docs/VALIDATION.md)
+and [third-party notices](THIRD_PARTY_NOTICES.md).
 
-Original application code: [MIT](LICENSE). Photos retain their individual Creative
-Commons licenses; self-hosted fonts retain SIL OFL. Attribution and source hashes
-are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Development used AI-assisted
-coding; there are no claimed users, testimonials or invented development history.
+Original application code: [MIT](LICENSE). Photographs retain their Creative
+Commons licenses and fonts retain SIL OFL. Source hashes and credits are preserved
+in the repository and published artifact. Development used AI-assisted coding;
+there are no invented users, testimonials, screenshots or development history.
