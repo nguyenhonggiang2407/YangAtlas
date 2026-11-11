@@ -45,6 +45,8 @@ These are direct screenshots with isolated verification data, not real purchases
   atomic validation. Version 1 backups migrate to version 2 without discarding
   old trips. Empty workspaces are valid. Conflicting changes from another tab,
   corrupt data and denied/full storage are shown explicitly.
+  If the workspace changes while a backup confirmation is open, review the
+  latest trips before selecting the backup again.
 
 For longer journeys, the selected day stays visible in the day strip. Keyboard
 focus remains on controls after checklist/visited-state changes. If a draft form

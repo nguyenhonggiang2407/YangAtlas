@@ -1037,23 +1037,39 @@ app.addEventListener("input", (event) => {
     document.querySelector("#place-grid").innerHTML = placeCards(active());
   }
 });
+
+function readRestoreBaseline() {
+  try {
+    return localStorage.getItem(KEY);
+  } catch {
+    return undefined;
+  }
+}
+
 app.addEventListener("change", async (event) => {
   if (event.target.id !== "import-file") return;
   const file = event.target.files?.[0];
   if (!file) return;
   try {
     if (file.size > 4 * 1024 * 1024) throw new Error("Bản sao tối đa 4 MB.");
+    const baseline = readRestoreBaseline();
+    const previousState = state;
     const imported = validWorkspace(await file.text());
     dialog(
       "Khôi phục bản sao?",
       "Chỉ tiếp tục nếu bạn muốn thay lịch trình hiện tại.",
-      `<p class="dialog-copy">Bản sao có ${imported.trips.length} chuyến đi. Dữ liệu trên trình duyệt này sẽ được thay bằng nội dung file. Hãy xuất bản sao hiện tại trước nếu cần giữ lại.</p><form><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button secondary" data-cancel>Giữ dữ liệu hiện tại</button><button type="submit" class="button primary">Thay dữ liệu hiện tại</button></div></form>`,
+      `<p class="dialog-copy">Bản sao có ${imported.trips.length} chuyến đi. Dữ liệu trên trình duyệt này sẽ được thay bằng nội dung file. Hãy xuất bản sao hiện tại trước nếu cần giữ lại.</p><form><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button secondary" data-cancel autofocus>Giữ dữ liệu hiện tại</button><button type="submit" class="button primary">Thay dữ liệu hiện tại</button></div></form>`,
       (_, node) => {
+        if (state !== previousState || readRestoreBaseline() !== baseline) {
+          node.querySelector('button[type="submit"]').disabled = true;
+          node.querySelector("[data-cancel]").focus();
+          throw new Error("Dữ liệu đã thay đổi từ lúc chọn file. Hãy giữ dữ liệu hiện tại, xem lại các thay đổi rồi chọn lại bản sao.");
+        }
         selectedDay = 0;
         view = "plan";
         commit(imported, { restore: true });
         node.close();
-        notify("Đã khôi phục bản sao.");
+        notify(storageError || "Đã khôi phục bản sao.");
       },
     );
   } catch (error) {

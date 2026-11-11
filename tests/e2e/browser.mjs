@@ -596,6 +596,29 @@ test(
 );
 
 test(
+  "a backup confirmation preserves a workspace saved by a second tab",
+  { timeout: 30000 },
+  async (t) => {
+    const { context, page } = await pageFor(t);
+    await openApp(page);
+    await newTrip(page, { title: "Chuyến đi trước khi chọn file" });
+    await uploadBackup(page, '{"version":2,"activeTripId":"","trips":[]}');
+    const dialog = page.getByRole("dialog", { name: "Khôi phục bản sao?" });
+    await expect(dialog).toBeVisible();
+    const other = await context.newPage();
+    await openApp(other);
+    await newTrip(other, { title: "Chuyến đi mới từ tab khác" });
+    await dialog.getByRole("button", { name: "Thay dữ liệu hiện tại" }).click();
+    await expect(dialog.getByRole("alert")).toContainText("đã thay đổi");
+    const saved = await other.evaluate(() => JSON.parse(localStorage.getItem("yangatlas:v1")));
+    assert.ok(saved.trips.some((trip) => trip.title === "Chuyến đi mới từ tab khác"));
+    await dialog.getByRole("button", { name: "Giữ dữ liệu hiện tại" }).click();
+    await page.reload();
+    await expect(page.locator("h1")).toHaveText("Chuyến đi mới từ tab khác");
+  },
+);
+
+test(
   "undo restores the removed entity without rolling back a newer completion or another trip",
   { timeout: 30000 },
   async (t) => {
